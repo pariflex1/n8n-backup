@@ -1,0 +1,137 @@
+{
+  "updatedAt": "2025-11-27T12:13:27.000Z",
+  "createdAt": "2025-11-08T16:04:20.405Z",
+  "id": "5l83IMGSX50xYHw7",
+  "name": "MCP Server",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "path": "n8n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 2,
+      "position": [
+        -512,
+        128
+      ],
+      "id": "c25e0f2a-a21d-41b7-b0b0-0d2069810977",
+      "name": "MCP Server Trigger",
+      "webhookId": "9137c0d1-b6d4-4415-ab29-239bcbb9f5ca",
+      "alwaysOutputData": false,
+      "executeOnce": false,
+      "retryOnFail": false,
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://insurancenivaran.com/wp-json/wp/v2/media",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "wordpressApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "content-disposition",
+              "value": "=attachment; filename={{ $json.title }}.png"
+            },
+            {
+              "name": "content-type",
+              "value": "={{ $binary.data.mimeType }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        -448,
+        352
+      ],
+      "id": "0564d2d3-853e-4586-9df3-cd874c18908b",
+      "name": "HTTP Request2",
+      "credentials": {
+        "wordpressApi": {
+          "id": "UUlAphKlEOZVI0zz",
+          "name": "Wordpress account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "title": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Title', ``, 'string') }}",
+        "additionalFields": {
+          "content": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Content', ``, 'string') }}",
+          "status": "publish",
+          "categories": [
+            4
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.wordpressTool",
+      "typeVersion": 1,
+      "position": [
+        -272,
+        336
+      ],
+      "id": "6722088a-1658-4830-b37e-1501ad523898",
+      "name": "Create a post in Wordpress",
+      "credentials": {
+        "wordpressApi": {
+          "id": "UUlAphKlEOZVI0zz",
+          "name": "Wordpress account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "HTTP Request2": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a post in Wordpress": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "b04b1b3a-0077-4098-8ba0-e7e6e2ed5b25",
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2025-11-08T16:04:20.411Z",
+      "createdAt": "2025-11-08T16:04:20.411Z",
+      "role": "workflow:owner",
+      "workflowId": "5l83IMGSX50xYHw7",
+      "projectId": "Ed0SJaRvK6NUjA9T"
+    }
+  ],
+  "tags": []
+}
