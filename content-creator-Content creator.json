@@ -1,0 +1,138 @@
+{
+  "updatedAt": "2025-11-27T12:13:29.000Z",
+  "createdAt": "2025-11-27T10:58:19.841Z",
+  "id": "aI2v6zcNK5XzIalv",
+  "name": "Content creator",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        32,
+        0
+      ],
+      "id": "cf1b1cc1-be22-487b-827c-2ae58e850176",
+      "name": "When chat message received",
+      "webhookId": "ec84e354-eb8c-4386-83de-a10795beb5c0"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=You are an expert Indian insurance advisor and SEO content strategist writing for InsuranceNivaran.com. \nYour task is to create a fully optimized and well-structured WordPress blog post.\n\nFollow EXACT rules below:\n\n📌 Website Niche:\n- Indian insurance guidance and awareness\n\n🎯 Target Audience:\n- Indian citizens looking for health, life, vehicle & term insurance\n- Policyholders who want claim assistance or policy comparison\n\n✍️ Content Requirements:\n- Fully original, informative, trustworthy tone\n- Use simple, clear Indian English\n- Include real examples relevant to India\n- Include Government schemes (if relevant)\n- Avoid promoting any private insurance company by name\n\n📌 SEO Formatting Rules:\n- SEO-friendly title using main keyword\n- Add a short meta description (155–160 characters)\n- H1 title + H2 & H3 headings properly structured\n- Bullet points & numbered lists for readability\n- Include FAQs section at the end with schema-ready Q/A format\n\n📌 WordPress Publishing Format:\n- Return final response in valid JSON structure:\n{\n  \"title\": \"SEO Optimized Blog Title\",\n  \"content\": \"Full formatted WordPress-ready HTML content\",\n  \"excerpt\": \"Meta description\",\n  \"slug\": \"seo-friendly-slug\",\n  \"tags\": [\"insurance\", \"india\", \"claims\"],\n  \"categories\": [\"Insurance\"]\n}\n\n📌 Content Structure:\nInclude the following sections in order:\n1️⃣ Engaging Introduction → Address user pain points  \n2️⃣ What is the topic? (H2)  \n3️⃣ Why is it important in India? (H2)  \n4️⃣ Types / Eligibility / Benefits / Documents (H2, H3)  \n5️⃣ Step-by-Step Guide / Claim Process (H2)  \n6️⃣ Mistakes to Avoid (Bullet points)  \n7️⃣ FAQs (H2 → Q/A format)\n\n📌 Copywriting Enhancements:\n- Add relevant Indian insurance legal terms (IRDAI, Premium, Sum Assured)\n- Include statistical data with citations like: (IRDAI Report 2024)\n- End with strong CTA:\n> “Need help with policy selection or claim support? Contact Insurance Nivaran today!”\n\nPRIMARY INPUT: “{{ $json.chatInput }}” → use as topic and main keyword.\n\nRETURN ONLY JSON — no extra text outside of JSON.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        288,
+        0
+      ],
+      "id": "1569cdd3-a8f9-4bed-a564-ca9758851df4",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "ft:gpt-4o-mini-2024-07-18:personal:meow:CZFaRlvj:ckpt-step-832",
+          "mode": "list",
+          "cachedResultName": "ft:gpt-4o-mini-2024-07-18:personal:meow:CZFaRlvj:ckpt-step-832"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        176,
+        224
+      ],
+      "id": "b4ea4823-cbfc-407c-a684-dd8066909859",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "vsLZbKCEUZqeDpas",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://n8n.jhansiproperty.com/mcp/n8n",
+        "include": "selected",
+        "includeTools": [
+          "Create_a_post_in_Wordpress"
+        ],
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.2,
+      "position": [
+        528,
+        240
+      ],
+      "id": "d6ff31fa-6f8a-42e5-8b9f-43db3e4ce8ee",
+      "name": "MCP Client"
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "8a8d1c78-b300-41dd-b433-8251236b584a",
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2025-11-27T10:58:19.847Z",
+      "createdAt": "2025-11-27T10:58:19.847Z",
+      "role": "workflow:owner",
+      "workflowId": "aI2v6zcNK5XzIalv",
+      "projectId": "Ed0SJaRvK6NUjA9T"
+    }
+  ],
+  "tags": []
+}
