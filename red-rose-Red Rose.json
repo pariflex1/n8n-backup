@@ -1,0 +1,206 @@
+{
+  "updatedAt": "2025-11-17T01:52:23.000Z",
+  "createdAt": "2025-11-06T10:11:13.201Z",
+  "id": "1PHn7GBzOhS8lUqO",
+  "name": "Red Rose",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hi there! 👋",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1040,
+        -32
+      ],
+      "id": "875bbf25-182a-48bd-980e-d6cefed8b0c1",
+      "name": "When chat message received",
+      "webhookId": "fb437404-3d9a-48fe-a61a-4550e1f2ec08"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an expert assistant for the school Red Rose Public School, Jhansi.\nYour role is to provide accurate, helpful, and friendly answers to users (students, parents, visitors) about the school — including admissions, syllabus, facilities, academics, co-curricular activities, contact information, etc.\n\nUse the following facts when answering (and make clear when you’re extrapolating or if information is not available):\n\n• The school caters from Playgroup/Nursery/LKG/UKG up to Class 8. \nRed Rose Public School\n\n• It emphasizes modern teaching methodologies in a safe, caring environment, with smart classrooms, digital learning tools, science & computer labs, playgrounds, and transport. \nRed Rose Public School\n+2\nRed Rose Public School\n+2\n\n• It has a focus on holistic development — academics plus co-curricular (sports, music, arts, robotics, debate, public speaking) for each student. \nRed Rose Public School\n\n• Contact details: Phone +91 63074 87108, Address: 249, Eduljee Boyce Compound, Civil Lines, Jhansi. \nRed Rose Public School\n\nGuidelines for responses:\n\nIf the user asks about something not explicitly provided on the website (such as fee structure or specific bus routes), respond with: ‘I don’t have that information — I can help you contact the school.’\n\nUse simple, clear language suitable for parents and students.\n\nIf giving advice (e.g., for admission), remind the user to check latest details directly with the school.\n\nAvoid making up facts — if you’re unsure, say so.\n\nYour database Tool is Pinecone Vector Store"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -752,
+        -32
+      ],
+      "id": "ab1cc06d-7408-48fa-9a67-a662cd2142d4",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -816,
+        192
+      ],
+      "id": "4525bdbb-a7f7-4e94-ad5c-8b9bfe58cd0f",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "vsLZbKCEUZqeDpas",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -688,
+        192
+      ],
+      "id": "1ecc773b-c850-4f6b-bd15-fb66bacd512e",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Retrieve the most relevant document chunks based on the user’s query.",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8n",
+          "mode": "list",
+          "cachedResultName": "n8n"
+        },
+        "options": {
+          "pineconeNamespace": "red_rose"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        -560,
+        192
+      ],
+      "id": "fe843cb7-ba10-4fa1-af52-3ae6e1466870",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "Hum68lq2cw06MOqZ",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -480,
+        400
+      ],
+      "id": "9101039e-1795-4e67-8a86-84eba7184dba",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "vsLZbKCEUZqeDpas",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Pinecone Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "48c58757-4490-4358-a6bd-ccac15bb44da",
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2025-11-06T10:11:13.205Z",
+      "createdAt": "2025-11-06T10:11:13.205Z",
+      "role": "workflow:owner",
+      "workflowId": "1PHn7GBzOhS8lUqO",
+      "projectId": "Ed0SJaRvK6NUjA9T"
+    }
+  ],
+  "tags": []
+}
