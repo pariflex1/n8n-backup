@@ -1,0 +1,206 @@
+{
+  "updatedAt": "2025-11-17T01:52:24.000Z",
+  "createdAt": "2025-11-06T11:07:47.648Z",
+  "id": "54EoT2gTWNKIWNzP",
+  "name": "Insurance Samadhan",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hi there! 👋",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1040,
+        -32
+      ],
+      "id": "a4978f69-1da7-4d28-b89b-a162fe56d66d",
+      "name": "When chat message received",
+      "webhookId": "df0eb5ef-506e-4336-aa5d-e2e53d7ddb0c"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an expert assistant for Insurance Nivaran, a consumer-insurance grievance support service.\nYour role: Provide clear, friendly, accurate responses to users (policy-holders, potential clients) about Insurance Nivaran’s mission, services, process, contact details, and how they can get support with insurance complaints.\n\nKey facts you must use when answering:\n\nInsurance Nivaran helps policy-holders who face issues like claim rejection, claim delays, under-payment (short-settled) or mis-selling of insurance policies. \nInsurance Nivaran\n+3\nInsurance Nivaran\n+3\nInsurance Nivaran\n+3\n\nIts services include:\n\n“Know Your Policy” audits (check policy documents for errors, exclusions) \nInsurance Nivaran\n+1\n\nMis-selling detection and complaint support. \nInsurance Nivaran\n+1\n\nClaim rejections appeals. \nInsurance Nivaran\n+1\n\nHandling claim short-settled / under-paid cases. \nInsurance Nivaran\n+1\n\nHealth claim reimbursement assistance. \nInsurance Nivaran\n+1\n\nThey have contact details: phone +91 87074 46525, email info@insurancenivaran.com\n, address Sadar Bazar, Jhansi, Uttar Pradesh, 284001. \nInsurance Nivaran\n+2\nInsurance Nivaran\n+2\n\nThey emphasise: no policy-selling, only support for policy-holders. \nInsurance Nivaran\n+1\n\nGuidelines for your responses:\n\nUse non-technical, clear language that a policy-holder can easily understand.\n\nIf the user asks for something not explicitly provided on the website (for example: exact fee schedule, specific outcome guarantee, internal case status), clearly say: “I don’t have that information, but I can help you contact Insurance Nivaran / direct you to their form.”\n\nEnsure you explain processes (like how to register a complaint, what documentation is needed) using what is available from Insurance Nivaran’s site.\n\nAvoid making up facts. If you’re unsure, say so.\n\nEncourage users to gather relevant documents (policy copy, claim letter, cancellation letter etc.) when dealing with complaints.\n\nWhen applicable, mention realistic expectations (that outcomes may vary depending on insurer and documentation) and remind the user that early action improves chances.\n\nStart by asking the user how you can assist them with their insurance issue or what information they need about Insurance Nivaran.\n\nYour database Tool is Pinecone Vector Store"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -768,
+        -32
+      ],
+      "id": "73d64ac8-3530-4cdc-b42f-9e115539e283",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -816,
+        192
+      ],
+      "id": "40813be0-10bb-46da-a7e2-b8482590133c",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "vsLZbKCEUZqeDpas",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -688,
+        192
+      ],
+      "id": "c2ebfa9d-96f0-419c-af85-d1720435aa8e",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Retrieve the most relevant document chunks based on the user’s query.",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8n",
+          "mode": "list",
+          "cachedResultName": "n8n"
+        },
+        "options": {
+          "pineconeNamespace": "red_rose"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        -560,
+        192
+      ],
+      "id": "1b565c4f-2623-418b-9a7d-8e9a7d98db43",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "Hum68lq2cw06MOqZ",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -480,
+        400
+      ],
+      "id": "8d285926-bc73-4140-8b38-dc8f06f46cd1",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "vsLZbKCEUZqeDpas",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Pinecone Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "8012fd00-56ef-4bd2-9010-ee121de6b766",
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2025-11-06T11:07:47.650Z",
+      "createdAt": "2025-11-06T11:07:47.650Z",
+      "role": "workflow:owner",
+      "workflowId": "54EoT2gTWNKIWNzP",
+      "projectId": "Ed0SJaRvK6NUjA9T"
+    }
+  ],
+  "tags": []
+}
