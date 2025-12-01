@@ -1,0 +1,104 @@
+{
+  "updatedAt": "2025-12-01T16:21:19.000Z",
+  "createdAt": "2025-12-01T16:00:14.677Z",
+  "id": "6JO1M4vo1W9oipoq",
+  "name": "WhatsApp AI Chatbot",
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7f05be21-8c19-4aab-9743-a3d7ee42697c",
+      "name": "When chat message received",
+      "webhookId": "32fcc324-3984-4cd9-92f8-4b469d6b3829",
+      "disabled": false
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4o Mini"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=Give answer to this :  {{ $json.chatInput }}"
+            }
+          ]
+        },
+        "builtInTools": {
+          "webSearch": {
+            "searchContextSize": "medium",
+            "allowedDomains": "ro.wellvalue.in"
+          }
+        },
+        "options": {
+          "onError": "continueErrorOutput"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "4c0805d2-62d9-493f-975d-72ddb946d635",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "vsLZbKCEUZqeDpas",
+          "name": "OpenAi account"
+        }
+      },
+      "disabled": false
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "saveManualExecutions": true,
+    "saveExecutionProgress": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": null,
+  "versionId": "94250830-56b8-43dc-a65f-3607b7af2d55",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2025-12-01T16:00:14.682Z",
+      "createdAt": "2025-12-01T16:00:14.682Z",
+      "role": "workflow:owner",
+      "workflowId": "6JO1M4vo1W9oipoq",
+      "projectId": "Ed0SJaRvK6NUjA9T"
+    }
+  ],
+  "tags": []
+}
