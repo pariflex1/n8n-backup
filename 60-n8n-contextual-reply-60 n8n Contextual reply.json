@@ -1,0 +1,753 @@
+{
+  "updatedAt": "2025-12-02T13:26:58.000Z",
+  "createdAt": "2025-12-01T14:55:32.667Z",
+  "id": "0iqltriMEbiRwRKp",
+  "name": "60 n8n Contextual reply",
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ef6c2837-9317-4ef6-afae-fdfa885c71c6",
+              "name": "message",
+              "value": "={{ $json.messages[0].text.body }}",
+              "type": "string"
+            },
+            {
+              "id": "625cec94-67c9-458b-8d58-b7851f8bcec5",
+              "name": "number",
+              "value": "={{ $json.messages[0].from }}",
+              "type": "string"
+            },
+            {
+              "id": "e8745982-aacb-422c-b003-fb7eb4c23303",
+              "name": "message_id",
+              "value": "={{ $json.messages[0].id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -8400,
+        256
+      ],
+      "id": "bf71ce5d-60ad-42a3-8934-1783de2bc8f2",
+      "name": "Variable mapping"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "obdU8QpYysdHzgH6",
+          "mode": "list",
+          "cachedResultName": "Msg Batch Processing",
+          "cachedResultUrl": "/projects/Ed0SJaRvK6NUjA9T/datatables/obdU8QpYysdHzgH6"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "message": "={{ $json.message }}",
+            "message_status": "in_queue",
+            "number": "={{ $json.number }}",
+            "message_id": "={{ $json.message_id }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "message_status",
+              "displayName": "message_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "number",
+              "displayName": "number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "message_id",
+              "displayName": "message_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -7952,
+        256
+      ],
+      "id": "ae92d54f-5d9d-4164-919d-d20d801e22ba",
+      "name": "Insert row"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -7728,
+        256
+      ],
+      "id": "48d84edc-0a34-4749-b24c-a30e03f42ce7",
+      "name": "Wait",
+      "webhookId": "b7fbb284-0a1d-4bd9-a6b2-bf507939b737"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -7280,
+        256
+      ],
+      "id": "c2a91b5b-3a02-4573-9362-61f1f85cd190",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -7056,
+        64
+      ],
+      "id": "c4772178-1df9-4ba3-9814-f1e6f0711ed9",
+      "name": "Done Processing"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "obdU8QpYysdHzgH6",
+          "mode": "list",
+          "cachedResultName": "Msg Batch Processing",
+          "cachedResultUrl": "/projects/Ed0SJaRvK6NUjA9T/datatables/obdU8QpYysdHzgH6"
+        },
+        "matchType": "allConditions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "number",
+              "keyValue": "={{ $('Variable mapping').item.json.number }}"
+            },
+            {
+              "keyName": "message_status",
+              "keyValue": "in_queue"
+            }
+          ]
+        },
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -7504,
+        256
+      ],
+      "id": "1357587b-55c4-42c9-b872-843dc15054e8",
+      "name": "Get row(s)"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Map result').item.json.number }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -6256,
+        288
+      ],
+      "id": "805df81e-7f5b-4865-bbb4-a38086cb01ff",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -5808,
+        64
+      ],
+      "id": "c755a053-f5c5-453b-841a-79cd30c4d8ee",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8170b840-eff6-4baf-b107-7a6222b57ee4",
+              "leftValue": "={{ $json.message }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -8176,
+        256
+      ],
+      "id": "b6ccbca0-3a48-4e09-a561-5cadac3d5105",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v24.0/387521651107625/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer EAAPaOJHZBhEkBQKiF9gLfK526mBl545ZBC9Pecivk6KNaW18sNYeUAgSvEAsK3nZBu0dts0W5R0WzdHL3OlmSGav8hDFmoaunea5Emcy8ZCKvzgvtTux5ZCwN7YaRFfAfrF78WGA3EJqW7XtLZC00Wz0FWQeTZBmYunelRZCM3FnxrBz4AI4mqrteCLiuEqnVv9WBAexUdDK3A1kXwLSrRSIpmbGZCDBzOs4cQ9U8b9BbUwWL27uDBDRH5OMoRx8ufrA4yCleZBD3ZBD5sYmEQrKZBvCGoKcFwdFBbPVkYYZD"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "messaging_product",
+              "value": "whatsapp"
+            },
+            {
+              "name": "status",
+              "value": "read"
+            },
+            {
+              "name": "message_id",
+              "value": "={{ $('WhatsApp Trigger1').item.json.messages[0].id }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -7056,
+        256
+      ],
+      "id": "3558dbc0-e6a7-48d0-87db-a3633de5d4f8",
+      "name": "Read message"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v24.0/387521651107625/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer EAAPaOJHZBhEkBQKiF9gLfK526mBl545ZBC9Pecivk6KNaW18sNYeUAgSvEAsK3nZBu0dts0W5R0WzdHL3OlmSGav8hDFmoaunea5Emcy8ZCKvzgvtTux5ZCwN7YaRFfAfrF78WGA3EJqW7XtLZC00Wz0FWQeTZBmYunelRZCM3FnxrBz4AI4mqrteCLiuEqnVv9WBAexUdDK3A1kXwLSrRSIpmbGZCDBzOs4cQ9U8b9BbUwWL27uDBDRH5OMoRx8ufrA4yCleZBD3ZBD5sYmEQrKZBvCGoKcFwdFBbPVkYYZD"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"status\": \"read\",\n  \"message_id\": \"{{ $('Get row(s)').item.json.message_id }}\",\n  \"typing_indicator\": {\n    \"type\": \"text\"\n  }\n} ",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -6608,
+        64
+      ],
+      "id": "22272dcc-17ec-4b9d-ad9c-0dd3c442180d",
+      "name": "Typing Indicator"
+    },
+    {
+      "parameters": {
+        "jsCode": "const combinedMessage = items\n  .map(msg => `${msg.json.message} (ID: ${msg.json.message_id})`)\n  .join(' | '); // use '\\n' for line breaks or ' | ' for single line\n\nconst number = items[0].json.number\n\nreturn [\n  {\n    json: {\n      number: number,\n      combined_message: combinedMessage,\n    },\n  },\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -6832,
+        64
+      ],
+      "id": "93cf86d8-0a0e-4a71-b59e-90cfa2880831",
+      "name": "Map result"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse JSON string from the \"output\" field and convert messages into an array of objects\n\nconst rawOutput = items[0].json.output; // get the string\nconst parsed = JSON.parse(rawOutput);   // parse the JSON string\n\n// Convert key-value pairs into list of objects\n// const messageList = Object.entries(parsed).map(([key, value]) => ({\n//   key,\n//   message: value\n// }));\n\n// return messageList.map(msg => ({ json: msg }));\nreturn parsed\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -6032,
+        64
+      ],
+      "id": "091017ea-7be4-419e-867d-f50d1b46eaaa",
+      "name": "Parse Data"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "obdU8QpYysdHzgH6",
+          "mode": "list",
+          "cachedResultName": "Msg Batch Processing",
+          "cachedResultUrl": "/projects/Ed0SJaRvK6NUjA9T/datatables/obdU8QpYysdHzgH6"
+        },
+        "matchType": "allConditions",
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "={{ $('Loop Over Items').item.json.id }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "message_status": "processed"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "message_status",
+              "displayName": "message_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "number",
+              "displayName": "number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -6832,
+        336
+      ],
+      "id": "4c98e5ca-f1dc-46db-bb51-72a65b0c9807",
+      "name": "update entry"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -8624,
+        256
+      ],
+      "id": "9f510423-b53c-4d77-9cb6-20c4b12280e9",
+      "name": "WhatsApp Trigger1",
+      "webhookId": "e57e8925-ccd3-4cfa-8a84-60bff5909af1",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "hJdNAsYG86txe52j",
+          "name": "WhatsApp OAuth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "ft:gpt-4o-mini-2024-07-18:personal:meow:CZFaRlvj:ckpt-step-832",
+          "mode": "list",
+          "cachedResultName": "ft:gpt-4o-mini-2024-07-18:personal:meow:CZFaRlvj:ckpt-step-832"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -6384,
+        288
+      ],
+      "id": "fc3b8a88-754e-45d8-a503-6edcb58766f3",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "vsLZbKCEUZqeDpas",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Map result').item.json.combined_message }}",
+        "options": {
+          "systemMessage": "SYSTEM PROMPT – Jhansi Property Real Estate AI Agent\n\nYou are “Jhansi Property AI Assistant,” an expert real estate virtual agent for the website JhansiProperty.com. Your job is to help users find properties, answer queries, guide buyers/sellers, and collect lead information. Respond in a friendly, professional, sales-oriented tone.\n\n1. Your Core Role\n\nYou act as a real estate consultant specializing in:\n\nProperty buying, selling & renting\n\nPricing guidance\n\nLocal area knowledge (Jhansi & nearby regions)\n\nInvestment suggestions\n\nPlot, house, commercial & agricultural properties\n\nNew project consultation\n\nYour priority is to give accurate, confident, and helpful advice.\n\n2. Always Identify the User’s Intent\n\nEach conversation must determine:\n\nAre they looking to buy / sell / rent?\n\nProperty type? (Plot, house, flat, commercial, land, etc.)\n\nPreferred location/area?\n\nBudget range?\n\nSize requirement?\n\nUrgency? (Immediate / 1–3 months / just exploring)\n\n3. Lead Capture\n\nPolitely and naturally request:\n\nName\n\nPhone number\n\nPreferred time to call\n\nIf the user refuses, continue the conversation and try again later.\n\n4. How You Should Respond\n\nBe concise but informative\n\nAvoid long paragraphs\n\nProvide options, suggestions, and next steps\n\nUse bullet points for clarity\n\nNever sound robotic\n\nAlways offer to show similar listings\n\nExample closing line:\n“Would you like me to share matching properties or arrange a quick call with our team?”\n\n5. Property Information Rules\n\nIf the user provides details like:\n\nPlot size\n\nLocation\n\nBudget\n\nFacing\n\nAmenities\n\nPurpose (residential/commercial)\n\n→ Respond as a professional agent with:\n\nEstimated price\n\nMarket insights\n\nAlternatives\n\nPros & cons\n\nNegotiation advice\n\nLegal/documentation checklist\n\nIf information is missing → ask for it politely.\n\n6. Local Expertise Behavior\n\nYou know key areas of Jhansi such as:\n\nSipri Bazar\n\nNandanpura\n\nCivil Lines\n\nHansari\n\nElite Crossing\n\nAwas Vikas Colony\n\nPrem Nagar\n\nBaragaon Road\n\nGwalior Road\n\nShivpuri Road\n\nMauranipur Road\n\nJhansi-Kanpur Road\n\nAnd nearby towns like:\n\nBabina\n\nMauranipur\n\nGarautha\n\nBaragaon\n\nTalbehat\n\nUse this knowledge naturally when guiding users.\n\n7. Important Do’s\n\nAlways stay positive & helpful\n\nGive clear property suggestions\n\nAsk follow-up questions\n\nPromote Jhansi Property services\n\nEncourage site visits or agent calls\n\nProvide estimated prices when possible\n\nHelp compare options\n\n8. Important Don’ts\n\nDo NOT guess exact prices if unsure — give ranges\n\nDo NOT disclose internal business info\n\nDo NOT provide legal advice; only general guidance\n\nDo NOT give personal opinions (only real estate expertise)\n\nDo NOT mention being an AI model\n\n9. Default Closing Message\n\nEnd most replies with:\n\n“Would you like me to show the best available options based on your needs?”\n\n10. Emergency Handling\n\nIf user asks irrelevant or harmful queries:\n\nReply:\n“I’m here to help only with property and real-estate related queries. How can I assist you in finding a property today?”"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -6384,
+        64
+      ],
+      "id": "25edca99-6ef3-41b8-a953-493e810fa9d8",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v22.0/387521651107625/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer EAAPaOJHZBhEkBQCAVi8AOHAy3NiV4U0VZAVWbsy3XnvOWqRDYmtZC6RZCDyGwPiRhgzxqsH8ir1kOlAJloXZCwSJqRPgLsCsPZChyZCETdXlNeoGnbBe00QxHmwoxeldcUPBH5yCGVRvdFyluCif4k9y2qLFmrmxa73WzBqPZAr8fEk57M06OdeSL2fS7I4WZBXtvES2gTv0wCy46ct33ZACWDMRs8ZAPfjrZAzXroaKVizoYYiBbwvsb1j78QA90RWWsERJfL1ZBlBTaZBY4U37YXMYWCBO3iDTr5e4kXUBgZD"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $('WhatsApp Trigger1').item.json.contacts[0].wa_id }}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"preview_url\": false,\n    \"body\": \"{{ $json.message }}\"\n  }\n}\n",
+        "options": {}
+      },
+      "id": "381cc32b-42ff-46df-9bbb-b495888cc4d8",
+      "name": "WhatsApp Send",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -5680,
+        256
+      ]
+    }
+  ],
+  "connections": {
+    "Variable mapping": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert row": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Done Processing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Read message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Done Processing": {
+      "main": [
+        [
+          {
+            "node": "Map result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "WhatsApp Send",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read message": {
+      "main": [
+        [
+          {
+            "node": "update entry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Typing Indicator": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Map result": {
+      "main": [
+        [
+          {
+            "node": "Typing Indicator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Data": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update entry": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Variable mapping",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Parse Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Send": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "75b9c062-fb2b-4884-b25a-5171e131210b",
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2025-12-01T14:55:32.729Z",
+      "createdAt": "2025-12-01T14:55:32.729Z",
+      "role": "workflow:owner",
+      "workflowId": "0iqltriMEbiRwRKp",
+      "projectId": "Ed0SJaRvK6NUjA9T"
+    }
+  ],
+  "tags": []
+}
