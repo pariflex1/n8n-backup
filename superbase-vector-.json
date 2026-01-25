@@ -1,22 +1,11 @@
 {
-  "updatedAt": "2026-01-15T09:43:05.638Z",
-  "createdAt": "2026-01-15T09:43:05.638Z",
-  "id": "BZ4e3jEteYW2qtHk6uuMo",
+  "updatedAt": "2026-01-24T12:51:50.270Z",
+  "createdAt": "2026-01-16T12:05:23.784Z",
+  "id": "GATXd-c5s7JZgM3cikUQ3",
   "name": "Superbase Vector",
   "active": false,
   "isArchived": false,
   "nodes": [
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -320,
-        -48
-      ],
-      "id": "1fd90635-edeb-4d77-89c9-33090283a299",
-      "name": "When clicking ‘Execute workflow’"
-    },
     {
       "parameters": {
         "jsCode": "return items.map(item => {\n    const data = item.json;\n    let content = \"\";\n\n    if (data.Question && data.Answer) {\n        // FAQ\n        content = `${data.Answer}`;\n    } else if (data['Product Name'] && data.Description) {\n        // Product\n        content = `Product\\nCategory: ${data.Category || \"General\"}\\nName: ${data['Product Name']}\\nDescription: ${data.Description}\\nSize: ${data.Size || \"N/A\"}\\nPrice: ${data.Price || \"N/A\"}`;\n    } else {\n        // Fallback\n        content = `Other Data\\n${JSON.stringify(data)}`;\n    }\n\n    return {\n        json: {\n            values: [],        // embedding node will fill this\n            content: content   // EVERYTHING is now vectorized\n        }\n    };\n});\n"
@@ -24,10 +13,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        128,
-        -48
+        448,
+        0
       ],
-      "id": "1cf91e90-9444-4200-bf2d-26456795c0fb",
+      "id": "f10ec433-2ef0-4a81-ae44-73498222d80e",
       "name": "Code"
     },
     {
@@ -35,9 +24,9 @@
         "mode": "insert",
         "tableName": {
           "__rl": true,
-          "value": "krishna_anandam_vectors",
+          "value": "documents",
           "mode": "list",
-          "cachedResultName": "krishna_anandam_vectors"
+          "cachedResultName": "documents"
         },
         "options": {
           "queryName": "match_documents"
@@ -46,14 +35,14 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
       "typeVersion": 1.3,
       "position": [
-        352,
-        -48
+        672,
+        0
       ],
-      "id": "3a97f222-92c6-4bab-a847-a0d34e22a3be",
+      "id": "47f84f75-9337-4fa8-97c8-158741eb305f",
       "name": "Supabase Vector Store",
       "credentials": {
         "supabaseApi": {
-          "id": "SussLdm82bhER87r",
+          "id": "1JXnZzXhEXnyD6eE",
           "name": "Supabase account"
         }
       }
@@ -65,10 +54,10 @@
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1.1,
       "position": [
-        496,
-        176
+        816,
+        224
       ],
-      "id": "a8a6916c-0330-4de6-80cb-144f41255514",
+      "id": "491df188-e4fc-4580-98d0-3a946c5244bc",
       "name": "Default Data Loader"
     },
     {
@@ -78,14 +67,14 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        368,
-        176
+        624,
+        208
       ],
-      "id": "53061d05-d67c-45cf-a3b7-c9d47ad51090",
+      "id": "02e93994-a77e-4467-a08c-69d31e4d8284",
       "name": "Embeddings OpenAI",
       "credentials": {
         "openAiApi": {
-          "id": "LXpXw67bYE0gLZYC",
+          "id": "oeU3bDddqKmVY1Rx",
           "name": "OpenAi account"
         }
       }
@@ -101,24 +90,24 @@
         },
         "sheetName": {
           "__rl": true,
-          "value": 1546266212,
+          "value": 1372716118,
           "mode": "list",
-          "cachedResultName": "Sheet2",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit#gid=1546266212"
+          "cachedResultName": "oshi",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit#gid=1372716118"
         },
         "options": {}
       },
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -96,
-        -48
+        224,
+        0
       ],
-      "id": "8aa6f5b7-c7a3-4020-827b-75efdee1cb8e",
+      "id": "233079fc-f677-422f-9546-084c1ae652fa",
       "name": "Get row(s) in sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "ZlJifX5P905KYyux",
+          "id": "uJqb7ndcbLq8v9jO",
           "name": "Google Sheets account"
         }
       }
@@ -133,10 +122,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -304,
-        448
+        16,
+        496
       ],
-      "id": "e8fe78ac-0f87-4040-ab86-6ba0d82504ab",
+      "id": "a8970d56-b769-4483-869e-5949858dbd17",
       "name": "Webhook",
       "webhookId": "739e3070-e4e5-4d15-b048-5529c8c523bb"
     },
@@ -176,10 +165,10 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        -80,
-        352
+        240,
+        400
       ],
-      "id": "eff77531-d2f5-4fc2-b4b1-c23e1acc760f",
+      "id": "a2a31b3d-658f-407b-80c8-64d363905200",
       "name": "Filter"
     },
     {
@@ -191,10 +180,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        144,
-        352
+        464,
+        400
       ],
-      "id": "ecc2c7b1-c979-4977-9ef3-ff7053ab5db0",
+      "id": "96d447e6-b324-4505-8024-e3c7e56a23db",
       "name": "Respond to Webhook"
     },
     {
@@ -225,10 +214,10 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        -80,
-        544
+        240,
+        592
       ],
-      "id": "0198275a-5208-452e-bf46-41b4e928314b",
+      "id": "5703b8a3-a29a-4098-81d6-d514f95b02c4",
       "name": "Filter1"
     },
     {
@@ -272,52 +261,41 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        144,
-        544
+        464,
+        592
       ],
-      "id": "fb64ecd5-b8ad-4df4-bb0c-e5e87fd07fc6",
+      "id": "02b32377-6190-4a8d-b8d7-3f21be2e1894",
       "name": "set_variable"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://graph.facebook.com/v19.0/639759029221223/messages",
+        "url": "=https://graph.facebook.com/v24.0/387521651107625/messages",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer EAAdG3FIsPD8BQfduGLSxk3wKrV5wzPJ9xIaE8RMuZBACUDVZBzZCMnOl9EqfvcvGuD9NpZCv0PdXZBm0kNoZBaynUdMDdR3D1RCH1o7TZB5hVYJ3RDZBFkvsKgj1LZCSPsmJAOjKZA46bEPEGKCFpIScFOXQ3NFZBIkqzp79Jp1tygZB3HLpyiTZCagBrjjZARDkuGhgZDZD"
+              "value": "Bearer EAAPaOJHZBhEkBQqhILZAJ0SldTkZCCheZC276IZBtZAtoVgfP9Lo2FDcGBh8dFrp0n40Hmb8PRMloKZBCUhyjqXxqiRHo7YYkBYF8RFZAbrYBKeBf7ZAhFQCb0Dksk4WVhab5OgNlj47mZCDB8KxpCP6VBT9dZAohBh5ePMQ8hRX68t3XsOi5ty2CUAZBQPzJ0M2AgZDZD"
             }
           ]
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $('Webhook').item.json.body.entry[0].changes[0].value.contacts[0].wa_id }}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"{{ $json.output }}\"\n  }\n}",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $('Webhook').item.json.body.entry[0].changes[0].value.contacts[0].wa_id }}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"my name is vicky\"\n  }\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        368,
-        544
+        688,
+        592
       ],
-      "id": "78f0343d-a48c-42a4-bd8d-59e7fe93ff13",
+      "id": "30073035-aae3-402b-bbc7-acdbdaaef653",
       "name": "HTTP Request"
     }
   ],
   "connections": {
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        [
-          {
-            "node": "Get row(s) in sheet",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Code": {
       "main": [
         [
@@ -419,18 +397,20 @@
     "availableInMCP": false
   },
   "staticData": null,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "pinData": {},
-  "versionId": "0a44e654-be5d-486a-9868-060a10726c79",
+  "versionId": "3ce73df6-d78f-478b-8ffe-f98c67d2afcf",
   "activeVersionId": null,
   "triggerCount": 0,
   "shared": [
     {
-      "updatedAt": "2026-01-15T09:43:05.643Z",
-      "createdAt": "2026-01-15T09:43:05.643Z",
+      "updatedAt": "2026-01-16T12:05:23.788Z",
+      "createdAt": "2026-01-16T12:05:23.788Z",
       "role": "workflow:owner",
-      "workflowId": "BZ4e3jEteYW2qtHk6uuMo",
-      "projectId": "q8LPzBKJKWzEdVHR"
+      "workflowId": "GATXd-c5s7JZgM3cikUQ3",
+      "projectId": "Wp4nC2HsKCQjylkb"
     }
   ],
   "activeVersion": null,
