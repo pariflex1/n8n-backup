@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-01-25T22:20:56.258Z",
+  "updatedAt": "2026-01-26T10:18:45.413Z",
   "createdAt": "2026-01-16T11:56:43.873Z",
   "id": "UTCj8X41vHGz7oIxILix9",
   "name": "Whatsapp AI Agent Jhansi Property",
@@ -18,8 +18,8 @@
       "type": "n8n-nodes-base.whatsAppTrigger",
       "typeVersion": 1,
       "position": [
-        -496,
-        2912
+        -576,
+        3376
       ],
       "id": "3045ebcc-c731-4357-8aae-554d3f1f7aa2",
       "name": "WhatsApp Trigger",
@@ -42,8 +42,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        1360,
-        2496
+        352,
+        3392
       ],
       "id": "ba7adb04-be1d-4539-a2cd-8b385575ba59",
       "name": "AI Agent"
@@ -60,8 +60,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        1296,
-        2720
+        304,
+        3616
       ],
       "id": "54cf6828-e01a-4006-8016-63e83d555106",
       "name": "OpenAI Chat Model",
@@ -82,8 +82,8 @@
       "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
       "typeVersion": 1.3,
       "position": [
-        1424,
-        2720
+        432,
+        3616
       ],
       "id": "d1f1d6ec-198a-403f-9216-835b36c272f9",
       "name": "Postgres Chat Memory",
@@ -112,8 +112,8 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
       "typeVersion": 1.3,
       "position": [
-        1552,
-        2720
+        560,
+        3616
       ],
       "id": "4a9c4634-8973-4bf9-8ba7-7f7aa8f9d6e3",
       "name": "Knowledge Base",
@@ -131,8 +131,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        1632,
-        2928
+        640,
+        3824
       ],
       "id": "231f7ff1-24d8-463c-b66e-5b1f7a9a61cf",
       "name": "Embeddings-OpenAI",
@@ -142,42 +142,6 @@
           "name": "OpenAi account"
         }
       }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "38a72e0d-57dd-4e88-916b-6a55ba470793",
-              "leftValue": "={{ $json.row_number }}",
-              "rightValue": 0,
-              "operator": {
-                "type": "number",
-                "operation": "empty",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        400,
-        2912
-      ],
-      "id": "ac1807c1-dcb7-4566-8333-d9cd013ebd51",
-      "name": "If",
-      "alwaysOutputData": false,
-      "executeOnce": true
     },
     {
       "parameters": {
@@ -192,8 +156,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1,
       "position": [
-        -496,
-        2016
+        112,
+        3232
       ],
       "id": "d02d5d74-6faa-427f-b3b7-5018a264c5d9",
       "name": "Error Message",
@@ -229,7 +193,10 @@
             "Name": "={{ $('WhatsApp Trigger').item.json.contacts[0].profile.name }}",
             "Contact": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
             "User": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}{{ $('WhatsApp Trigger').item.json.messages[0].interactive.button_reply.title }}",
-            "AI": "={{ $('AI Agent').item.json.output }}"
+            "AI": "={{ $('AI Agent').item.json.output }}",
+            "Site": "Oshi",
+            "Agent Name": "Deepak Raja",
+            "Agent Contact": "918400517771"
           },
           "matchingColumns": [],
           "schema": [
@@ -277,6 +244,36 @@
               "display": true,
               "type": "string",
               "canBeUsedToMatch": true
+            },
+            {
+              "id": "Site",
+              "displayName": "Site",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Agent Name",
+              "displayName": "Agent Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Agent Contact",
+              "displayName": "Agent Contact",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -287,8 +284,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        2144,
-        2704
+        880,
+        3392
       ],
       "id": "a7dc4196-1aae-4d52-97ba-fd878b93a4f2",
       "name": "Append row in sheet1",
@@ -310,8 +307,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        1920,
-        2704
+        656,
+        3392
       ],
       "id": "0f8385be-57dc-4229-9530-9d4ee8c1467d",
       "name": "Send message and wait for response",
@@ -322,137 +319,6 @@
           "name": "WhatsApp account"
         }
       }
-    },
-    {
-      "parameters": {
-        "documentId": {
-          "__rl": true,
-          "value": "1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs",
-          "mode": "list",
-          "cachedResultName": "HTML FORM - DATA",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit?usp=drivesdk"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": 309506201,
-          "mode": "list",
-          "cachedResultName": "Spacemooncity",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit#gid=309506201"
-        },
-        "filtersUI": {
-          "values": [
-            {
-              "lookupColumn": "Contact",
-              "lookupValue": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        176,
-        2912
-      ],
-      "id": "e82eae9b-856c-45c6-8a52-4bf029ca0add",
-      "name": "Get row(s) in sheet",
-      "alwaysOutputData": true,
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "uJqb7ndcbLq8v9jO",
-          "name": "Google Sheets account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "leftValue": "={{ $('WhatsApp Trigger').item.json.messages[0].type }}",
-                    "rightValue": "text",
-                    "operator": {
-                      "type": "string",
-                      "operation": "notEquals"
-                    },
-                    "id": "0198aeab-b1c7-422a-bd7d-66a0d583b860"
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Image"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "1200b127-c89d-4d8d-90b4-a6d2884166b5",
-                    "leftValue": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}",
-                    "rightValue": "Hello",
-                    "operator": {
-                      "type": "string",
-                      "operation": "notContains"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "AI"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "ba170b51-1824-440d-9811-3e4e39f07caf",
-                    "leftValue": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}",
-                    "rightValue": "Hello!",
-                    "operator": {
-                      "type": "string",
-                      "operation": "contains"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Hello"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3.4,
-      "position": [
-        -496,
-        2240
-      ],
-      "id": "0f1a5310-36eb-464f-8a38-64d866088a0d",
-      "name": "Switch"
     },
     {
       "parameters": {
@@ -470,7 +336,7 @@
               "rightValue": "Hello!",
               "operator": {
                 "type": "string",
-                "operation": "notContains"
+                "operation": "contains"
               }
             }
           ],
@@ -481,8 +347,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1072,
-        2912
+        176,
+        3376
       ],
       "id": "78f3b059-5dc5-438b-8e3b-7b803599537c",
       "name": "If2"
@@ -522,8 +388,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -272,
-        2912
+        -384,
+        3376
       ],
       "id": "891b851d-ae7a-46ad-95f6-13d8266ef6ae",
       "name": "read"
@@ -555,8 +421,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -48,
-        2912
+        -224,
+        3376
       ],
       "id": "0b651daa-a8bd-4817-8465-9b710257426e",
       "name": "typing"
@@ -582,8 +448,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1504,
-        3104
+        368,
+        3216
       ],
       "id": "ca957ace-bf3c-4a74-80e2-dfc0e14e5af6",
       "name": "hello"
@@ -611,8 +477,11 @@
             "Time": "={{$now.toFormat(\"dd/MM/yyyy HH:mm:ss\")}}",
             "Name": "={{ $('WhatsApp Trigger').item.json.contacts[0].profile.name }}",
             "Contact": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
-            "User": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}",
-            "AI": "=Hey, where you are interested in?"
+            "User": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}{{ $('WhatsApp Trigger').item.json.messages[0].interactive.button_reply.title }}",
+            "AI": "=App kis me interested hai",
+            "Site": "Oshi",
+            "Agent Name": "Deepak Raja",
+            "Agent Contact": "918400517771"
           },
           "matchingColumns": [],
           "schema": [
@@ -660,150 +529,10 @@
               "display": true,
               "type": "string",
               "canBeUsedToMatch": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        848,
-        2784
-      ],
-      "id": "54216a64-9abe-45ef-8082-70a88f41a3d3",
-      "name": "Append row in sheet",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "uJqb7ndcbLq8v9jO",
-          "name": "Google Sheets account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "appendOrUpdate",
-        "documentId": {
-          "__rl": true,
-          "value": "1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs",
-          "mode": "list",
-          "cachedResultName": "HTML FORM - DATA",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit?usp=drivesdk"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": 309506201,
-          "mode": "list",
-          "cachedResultName": "Spacemooncity",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit#gid=309506201"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "Timestamp": "={{$now.toFormat(\"dd/MM/yyyy HH:mm:ss\")}}",
-            "Client Name": "={{ $('WhatsApp Trigger').item.json.contacts[0].profile.name }}",
-            "Contact": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
-            "Lead From": "Facebook",
-            "Site": "Oshi House",
-            "Agent Name": "Deepak Raja",
-            "Client Contact": "918400517771"
-          },
-          "matchingColumns": [
-            "Contact"
-          ],
-          "schema": [
-            {
-              "id": "Timestamp",
-              "displayName": "Timestamp",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Client Name",
-              "displayName": "Client Name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Contact",
-              "displayName": "Contact",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "About",
-              "displayName": "About",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Note",
-              "displayName": "Note",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Lead From",
-              "displayName": "Lead From",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
             },
             {
               "id": "Site",
               "displayName": "Site",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Meeting Date",
-              "displayName": "Meeting Date",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Meeting Time",
-              "displayName": "Meeting Time",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Site Url",
-              "displayName": "Site Url",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -822,8 +551,8 @@
               "removed": false
             },
             {
-              "id": "Client Contact",
-              "displayName": "Client Contact",
+              "id": "Agent Contact",
+              "displayName": "Agent Contact",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -840,17 +569,59 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        624,
-        2784
+        544,
+        3216
       ],
-      "id": "145b809e-891d-490b-b935-3f52b1044b53",
-      "name": "Append or update row in sheet",
+      "id": "09a7a148-5ae6-4e1b-8208-4399583301f6",
+      "name": "Append row in sheet2",
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "uJqb7ndcbLq8v9jO",
           "name": "Google Sheets account"
         }
       }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "fa584dde-50f4-4ec1-92ec-ac1275d44308",
+              "leftValue": "={{ $('WhatsApp Trigger').item.json.messages[0].type }}",
+              "rightValue": "interactive",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "733b95b4-bc6a-44c6-9173-b4cb3f8d9123",
+              "leftValue": "={{ $('WhatsApp Trigger').item.json.messages[0].type }}",
+              "rightValue": "text",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -32,
+        3376
+      ],
+      "id": "70723e5d-eade-4c38-8fed-10b1e32dbbe3",
+      "name": "If"
     }
   ],
   "connections": {
@@ -920,24 +691,6 @@
         ]
       ]
     },
-    "If": {
-      "main": [
-        [
-          {
-            "node": "Append or update row in sheet",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "If2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Append row in sheet1": {
       "main": [
         []
@@ -954,36 +707,18 @@
         ]
       ]
     },
-    "Get row(s) in sheet": {
-      "main": [
-        [
-          {
-            "node": "If",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch": {
-      "main": [
-        [],
-        [],
-        []
-      ]
-    },
     "If2": {
       "main": [
         [
           {
-            "node": "AI Agent",
+            "node": "hello",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "hello",
+            "node": "AI Agent",
             "type": "main",
             "index": 0
           }
@@ -1010,7 +745,7 @@
       "main": [
         [
           {
-            "node": "Get row(s) in sheet",
+            "node": "If",
             "type": "main",
             "index": 0
           }
@@ -1019,25 +754,27 @@
     },
     "hello": {
       "main": [
-        []
-      ]
-    },
-    "Append row in sheet": {
-      "main": [
         [
           {
-            "node": "If2",
+            "node": "Append row in sheet2",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Append or update row in sheet": {
+    "If": {
       "main": [
         [
           {
-            "node": "Append row in sheet",
+            "node": "Error Message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If2",
             "type": "main",
             "index": 0
           }
@@ -1054,8 +791,8 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "8d4efe2e-526e-4a77-8f55-840aeb1ed377",
-  "activeVersionId": "aed01a04-2382-4bf7-9224-f116770dfad9",
+  "versionId": "7feb4199-f731-4fb0-8489-42f7ebf6289c",
+  "activeVersionId": "7feb4199-f731-4fb0-8489-42f7ebf6289c",
   "triggerCount": 1,
   "shared": [
     {
@@ -1067,9 +804,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-01-25T21:55:05.000Z",
-    "createdAt": "2026-01-25T21:54:59.511Z",
-    "versionId": "aed01a04-2382-4bf7-9224-f116770dfad9",
+    "updatedAt": "2026-01-26T10:18:50.000Z",
+    "createdAt": "2026-01-26T10:18:45.417Z",
+    "versionId": "7feb4199-f731-4fb0-8489-42f7ebf6289c",
     "workflowId": "UTCj8X41vHGz7oIxILix9",
     "nodes": [
       {
@@ -1084,8 +821,8 @@
         "type": "n8n-nodes-base.whatsAppTrigger",
         "typeVersion": 1,
         "position": [
-          -496,
-          2904
+          -576,
+          3376
         ],
         "id": "3045ebcc-c731-4357-8aae-554d3f1f7aa2",
         "name": "WhatsApp Trigger",
@@ -1108,8 +845,8 @@
         "type": "@n8n/n8n-nodes-langchain.agent",
         "typeVersion": 2.2,
         "position": [
-          1352,
-          2496
+          352,
+          3392
         ],
         "id": "ba7adb04-be1d-4539-a2cd-8b385575ba59",
         "name": "AI Agent"
@@ -1126,8 +863,8 @@
         "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
         "typeVersion": 1.2,
         "position": [
-          1296,
-          2720
+          304,
+          3616
         ],
         "id": "54cf6828-e01a-4006-8016-63e83d555106",
         "name": "OpenAI Chat Model",
@@ -1148,8 +885,8 @@
         "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
         "typeVersion": 1.3,
         "position": [
-          1424,
-          2720
+          432,
+          3616
         ],
         "id": "d1f1d6ec-198a-403f-9216-835b36c272f9",
         "name": "Postgres Chat Memory",
@@ -1178,8 +915,8 @@
         "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
         "typeVersion": 1.3,
         "position": [
-          1552,
-          2720
+          560,
+          3616
         ],
         "id": "4a9c4634-8973-4bf9-8ba7-7f7aa8f9d6e3",
         "name": "Knowledge Base",
@@ -1197,8 +934,8 @@
         "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
         "typeVersion": 1.2,
         "position": [
-          1632,
-          2928
+          640,
+          3824
         ],
         "id": "231f7ff1-24d8-463c-b66e-5b1f7a9a61cf",
         "name": "Embeddings-OpenAI",
@@ -1208,42 +945,6 @@
             "name": "OpenAi account"
           }
         }
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "strict",
-              "version": 3
-            },
-            "conditions": [
-              {
-                "id": "38a72e0d-57dd-4e88-916b-6a55ba470793",
-                "leftValue": "={{ $json.row_number }}",
-                "rightValue": 0,
-                "operator": {
-                  "type": "number",
-                  "operation": "empty",
-                  "singleValue": true
-                }
-              }
-            ],
-            "combinator": "and"
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.3,
-        "position": [
-          400,
-          2904
-        ],
-        "id": "ac1807c1-dcb7-4566-8333-d9cd013ebd51",
-        "name": "If",
-        "alwaysOutputData": false,
-        "executeOnce": true
       },
       {
         "parameters": {
@@ -1258,8 +959,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1,
         "position": [
-          -496,
-          2016
+          112,
+          3232
         ],
         "id": "d02d5d74-6faa-427f-b3b7-5018a264c5d9",
         "name": "Error Message",
@@ -1295,7 +996,10 @@
               "Name": "={{ $('WhatsApp Trigger').item.json.contacts[0].profile.name }}",
               "Contact": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
               "User": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}{{ $('WhatsApp Trigger').item.json.messages[0].interactive.button_reply.title }}",
-              "AI": "={{ $('AI Agent').item.json.output }}"
+              "AI": "={{ $('AI Agent').item.json.output }}",
+              "Site": "Oshi",
+              "Agent Name": "Deepak Raja",
+              "Agent Contact": "918400517771"
             },
             "matchingColumns": [],
             "schema": [
@@ -1343,6 +1047,36 @@
                 "display": true,
                 "type": "string",
                 "canBeUsedToMatch": true
+              },
+              {
+                "id": "Site",
+                "displayName": "Site",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Agent Name",
+                "displayName": "Agent Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Agent Contact",
+                "displayName": "Agent Contact",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
               }
             ],
             "attemptToConvertTypes": false,
@@ -1353,8 +1087,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          2144,
-          2704
+          880,
+          3392
         ],
         "id": "a7dc4196-1aae-4d52-97ba-fd878b93a4f2",
         "name": "Append row in sheet1",
@@ -1376,8 +1110,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          1920,
-          2704
+          656,
+          3392
         ],
         "id": "0f8385be-57dc-4229-9530-9d4ee8c1467d",
         "name": "Send message and wait for response",
@@ -1388,137 +1122,6 @@
             "name": "WhatsApp account"
           }
         }
-      },
-      {
-        "parameters": {
-          "documentId": {
-            "__rl": true,
-            "value": "1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs",
-            "mode": "list",
-            "cachedResultName": "HTML FORM - DATA",
-            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit?usp=drivesdk"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": 309506201,
-            "mode": "list",
-            "cachedResultName": "Spacemooncity",
-            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit#gid=309506201"
-          },
-          "filtersUI": {
-            "values": [
-              {
-                "lookupColumn": "Contact",
-                "lookupValue": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleSheets",
-        "typeVersion": 4.7,
-        "position": [
-          176,
-          2904
-        ],
-        "id": "e82eae9b-856c-45c6-8a52-4bf029ca0add",
-        "name": "Get row(s) in sheet",
-        "alwaysOutputData": true,
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "uJqb7ndcbLq8v9jO",
-            "name": "Google Sheets account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "rules": {
-            "values": [
-              {
-                "conditions": {
-                  "options": {
-                    "caseSensitive": true,
-                    "leftValue": "",
-                    "typeValidation": "strict",
-                    "version": 3
-                  },
-                  "conditions": [
-                    {
-                      "leftValue": "={{ $('WhatsApp Trigger').item.json.messages[0].type }}",
-                      "rightValue": "text",
-                      "operator": {
-                        "type": "string",
-                        "operation": "notEquals"
-                      },
-                      "id": "0198aeab-b1c7-422a-bd7d-66a0d583b860"
-                    }
-                  ],
-                  "combinator": "and"
-                },
-                "renameOutput": true,
-                "outputKey": "Image"
-              },
-              {
-                "conditions": {
-                  "options": {
-                    "caseSensitive": true,
-                    "leftValue": "",
-                    "typeValidation": "strict",
-                    "version": 3
-                  },
-                  "conditions": [
-                    {
-                      "id": "1200b127-c89d-4d8d-90b4-a6d2884166b5",
-                      "leftValue": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}",
-                      "rightValue": "Hello",
-                      "operator": {
-                        "type": "string",
-                        "operation": "notContains"
-                      }
-                    }
-                  ],
-                  "combinator": "and"
-                },
-                "renameOutput": true,
-                "outputKey": "AI"
-              },
-              {
-                "conditions": {
-                  "options": {
-                    "caseSensitive": true,
-                    "leftValue": "",
-                    "typeValidation": "strict",
-                    "version": 3
-                  },
-                  "conditions": [
-                    {
-                      "id": "ba170b51-1824-440d-9811-3e4e39f07caf",
-                      "leftValue": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}",
-                      "rightValue": "Hello!",
-                      "operator": {
-                        "type": "string",
-                        "operation": "contains"
-                      }
-                    }
-                  ],
-                  "combinator": "and"
-                },
-                "renameOutput": true,
-                "outputKey": "Hello"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.switch",
-        "typeVersion": 3.4,
-        "position": [
-          -496,
-          2240
-        ],
-        "id": "0f1a5310-36eb-464f-8a38-64d866088a0d",
-        "name": "Switch"
       },
       {
         "parameters": {
@@ -1536,7 +1139,7 @@
                 "rightValue": "Hello!",
                 "operator": {
                   "type": "string",
-                  "operation": "notContains"
+                  "operation": "contains"
                 }
               }
             ],
@@ -1547,8 +1150,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          1072,
-          2904
+          176,
+          3376
         ],
         "id": "78f3b059-5dc5-438b-8e3b-7b803599537c",
         "name": "If2"
@@ -1588,8 +1191,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -272,
-          2904
+          -384,
+          3376
         ],
         "id": "891b851d-ae7a-46ad-95f6-13d8266ef6ae",
         "name": "read"
@@ -1621,8 +1224,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -48,
-          2904
+          -224,
+          3376
         ],
         "id": "0b651daa-a8bd-4817-8465-9b710257426e",
         "name": "typing"
@@ -1648,8 +1251,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1496,
-          3104
+          368,
+          3216
         ],
         "id": "ca957ace-bf3c-4a74-80e2-dfc0e14e5af6",
         "name": "hello"
@@ -1677,8 +1280,11 @@
               "Time": "={{$now.toFormat(\"dd/MM/yyyy HH:mm:ss\")}}",
               "Name": "={{ $('WhatsApp Trigger').item.json.contacts[0].profile.name }}",
               "Contact": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
-              "User": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}",
-              "AI": "=Hey, where you are interested in?"
+              "User": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}{{ $('WhatsApp Trigger').item.json.messages[0].interactive.button_reply.title }}",
+              "AI": "=App kis me interested hai",
+              "Site": "Oshi",
+              "Agent Name": "Deepak Raja",
+              "Agent Contact": "918400517771"
             },
             "matchingColumns": [],
             "schema": [
@@ -1726,150 +1332,10 @@
                 "display": true,
                 "type": "string",
                 "canBeUsedToMatch": true
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleSheets",
-        "typeVersion": 4.7,
-        "position": [
-          848,
-          2784
-        ],
-        "id": "54216a64-9abe-45ef-8082-70a88f41a3d3",
-        "name": "Append row in sheet",
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "uJqb7ndcbLq8v9jO",
-            "name": "Google Sheets account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "operation": "appendOrUpdate",
-          "documentId": {
-            "__rl": true,
-            "value": "1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs",
-            "mode": "list",
-            "cachedResultName": "HTML FORM - DATA",
-            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit?usp=drivesdk"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": 309506201,
-            "mode": "list",
-            "cachedResultName": "Spacemooncity",
-            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit#gid=309506201"
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "Timestamp": "={{$now.toFormat(\"dd/MM/yyyy HH:mm:ss\")}}",
-              "Client Name": "={{ $('WhatsApp Trigger').item.json.contacts[0].profile.name }}",
-              "Contact": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
-              "Lead From": "Facebook",
-              "Site": "Oshi House",
-              "Agent Name": "Deepak Raja",
-              "Client Contact": "918400517771"
-            },
-            "matchingColumns": [
-              "Contact"
-            ],
-            "schema": [
-              {
-                "id": "Timestamp",
-                "displayName": "Timestamp",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Client Name",
-                "displayName": "Client Name",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Contact",
-                "displayName": "Contact",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "About",
-                "displayName": "About",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "Note",
-                "displayName": "Note",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "Lead From",
-                "displayName": "Lead From",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
               },
               {
                 "id": "Site",
                 "displayName": "Site",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "Meeting Date",
-                "displayName": "Meeting Date",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "Meeting Time",
-                "displayName": "Meeting Time",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "Site Url",
-                "displayName": "Site Url",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
@@ -1888,8 +1354,8 @@
                 "removed": false
               },
               {
-                "id": "Client Contact",
-                "displayName": "Client Contact",
+                "id": "Agent Contact",
+                "displayName": "Agent Contact",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
@@ -1906,17 +1372,59 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          624,
-          2784
+          544,
+          3216
         ],
-        "id": "145b809e-891d-490b-b935-3f52b1044b53",
-        "name": "Append or update row in sheet",
+        "id": "09a7a148-5ae6-4e1b-8208-4399583301f6",
+        "name": "Append row in sheet2",
         "credentials": {
           "googleSheetsOAuth2Api": {
             "id": "uJqb7ndcbLq8v9jO",
             "name": "Google Sheets account"
           }
         }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "fa584dde-50f4-4ec1-92ec-ac1275d44308",
+                "leftValue": "={{ $('WhatsApp Trigger').item.json.messages[0].type }}",
+                "rightValue": "interactive",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEquals"
+                }
+              },
+              {
+                "id": "733b95b4-bc6a-44c6-9173-b4cb3f8d9123",
+                "leftValue": "={{ $('WhatsApp Trigger').item.json.messages[0].type }}",
+                "rightValue": "text",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEquals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -32,
+          3376
+        ],
+        "id": "70723e5d-eade-4c38-8fed-10b1e32dbbe3",
+        "name": "If"
       }
     ],
     "connections": {
@@ -1986,24 +1494,6 @@
           ]
         ]
       },
-      "If": {
-        "main": [
-          [
-            {
-              "node": "Append or update row in sheet",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "If2",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Append row in sheet1": {
         "main": [
           []
@@ -2020,36 +1510,18 @@
           ]
         ]
       },
-      "Get row(s) in sheet": {
-        "main": [
-          [
-            {
-              "node": "If",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Switch": {
-        "main": [
-          [],
-          [],
-          []
-        ]
-      },
       "If2": {
         "main": [
           [
             {
-              "node": "AI Agent",
+              "node": "hello",
               "type": "main",
               "index": 0
             }
           ],
           [
             {
-              "node": "hello",
+              "node": "AI Agent",
               "type": "main",
               "index": 0
             }
@@ -2076,7 +1548,7 @@
         "main": [
           [
             {
-              "node": "Get row(s) in sheet",
+              "node": "If",
               "type": "main",
               "index": 0
             }
@@ -2085,11 +1557,24 @@
       },
       "hello": {
         "main": [
-          []
+          [
+            {
+              "node": "Append row in sheet2",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
-      "Append row in sheet": {
+      "If": {
         "main": [
+          [
+            {
+              "node": "Error Message",
+              "type": "main",
+              "index": 0
+            }
+          ],
           [
             {
               "node": "If2",
@@ -2098,21 +1583,10 @@
             }
           ]
         ]
-      },
-      "Append or update row in sheet": {
-        "main": [
-          [
-            {
-              "node": "Append row in sheet",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
       }
     },
     "authors": "Brij Mohan",
-    "name": "Version aed01a04",
+    "name": "Version 7feb4199",
     "description": "",
     "autosaved": false
   },
