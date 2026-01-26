@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-01-25T21:57:36.000Z",
+  "updatedAt": "2026-01-26T09:59:41.000Z",
   "createdAt": "2026-01-18T10:44:39.835Z",
   "id": "G0i83L2lWi-l5tTnyKVQz",
   "name": "Sivanta Home App",
   "active": false,
-  "isArchived": false,
+  "isArchived": true,
   "nodes": [
     {
       "parameters": {
@@ -329,7 +329,7 @@
   "staticData": null,
   "meta": null,
   "pinData": {},
-  "versionId": "5b060a9d-3a5b-4ef9-b04a-7d0b21070d95",
+  "versionId": "0e13e4ed-c815-4923-bf12-ae73b568eb7a",
   "activeVersionId": null,
   "triggerCount": 1,
   "shared": [
