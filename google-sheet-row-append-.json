@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-01-26T09:29:59.582Z",
+  "updatedAt": "2026-01-27T04:51:24.503Z",
   "createdAt": "2026-01-26T08:50:46.624Z",
   "id": "mEaVKIH9dvcLGSmK-syhs",
   "name": "Google Sheet Row Append",
@@ -35,11 +35,12 @@
       "type": "n8n-nodes-base.googleSheetsTrigger",
       "typeVersion": 1,
       "position": [
-        -160,
+        -144,
         -48
       ],
       "id": "92ab9e6e-afa7-458b-acd2-111a528187f7",
       "name": "Google Sheets Trigger",
+      "executeOnce": true,
       "credentials": {
         "googleSheetsTriggerOAuth2Api": {
           "id": "oKa6EpOL07F2vJbl",
@@ -75,7 +76,9 @@
             "Client Contact": "={{ $json['Agent Contact'] }}",
             "Lead From": "Facebook"
           },
-          "matchingColumns": [],
+          "matchingColumns": [
+            "Contact"
+          ],
           "schema": [
             {
               "id": "Timestamp",
@@ -102,7 +105,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "About",
@@ -364,8 +368,8 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "c33c0fa2-c19d-47cd-bddf-2098a3ddc674",
-  "activeVersionId": "c33c0fa2-c19d-47cd-bddf-2098a3ddc674",
+  "versionId": "11a7d84e-9fe2-4021-beaa-26db54b16ec0",
+  "activeVersionId": "11a7d84e-9fe2-4021-beaa-26db54b16ec0",
   "triggerCount": 1,
   "shared": [
     {
@@ -377,9 +381,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-01-26T09:30:05.000Z",
-    "createdAt": "2026-01-26T09:29:59.583Z",
-    "versionId": "c33c0fa2-c19d-47cd-bddf-2098a3ddc674",
+    "updatedAt": "2026-01-27T04:51:29.000Z",
+    "createdAt": "2026-01-27T04:51:24.505Z",
+    "versionId": "11a7d84e-9fe2-4021-beaa-26db54b16ec0",
     "workflowId": "mEaVKIH9dvcLGSmK-syhs",
     "nodes": [
       {
@@ -411,11 +415,12 @@
         "type": "n8n-nodes-base.googleSheetsTrigger",
         "typeVersion": 1,
         "position": [
-          -160,
+          -144,
           -48
         ],
         "id": "92ab9e6e-afa7-458b-acd2-111a528187f7",
         "name": "Google Sheets Trigger",
+        "executeOnce": true,
         "credentials": {
           "googleSheetsTriggerOAuth2Api": {
             "id": "oKa6EpOL07F2vJbl",
@@ -451,7 +456,9 @@
               "Client Contact": "={{ $json['Agent Contact'] }}",
               "Lead From": "Facebook"
             },
-            "matchingColumns": [],
+            "matchingColumns": [
+              "Contact"
+            ],
             "schema": [
               {
                 "id": "Timestamp",
@@ -478,7 +485,8 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
                 "id": "About",
@@ -732,7 +740,7 @@
       }
     },
     "authors": "Brij Mohan",
-    "name": "Version c33c0fa2",
+    "name": "Version 11a7d84e",
     "description": "",
     "autosaved": false
   },
