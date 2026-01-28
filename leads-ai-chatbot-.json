@@ -1,0 +1,31 @@
+{
+  "updatedAt": "2026-01-28T18:08:15.576Z",
+  "createdAt": "2026-01-28T18:08:15.576Z",
+  "id": "8C20vd6Cbwu2W1INAswi-",
+  "name": "Leads AI Chatbot",
+  "active": false,
+  "isArchived": false,
+  "nodes": [],
+  "connections": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "dd21d976-2782-4ebd-8ebe-432e3ed941ca",
+  "activeVersionId": null,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-01-28T18:08:15.580Z",
+      "createdAt": "2026-01-28T18:08:15.580Z",
+      "role": "workflow:owner",
+      "workflowId": "8C20vd6Cbwu2W1INAswi-",
+      "projectId": "Wp4nC2HsKCQjylkb"
+    }
+  ],
+  "activeVersion": null,
+  "tags": []
+}
