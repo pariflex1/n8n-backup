@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-01-26T10:18:45.413Z",
+  "updatedAt": "2026-01-28T07:50:22.499Z",
   "createdAt": "2026-01-16T11:56:43.873Z",
   "id": "UTCj8X41vHGz7oIxILix9",
   "name": "Whatsapp AI Agent Jhansi Property",
@@ -18,8 +18,8 @@
       "type": "n8n-nodes-base.whatsAppTrigger",
       "typeVersion": 1,
       "position": [
-        -576,
-        3376
+        -368,
+        3680
       ],
       "id": "3045ebcc-c731-4357-8aae-554d3f1f7aa2",
       "name": "WhatsApp Trigger",
@@ -42,8 +42,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        352,
-        3392
+        864,
+        3696
       ],
       "id": "ba7adb04-be1d-4539-a2cd-8b385575ba59",
       "name": "AI Agent"
@@ -60,8 +60,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        304,
-        3616
+        800,
+        3920
       ],
       "id": "54cf6828-e01a-4006-8016-63e83d555106",
       "name": "OpenAI Chat Model",
@@ -82,8 +82,8 @@
       "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
       "typeVersion": 1.3,
       "position": [
-        432,
-        3616
+        928,
+        3920
       ],
       "id": "d1f1d6ec-198a-403f-9216-835b36c272f9",
       "name": "Postgres Chat Memory",
@@ -112,8 +112,8 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
       "typeVersion": 1.3,
       "position": [
-        560,
-        3616
+        1056,
+        3920
       ],
       "id": "4a9c4634-8973-4bf9-8ba7-7f7aa8f9d6e3",
       "name": "Knowledge Base",
@@ -131,8 +131,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        640,
-        3824
+        1136,
+        4128
       ],
       "id": "231f7ff1-24d8-463c-b66e-5b1f7a9a61cf",
       "name": "Embeddings-OpenAI",
@@ -156,8 +156,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1,
       "position": [
-        112,
-        3232
+        864,
+        3536
       ],
       "id": "d02d5d74-6faa-427f-b3b7-5018a264c5d9",
       "name": "Error Message",
@@ -284,8 +284,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        880,
-        3392
+        1408,
+        3696
       ],
       "id": "a7dc4196-1aae-4d52-97ba-fd878b93a4f2",
       "name": "Append row in sheet1",
@@ -307,8 +307,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        656,
-        3392
+        1184,
+        3696
       ],
       "id": "0f8385be-57dc-4229-9530-9d4ee8c1467d",
       "name": "Send message and wait for response",
@@ -319,39 +319,6 @@
           "name": "WhatsApp account"
         }
       }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "d375fbba-7c87-4be1-aca6-8b1cda775cb4",
-              "leftValue": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}",
-              "rightValue": "Hello!",
-              "operator": {
-                "type": "string",
-                "operation": "contains"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        176,
-        3376
-      ],
-      "id": "78f3b059-5dc5-438b-8e3b-7b803599537c",
-      "name": "If2"
     },
     {
       "parameters": {
@@ -388,8 +355,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -384,
-        3376
+        -144,
+        3680
       ],
       "id": "891b851d-ae7a-46ad-95f6-13d8266ef6ae",
       "name": "read"
@@ -421,8 +388,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -224,
-        3376
+        80,
+        3680
       ],
       "id": "0b651daa-a8bd-4817-8465-9b710257426e",
       "name": "typing"
@@ -448,8 +415,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        368,
-        3216
+        864,
+        3376
       ],
       "id": "ca957ace-bf3c-4a74-80e2-dfc0e14e5af6",
       "name": "hello"
@@ -569,8 +536,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        544,
-        3216
+        1072,
+        3376
       ],
       "id": "09a7a148-5ae6-4e1b-8208-4399583301f6",
       "name": "Append row in sheet2",
@@ -617,11 +584,371 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -32,
-        3376
+        704,
+        3696
       ],
       "id": "70723e5d-eade-4c38-8fed-10b1e32dbbe3",
       "name": "If"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY",
+          "mode": "list",
+          "cachedResultName": "RVMC Chatbot",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 766163843,
+          "mode": "list",
+          "cachedResultName": "filter",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit#gid=766163843"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Contact",
+              "lookupValue": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        304,
+        3680
+      ],
+      "id": "a9881983-9387-45dc-986b-a286b0b9e1f7",
+      "name": "Get row(s) in sheet",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uJqb7ndcbLq8v9jO",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs",
+          "mode": "list",
+          "cachedResultName": "HTML FORM - DATA",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 309506201,
+          "mode": "list",
+          "cachedResultName": "Spacemooncity",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit#gid=309506201"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{$now.toFormat(\"dd/MM/yyyy HH:mm:ss\")}}",
+            "Client Name": "={{ $('WhatsApp Trigger').item.json.contacts[0].profile.name }}",
+            "Contact": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+            "Lead From": "Facebook",
+            "Site": "Oshi",
+            "Agent Name": "Deepak Raja\t",
+            "Client Contact": "918400517771"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Client Name",
+              "displayName": "Client Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Contact",
+              "displayName": "Contact",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "About",
+              "displayName": "About",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Note",
+              "displayName": "Note",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Lead From",
+              "displayName": "Lead From",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Site",
+              "displayName": "Site",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Meeting Date",
+              "displayName": "Meeting Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Meeting Time",
+              "displayName": "Meeting Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Site Url",
+              "displayName": "Site Url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Agent Name",
+              "displayName": "Agent Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Client Contact",
+              "displayName": "Client Contact",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1296,
+        3376
+      ],
+      "id": "84d7dfa8-5324-4f1e-867d-dd0b4866879b",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uJqb7ndcbLq8v9jO",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "fa584dde-50f4-4ec1-92ec-ac1275d44308",
+              "leftValue": "={{ $json.Contact }}",
+              "rightValue": null,
+              "operator": {
+                "type": "number",
+                "operation": "notExists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        528,
+        3680
+      ],
+      "id": "3f0fc3e5-b892-4a2e-8995-bcde909d81d7",
+      "name": "If1",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1b1vfn_YuKncORxYn9yO_CYBBlTAyKUiAxBPJh0qWaKw",
+          "mode": "list",
+          "cachedResultName": "Jhansi Property ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1b1vfn_YuKncORxYn9yO_CYBBlTAyKUiAxBPJh0qWaKw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2016543109,
+          "mode": "list",
+          "cachedResultName": "Deepak Raja",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1b1vfn_YuKncORxYn9yO_CYBBlTAyKUiAxBPJh0qWaKw/edit#gid=2016543109"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{$now.toFormat(\"dd/MM/yyyy HH:mm:ss\")}}",
+            "Client Name": "={{ $('WhatsApp Trigger').item.json.contacts[0].profile.name }}",
+            "Contact": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+            "Lead From": "Facebook"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Client Name",
+              "displayName": "Client Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Contact",
+              "displayName": "Contact",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Proffesion ",
+              "displayName": "Proffesion ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "City/Town/Village ",
+              "displayName": "City/Town/Village ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Lead From",
+              "displayName": "Lead From",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Response",
+              "displayName": "Response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1504,
+        3376
+      ],
+      "id": "6df28ea8-9230-44df-bad4-4daaa1ff2669",
+      "name": "Append row in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uJqb7ndcbLq8v9jO",
+          "name": "Google Sheets account"
+        }
+      }
     }
   ],
   "connections": {
@@ -707,24 +1034,6 @@
         ]
       ]
     },
-    "If2": {
-      "main": [
-        [
-          {
-            "node": "hello",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Error Message": {
       "main": [
         []
@@ -745,7 +1054,7 @@
       "main": [
         [
           {
-            "node": "If",
+            "node": "Get row(s) in sheet",
             "type": "main",
             "index": 0
           }
@@ -774,7 +1083,58 @@
         ],
         [
           {
-            "node": "If2",
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "hello",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet3",
             "type": "main",
             "index": 0
           }
@@ -791,8 +1151,8 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "7feb4199-f731-4fb0-8489-42f7ebf6289c",
-  "activeVersionId": "7feb4199-f731-4fb0-8489-42f7ebf6289c",
+  "versionId": "24598e73-8e4b-4c68-ac3d-415cb30e50ab",
+  "activeVersionId": "24598e73-8e4b-4c68-ac3d-415cb30e50ab",
   "triggerCount": 1,
   "shared": [
     {
@@ -804,9 +1164,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-01-26T10:18:50.000Z",
-    "createdAt": "2026-01-26T10:18:45.417Z",
-    "versionId": "7feb4199-f731-4fb0-8489-42f7ebf6289c",
+    "updatedAt": "2026-01-28T07:50:28.000Z",
+    "createdAt": "2026-01-28T07:50:22.501Z",
+    "versionId": "24598e73-8e4b-4c68-ac3d-415cb30e50ab",
     "workflowId": "UTCj8X41vHGz7oIxILix9",
     "nodes": [
       {
@@ -821,8 +1181,8 @@
         "type": "n8n-nodes-base.whatsAppTrigger",
         "typeVersion": 1,
         "position": [
-          -576,
-          3376
+          -368,
+          3680
         ],
         "id": "3045ebcc-c731-4357-8aae-554d3f1f7aa2",
         "name": "WhatsApp Trigger",
@@ -845,8 +1205,8 @@
         "type": "@n8n/n8n-nodes-langchain.agent",
         "typeVersion": 2.2,
         "position": [
-          352,
-          3392
+          864,
+          3696
         ],
         "id": "ba7adb04-be1d-4539-a2cd-8b385575ba59",
         "name": "AI Agent"
@@ -863,8 +1223,8 @@
         "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
         "typeVersion": 1.2,
         "position": [
-          304,
-          3616
+          800,
+          3920
         ],
         "id": "54cf6828-e01a-4006-8016-63e83d555106",
         "name": "OpenAI Chat Model",
@@ -885,8 +1245,8 @@
         "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
         "typeVersion": 1.3,
         "position": [
-          432,
-          3616
+          928,
+          3920
         ],
         "id": "d1f1d6ec-198a-403f-9216-835b36c272f9",
         "name": "Postgres Chat Memory",
@@ -915,8 +1275,8 @@
         "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
         "typeVersion": 1.3,
         "position": [
-          560,
-          3616
+          1056,
+          3920
         ],
         "id": "4a9c4634-8973-4bf9-8ba7-7f7aa8f9d6e3",
         "name": "Knowledge Base",
@@ -934,8 +1294,8 @@
         "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
         "typeVersion": 1.2,
         "position": [
-          640,
-          3824
+          1136,
+          4128
         ],
         "id": "231f7ff1-24d8-463c-b66e-5b1f7a9a61cf",
         "name": "Embeddings-OpenAI",
@@ -959,8 +1319,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1,
         "position": [
-          112,
-          3232
+          864,
+          3536
         ],
         "id": "d02d5d74-6faa-427f-b3b7-5018a264c5d9",
         "name": "Error Message",
@@ -1087,8 +1447,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          880,
-          3392
+          1408,
+          3696
         ],
         "id": "a7dc4196-1aae-4d52-97ba-fd878b93a4f2",
         "name": "Append row in sheet1",
@@ -1110,8 +1470,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          656,
-          3392
+          1184,
+          3696
         ],
         "id": "0f8385be-57dc-4229-9530-9d4ee8c1467d",
         "name": "Send message and wait for response",
@@ -1122,39 +1482,6 @@
             "name": "WhatsApp account"
           }
         }
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "strict",
-              "version": 3
-            },
-            "conditions": [
-              {
-                "id": "d375fbba-7c87-4be1-aca6-8b1cda775cb4",
-                "leftValue": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}",
-                "rightValue": "Hello!",
-                "operator": {
-                  "type": "string",
-                  "operation": "contains"
-                }
-              }
-            ],
-            "combinator": "and"
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.3,
-        "position": [
-          176,
-          3376
-        ],
-        "id": "78f3b059-5dc5-438b-8e3b-7b803599537c",
-        "name": "If2"
       },
       {
         "parameters": {
@@ -1191,8 +1518,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -384,
-          3376
+          -144,
+          3680
         ],
         "id": "891b851d-ae7a-46ad-95f6-13d8266ef6ae",
         "name": "read"
@@ -1224,8 +1551,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -224,
-          3376
+          80,
+          3680
         ],
         "id": "0b651daa-a8bd-4817-8465-9b710257426e",
         "name": "typing"
@@ -1251,8 +1578,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          368,
-          3216
+          864,
+          3376
         ],
         "id": "ca957ace-bf3c-4a74-80e2-dfc0e14e5af6",
         "name": "hello"
@@ -1372,8 +1699,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          544,
-          3216
+          1072,
+          3376
         ],
         "id": "09a7a148-5ae6-4e1b-8208-4399583301f6",
         "name": "Append row in sheet2",
@@ -1420,11 +1747,371 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -32,
-          3376
+          704,
+          3696
         ],
         "id": "70723e5d-eade-4c38-8fed-10b1e32dbbe3",
         "name": "If"
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY",
+            "mode": "list",
+            "cachedResultName": "RVMC Chatbot",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 766163843,
+            "mode": "list",
+            "cachedResultName": "filter",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit#gid=766163843"
+          },
+          "filtersUI": {
+            "values": [
+              {
+                "lookupColumn": "Contact",
+                "lookupValue": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          304,
+          3680
+        ],
+        "id": "a9881983-9387-45dc-986b-a286b0b9e1f7",
+        "name": "Get row(s) in sheet",
+        "alwaysOutputData": true,
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "uJqb7ndcbLq8v9jO",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs",
+            "mode": "list",
+            "cachedResultName": "HTML FORM - DATA",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 309506201,
+            "mode": "list",
+            "cachedResultName": "Spacemooncity",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit#gid=309506201"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Timestamp": "={{$now.toFormat(\"dd/MM/yyyy HH:mm:ss\")}}",
+              "Client Name": "={{ $('WhatsApp Trigger').item.json.contacts[0].profile.name }}",
+              "Contact": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+              "Lead From": "Facebook",
+              "Site": "Oshi",
+              "Agent Name": "Deepak Raja\t",
+              "Client Contact": "918400517771"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "Timestamp",
+                "displayName": "Timestamp",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Client Name",
+                "displayName": "Client Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Contact",
+                "displayName": "Contact",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "About",
+                "displayName": "About",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Note",
+                "displayName": "Note",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Lead From",
+                "displayName": "Lead From",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Site",
+                "displayName": "Site",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Meeting Date",
+                "displayName": "Meeting Date",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Meeting Time",
+                "displayName": "Meeting Time",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Site Url",
+                "displayName": "Site Url",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Agent Name",
+                "displayName": "Agent Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Client Contact",
+                "displayName": "Client Contact",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          1296,
+          3376
+        ],
+        "id": "84d7dfa8-5324-4f1e-867d-dd0b4866879b",
+        "name": "Append row in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "uJqb7ndcbLq8v9jO",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "fa584dde-50f4-4ec1-92ec-ac1275d44308",
+                "leftValue": "={{ $json.Contact }}",
+                "rightValue": null,
+                "operator": {
+                  "type": "number",
+                  "operation": "notExists",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          528,
+          3680
+        ],
+        "id": "3f0fc3e5-b892-4a2e-8995-bcde909d81d7",
+        "name": "If1",
+        "alwaysOutputData": false
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "1b1vfn_YuKncORxYn9yO_CYBBlTAyKUiAxBPJh0qWaKw",
+            "mode": "list",
+            "cachedResultName": "Jhansi Property ",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1b1vfn_YuKncORxYn9yO_CYBBlTAyKUiAxBPJh0qWaKw/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 2016543109,
+            "mode": "list",
+            "cachedResultName": "Deepak Raja",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1b1vfn_YuKncORxYn9yO_CYBBlTAyKUiAxBPJh0qWaKw/edit#gid=2016543109"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Timestamp": "={{$now.toFormat(\"dd/MM/yyyy HH:mm:ss\")}}",
+              "Client Name": "={{ $('WhatsApp Trigger').item.json.contacts[0].profile.name }}",
+              "Contact": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+              "Lead From": "Facebook"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "Timestamp",
+                "displayName": "Timestamp",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Client Name",
+                "displayName": "Client Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Contact",
+                "displayName": "Contact",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Proffesion ",
+                "displayName": "Proffesion ",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "City/Town/Village ",
+                "displayName": "City/Town/Village ",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Notes",
+                "displayName": "Notes",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Lead From",
+                "displayName": "Lead From",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Response",
+                "displayName": "Response",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          1504,
+          3376
+        ],
+        "id": "6df28ea8-9230-44df-bad4-4daaa1ff2669",
+        "name": "Append row in sheet3",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "uJqb7ndcbLq8v9jO",
+            "name": "Google Sheets account"
+          }
+        }
       }
     ],
     "connections": {
@@ -1510,24 +2197,6 @@
           ]
         ]
       },
-      "If2": {
-        "main": [
-          [
-            {
-              "node": "hello",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "AI Agent",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Error Message": {
         "main": [
           []
@@ -1548,7 +2217,7 @@
         "main": [
           [
             {
-              "node": "If",
+              "node": "Get row(s) in sheet",
               "type": "main",
               "index": 0
             }
@@ -1577,7 +2246,58 @@
           ],
           [
             {
-              "node": "If2",
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s) in sheet": {
+        "main": [
+          [
+            {
+              "node": "If1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Append row in sheet2": {
+        "main": [
+          [
+            {
+              "node": "Append row in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If1": {
+        "main": [
+          [
+            {
+              "node": "hello",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Append row in sheet": {
+        "main": [
+          [
+            {
+              "node": "Append row in sheet3",
               "type": "main",
               "index": 0
             }
@@ -1586,7 +2306,7 @@
       }
     },
     "authors": "Brij Mohan",
-    "name": "Version 7feb4199",
+    "name": "Version 24598e73",
     "description": "",
     "autosaved": false
   },
