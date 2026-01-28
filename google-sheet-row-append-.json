@@ -1,20 +1,29 @@
 {
-  "updatedAt": "2026-01-27T04:51:24.503Z",
+  "updatedAt": "2026-01-28T07:51:02.791Z",
   "createdAt": "2026-01-26T08:50:46.624Z",
   "id": "mEaVKIH9dvcLGSmK-syhs",
   "name": "Google Sheet Row Append",
-  "active": true,
+  "active": false,
   "isArchived": false,
   "nodes": [
     {
       "parameters": {
-        "pollTimes": {
-          "item": [
-            {
-              "mode": "everyMinute"
-            }
-          ]
-        },
+        "httpMethod": "POST",
+        "path": "n8n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -832,
+        -96
+      ],
+      "id": "ffc90429-70ff-43ac-be69-b288853d278d",
+      "name": "Webhook",
+      "webhookId": "c396d640-447b-4c53-8858-d1df9bec425f"
+    },
+    {
+      "parameters": {
         "documentId": {
           "__rl": true,
           "value": "1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY",
@@ -24,334 +33,207 @@
         },
         "sheetName": {
           "__rl": true,
-          "value": 766163843,
+          "value": "gid=0",
           "mode": "list",
-          "cachedResultName": "filter",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit#gid=766163843"
+          "cachedResultName": "Chat",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit#gid=0"
         },
-        "event": "rowAdded",
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Contact",
+              "lookupValue": "={{ $json.body.Contact }}"
+            }
+          ]
+        },
         "options": {}
       },
-      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -384,
+        -96
+      ],
+      "id": "ac054767-52c8-4afc-b02c-a1ec8ec70224",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uJqb7ndcbLq8v9jO",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "User"
+            },
+            {
+              "fieldToAggregate": "AI"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
       "typeVersion": 1,
       "position": [
-        -144,
-        -48
+        -160,
+        -96
       ],
-      "id": "92ab9e6e-afa7-458b-acd2-111a528187f7",
-      "name": "Google Sheets Trigger",
-      "executeOnce": true,
-      "credentials": {
-        "googleSheetsTriggerOAuth2Api": {
-          "id": "oKa6EpOL07F2vJbl",
-          "name": "Google Sheets Trigger account"
-        }
-      }
+      "id": "79627e2c-d736-4193-890f-d13d2d2687e5",
+      "name": "Aggregate"
     },
     {
       "parameters": {
-        "operation": "append",
-        "documentId": {
+        "modelId": {
           "__rl": true,
-          "value": "1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs",
+          "value": "gpt-3.5-turbo",
           "mode": "list",
-          "cachedResultName": "HTML FORM - DATA",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit?usp=drivesdk"
+          "cachedResultName": "GPT-3.5-TURBO"
         },
-        "sheetName": {
-          "__rl": true,
-          "value": 309506201,
-          "mode": "list",
-          "cachedResultName": "Spacemooncity",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit#gid=309506201"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "Timestamp": "={{ $json.Time }}",
-            "Contact": "={{ $json.Contact }}",
-            "Client Name": "={{ $json.Name }}",
-            "Site": "={{ $json.Site }}",
-            "Agent Name": "={{ $json['Agent Name'] }}",
-            "Client Contact": "={{ $json['Agent Contact'] }}",
-            "Lead From": "Facebook"
-          },
-          "matchingColumns": [
-            "Contact"
-          ],
-          "schema": [
+        "responses": {
+          "values": [
             {
-              "id": "Timestamp",
-              "displayName": "Timestamp",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Client Name",
-              "displayName": "Client Name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Contact",
-              "displayName": "Contact",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "About",
-              "displayName": "About",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Note",
-              "displayName": "Note",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Lead From",
-              "displayName": "Lead From",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Site",
-              "displayName": "Site",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Meeting Date",
-              "displayName": "Meeting Date",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Meeting Time",
-              "displayName": "Meeting Time",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Site Url",
-              "displayName": "Site Url",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Agent Name",
-              "displayName": "Agent Name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Client Contact",
-              "displayName": "Client Contact",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
+              "role": "system",
+              "content": "=Analyze the provided chat history and generate a concise summary report written strictly in Hindi as one continuous paragraph only.\n\nSTRICT RULES:\nDo not use bullet points, numbering, symbols, emojis, dashes, or any special characters.\nDo not insert line breaks, new lines, or press Enter anywhere in the output.\nThe entire response must be a single uninterrupted line of text.\nSummary must be 1-2 sentence.\n\nCONTENT REQUIREMENTS:\nThe summary must clearly mention the user’s property interest as either  3 or 2 BKH Villa, the user’s profession, the user’s current city of residence and user’s name: {{ $('Webhook').item.json.body.Name }}\n\nIf any of these details are not explicitly available in the chat history, infer them logically from context without adding extra assumptions.\n\nLANGUAGE RULE:\nThe complete output must be written only in Hindi. No English words or mixed language is allowed.\n\nThis is conversasion: Questions:{{ $json.User[0] }} , Answers: {{ $json.AI }}"
             }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
+          ]
         },
+        "builtInTools": {},
         "options": {}
       },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
       "position": [
         64,
-        -48
+        -96
       ],
-      "id": "00387976-6f65-4b0d-8db5-54597936be8a",
-      "name": "HTML Sheet",
+      "id": "adeca481-64b2-41cb-bfa2-161807a695fb",
+      "name": "Message a model",
       "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "uJqb7ndcbLq8v9jO",
-          "name": "Google Sheets account"
+        "openAiApi": {
+          "id": "oeU3bDddqKmVY1Rx",
+          "name": "OpenAi account"
         }
       }
     },
     {
       "parameters": {
-        "operation": "append",
-        "documentId": {
-          "__rl": true,
-          "value": "1b1vfn_YuKncORxYn9yO_CYBBlTAyKUiAxBPJh0qWaKw",
-          "mode": "list",
-          "cachedResultName": "Jhansi Property ",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1b1vfn_YuKncORxYn9yO_CYBBlTAyKUiAxBPJh0qWaKw/edit?usp=drivesdk"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": 2016543109,
-          "mode": "list",
-          "cachedResultName": "Deepak Raja",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1b1vfn_YuKncORxYn9yO_CYBBlTAyKUiAxBPJh0qWaKw/edit#gid=2016543109"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "Timestamp": "={{ $('Google Sheets Trigger').item.json.Time }}",
-            "Contact": "={{ $json.Contact }}",
-            "Client Name": "={{ $('Google Sheets Trigger').item.json.Name }}",
-            "Lead From": "=Facebook"
-          },
-          "matchingColumns": [],
-          "schema": [
-            {
-              "id": "Timestamp",
-              "displayName": "Timestamp",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Client Name",
-              "displayName": "Client Name",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Contact",
-              "displayName": "Contact",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Proffesion ",
-              "displayName": "Proffesion ",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "City/Town/Village ",
-              "displayName": "City/Town/Village ",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Notes",
-              "displayName": "Notes",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Lead From",
-              "displayName": "Lead From",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Response",
-              "displayName": "Response",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
+        "method": "POST",
+        "url": "https://www.privyr.com/api/v1/incoming-leads/0vZfjMQw/55JFmC8u#generic-webhook",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={ \t\t\n\"name\": \"{{ $('Webhook').item.json.body.Name }}\", \t\t\n\"phone\": \"{{ $('Webhook').item.json.body['Agent Contact'] }}\", \t\t\n\"other_fields\": { \t\t\n\"summary\": \"{{ $json.output[0].content[0].text }}\", \t\t\n\"lead for\": \"OSHI\", \t\t\n\"lead Source\": \"Facebook\" \t} }",
         "options": {}
       },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
       "position": [
-        288,
-        -48
+        416,
+        -96
       ],
-      "id": "5974a4e4-3987-45df-97cc-2c42f43231a1",
-      "name": "Jhansi Property Data",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "uJqb7ndcbLq8v9jO",
-          "name": "Google Sheets account"
-        }
-      }
+      "id": "1555d7aa-0099-4d5e-908d-1e26076873f1",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.privyr.com/api/v1/incoming-leads/0vZfjMQw/yppsh61n#generic-webhook",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={ \t\t\n\"name\": \"{{ $('Webhook').item.json.body.Name }}\", \t\t\n\"phone\": \"{{ $('Webhook').item.json.body['Agent Contact'] }}\", \t\t\n\"other_fields\": { \t\t\n\"summary\": \"{{ $json.output[0].content[0].text }}\", \t\t\n\"lead for\": \"OSHI\", \t\t\n\"lead Source\": \"Facebook\" \t} }",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        640,
+        -96
+      ],
+      "id": "80890ba4-4be4-4d57-b57d-256b6224c857",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -608,
+        -96
+      ],
+      "id": "39f2723f-71bf-4528-bbb4-72ae884b58a7",
+      "name": "Wait",
+      "webhookId": "7a39e516-cfc3-4f3e-b997-5d2d4c97d258"
     }
   ],
   "connections": {
-    "Google Sheets Trigger": {
+    "Webhook": {
       "main": [
         [
           {
-            "node": "HTML Sheet",
+            "node": "Wait",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "HTML Sheet": {
+    "Get row(s) in sheet": {
       "main": [
         [
           {
-            "node": "Jhansi Property Data",
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
             "type": "main",
             "index": 0
           }
@@ -368,8 +250,8 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "11a7d84e-9fe2-4021-beaa-26db54b16ec0",
-  "activeVersionId": "11a7d84e-9fe2-4021-beaa-26db54b16ec0",
+  "versionId": "dbf6c14a-b6fc-435e-91b1-b3d933ef5f9a",
+  "activeVersionId": null,
   "triggerCount": 1,
   "shared": [
     {
@@ -380,369 +262,6 @@
       "projectId": "Wp4nC2HsKCQjylkb"
     }
   ],
-  "activeVersion": {
-    "updatedAt": "2026-01-27T04:51:29.000Z",
-    "createdAt": "2026-01-27T04:51:24.505Z",
-    "versionId": "11a7d84e-9fe2-4021-beaa-26db54b16ec0",
-    "workflowId": "mEaVKIH9dvcLGSmK-syhs",
-    "nodes": [
-      {
-        "parameters": {
-          "pollTimes": {
-            "item": [
-              {
-                "mode": "everyMinute"
-              }
-            ]
-          },
-          "documentId": {
-            "__rl": true,
-            "value": "1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY",
-            "mode": "list",
-            "cachedResultName": "RVMC Chatbot",
-            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit?usp=drivesdk"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": 766163843,
-            "mode": "list",
-            "cachedResultName": "filter",
-            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit#gid=766163843"
-          },
-          "event": "rowAdded",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleSheetsTrigger",
-        "typeVersion": 1,
-        "position": [
-          -144,
-          -48
-        ],
-        "id": "92ab9e6e-afa7-458b-acd2-111a528187f7",
-        "name": "Google Sheets Trigger",
-        "executeOnce": true,
-        "credentials": {
-          "googleSheetsTriggerOAuth2Api": {
-            "id": "oKa6EpOL07F2vJbl",
-            "name": "Google Sheets Trigger account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "operation": "append",
-          "documentId": {
-            "__rl": true,
-            "value": "1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs",
-            "mode": "list",
-            "cachedResultName": "HTML FORM - DATA",
-            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit?usp=drivesdk"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": 309506201,
-            "mode": "list",
-            "cachedResultName": "Spacemooncity",
-            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Y9HDNQNU_XYDoCMdPMv0qifrV90wh40zSI72x7-pArs/edit#gid=309506201"
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "Timestamp": "={{ $json.Time }}",
-              "Contact": "={{ $json.Contact }}",
-              "Client Name": "={{ $json.Name }}",
-              "Site": "={{ $json.Site }}",
-              "Agent Name": "={{ $json['Agent Name'] }}",
-              "Client Contact": "={{ $json['Agent Contact'] }}",
-              "Lead From": "Facebook"
-            },
-            "matchingColumns": [
-              "Contact"
-            ],
-            "schema": [
-              {
-                "id": "Timestamp",
-                "displayName": "Timestamp",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Client Name",
-                "displayName": "Client Name",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Contact",
-                "displayName": "Contact",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "About",
-                "displayName": "About",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Note",
-                "displayName": "Note",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Lead From",
-                "displayName": "Lead From",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Site",
-                "displayName": "Site",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Meeting Date",
-                "displayName": "Meeting Date",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Meeting Time",
-                "displayName": "Meeting Time",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Site Url",
-                "displayName": "Site Url",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Agent Name",
-                "displayName": "Agent Name",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Client Contact",
-                "displayName": "Client Contact",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleSheets",
-        "typeVersion": 4.7,
-        "position": [
-          64,
-          -48
-        ],
-        "id": "00387976-6f65-4b0d-8db5-54597936be8a",
-        "name": "HTML Sheet",
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "uJqb7ndcbLq8v9jO",
-            "name": "Google Sheets account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "operation": "append",
-          "documentId": {
-            "__rl": true,
-            "value": "1b1vfn_YuKncORxYn9yO_CYBBlTAyKUiAxBPJh0qWaKw",
-            "mode": "list",
-            "cachedResultName": "Jhansi Property ",
-            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1b1vfn_YuKncORxYn9yO_CYBBlTAyKUiAxBPJh0qWaKw/edit?usp=drivesdk"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": 2016543109,
-            "mode": "list",
-            "cachedResultName": "Deepak Raja",
-            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1b1vfn_YuKncORxYn9yO_CYBBlTAyKUiAxBPJh0qWaKw/edit#gid=2016543109"
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "Timestamp": "={{ $('Google Sheets Trigger').item.json.Time }}",
-              "Contact": "={{ $json.Contact }}",
-              "Client Name": "={{ $('Google Sheets Trigger').item.json.Name }}",
-              "Lead From": "=Facebook"
-            },
-            "matchingColumns": [],
-            "schema": [
-              {
-                "id": "Timestamp",
-                "displayName": "Timestamp",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Client Name",
-                "displayName": "Client Name",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Contact",
-                "displayName": "Contact",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Proffesion ",
-                "displayName": "Proffesion ",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "City/Town/Village ",
-                "displayName": "City/Town/Village ",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "Notes",
-                "displayName": "Notes",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "Lead From",
-                "displayName": "Lead From",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "Response",
-                "displayName": "Response",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleSheets",
-        "typeVersion": 4.7,
-        "position": [
-          288,
-          -48
-        ],
-        "id": "5974a4e4-3987-45df-97cc-2c42f43231a1",
-        "name": "Jhansi Property Data",
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "uJqb7ndcbLq8v9jO",
-            "name": "Google Sheets account"
-          }
-        }
-      }
-    ],
-    "connections": {
-      "Google Sheets Trigger": {
-        "main": [
-          [
-            {
-              "node": "HTML Sheet",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "HTML Sheet": {
-        "main": [
-          [
-            {
-              "node": "Jhansi Property Data",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      }
-    },
-    "authors": "Brij Mohan",
-    "name": "Version 11a7d84e",
-    "description": "",
-    "autosaved": false
-  },
+  "activeVersion": null,
   "tags": []
 }
