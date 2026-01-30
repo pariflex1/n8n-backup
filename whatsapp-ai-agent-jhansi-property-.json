@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-01-28T21:04:11.673Z",
+  "updatedAt": "2026-01-30T14:55:47.957Z",
   "createdAt": "2026-01-16T11:56:43.873Z",
   "id": "UTCj8X41vHGz7oIxILix9",
   "name": "Whatsapp AI Agent Jhansi Property",
@@ -980,7 +980,7 @@
             "PropertyType": "2 & 3 BHK House",
             "FollowUpDateTime": "={{ $now.plus({ days: 3 }).toFormat('dd/MM/yyyy') + ' 10:00:00' }}",
             "UserName": "Vipsa",
-            "UserContact": "9876543210"
+            "UserContact": "8400638468"
           },
           "matchingColumns": [],
           "schema": [
@@ -1375,8 +1375,8 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "271e4760-7c8f-45e7-a7a0-97ad0cb94218",
-  "activeVersionId": "271e4760-7c8f-45e7-a7a0-97ad0cb94218",
+  "versionId": "e8659441-ca23-4ef2-9c6d-c0ae2e3ad087",
+  "activeVersionId": "e8659441-ca23-4ef2-9c6d-c0ae2e3ad087",
   "triggerCount": 1,
   "shared": [
     {
@@ -1388,9 +1388,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-01-28T21:04:21.000Z",
-    "createdAt": "2026-01-28T21:04:11.675Z",
-    "versionId": "271e4760-7c8f-45e7-a7a0-97ad0cb94218",
+    "updatedAt": "2026-01-30T14:55:57.000Z",
+    "createdAt": "2026-01-30T14:55:47.959Z",
+    "versionId": "e8659441-ca23-4ef2-9c6d-c0ae2e3ad087",
     "workflowId": "UTCj8X41vHGz7oIxILix9",
     "nodes": [
       {
@@ -2367,7 +2367,7 @@
               "PropertyType": "2 & 3 BHK House",
               "FollowUpDateTime": "={{ $now.plus({ days: 3 }).toFormat('dd/MM/yyyy') + ' 10:00:00' }}",
               "UserName": "Vipsa",
-              "UserContact": "9876543210"
+              "UserContact": "8400638468"
             },
             "matchingColumns": [],
             "schema": [
@@ -2754,7 +2754,7 @@
       }
     },
     "authors": "Brij Mohan",
-    "name": "Version 271e4760",
+    "name": "Version e8659441",
     "description": "",
     "autosaved": false
   },
