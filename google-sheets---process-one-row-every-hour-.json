@@ -1,0 +1,736 @@
+{
+  "updatedAt": "2026-02-12T17:36:29.048Z",
+  "createdAt": "2026-02-12T12:34:42.033Z",
+  "id": "hyMlRfs29c6S10HyxPT5L",
+  "name": "Google Sheets - Process One Row Every Hour",
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "id": "069113d0-88b9-4e07-8075-3d617c25695d",
+      "name": "Run Every Hour",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Ysb0ozO7S5ICRYJkOJSXaudKobEnkQsEQ-F3bQ7p_mM",
+          "mode": "list",
+          "cachedResultName": "Getleadsforasif",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Ysb0ozO7S5ICRYJkOJSXaudKobEnkQsEQ-F3bQ7p_mM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 877151679,
+          "mode": "list",
+          "cachedResultName": "Bharat Rajpoot",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Ysb0ozO7S5ICRYJkOJSXaudKobEnkQsEQ-F3bQ7p_mM/edit#gid=877151679"
+        },
+        "options": {}
+      },
+      "id": "d598f8e2-4463-4961-9806-08c2b2fc5d36",
+      "name": "Read Google Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        -416,
+        -48
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uJqb7ndcbLq8v9jO",
+          "name": "Dhanistadigital"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.processed}}",
+              "operation": "notEqual",
+              "value2": "TRUE"
+            }
+          ]
+        }
+      },
+      "id": "dd36c418-1af4-4eab-bb39-24bee2946f78",
+      "name": "Is Not Processed?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "fe2385aa-c248-4ebe-9332-1c6cf1784df5",
+      "name": "Take One Row",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 1,
+      "position": [
+        32,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1Ysb0ozO7S5ICRYJkOJSXaudKobEnkQsEQ-F3bQ7p_mM",
+          "mode": "list",
+          "cachedResultName": "Getleadsforasif",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Ysb0ozO7S5ICRYJkOJSXaudKobEnkQsEQ-F3bQ7p_mM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 877151679,
+          "mode": "list",
+          "cachedResultName": "Bharat Rajpoot",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Ysb0ozO7S5ICRYJkOJSXaudKobEnkQsEQ-F3bQ7p_mM/edit#gid=877151679"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{ $json.Timestamp }}",
+            "Client Name": "={{ $json['Client Name'] }}",
+            "Contact": "={{ $json.Contact }}",
+            "About": "={{ $json.About }}",
+            "Note": "={{ $json.Note }}",
+            "processed": "=TRUE",
+            "row_number": "={{ $json.row_number }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Client Name",
+              "displayName": "Client Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Contact",
+              "displayName": "Contact",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "About",
+              "displayName": "About",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Note",
+              "displayName": "Note",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "processed",
+              "displayName": "processed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "94142342-9e9a-4d47-b46a-859db2c2cfdc",
+      "name": "Mark Processed",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        256,
+        -96
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uJqb7ndcbLq8v9jO",
+          "name": "Dhanistadigital"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v24.0/387521651107625/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer EAAMPjrTPZB3MBQpH7EoTtleOUp6wf2eNkN60sB8y1upUDVktKpjkWES5wZBttG37UwrwBpSmUeFkLk7SUZBcGpOwTiYUa4sBck0HzgARYYWxEhZAIGXTRZCTCAWxVdzZBN8JkAEAWWoVkO9BcnIM8ZAi1KADCdVtutrYaaz3DE4wT0OiZCnez89S9bETYqBcVAZDZD"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"={{$('Read Google Sheet').item.json.Contact}}\",\n  \"type\": \"template\",\n  \"template\": {\n    \"name\": \"asif_bhai\",\n    \"language\": {\n      \"code\": \"en\"\n    },\n    \"components\": [\n      {\n        \"type\": \"header\",\n        \"parameters\": [\n          {\n            \"type\": \"image\",\n            \"image\": {\n              \"link\": \"https://github.com/pariflex1/WhatsApp-Images/blob/main/gwalior-shivpuri-plots.jpg?raw=true\"\n            }\n          }\n        ]\n      },\n      {\n        \"type\": \"body\",\n        \"parameters\": [\n          {\n            \"type\": \"text\",\n            \"text\": \"{{$('Read Google Sheet').item.json['Client Name'].trim().split(/\\s+/)[0]}}\"\n          }\n        ]\n      }\n    ]\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        480,
+        -96
+      ],
+      "id": "c3c19969-0cb4-484a-a504-01ec73fdde22",
+      "name": "hello"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.privyr.com/api/v1/incoming-leads/0vZfjMQw/2IJvNWoS#generic-webhook",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"{{$node['Read Google Sheet'].json['Client Name']}}\",\n  \"phone\": \"{{$node['Read Google Sheet'].json.Contact}}\",\n  \"other_fields\": {\n    \"lead_for\": \"Gwalior-Shivpuri Bypass\",\n\"lead source\": \"Ads\",\n        \"about\": \"{{ $('Read Google Sheet').item.json.About }}\",\n        \"city_job\": \"{{ $('Read Google Sheet').item.json.Note }}\"\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        896,
+        -96
+      ],
+      "id": "b287b2f5-76f4-4ef1-be3b-45c54a33693d",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "amount": 30,
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        688,
+        -96
+      ],
+      "id": "49674efc-3826-430c-9d33-d7ff7b8ab843",
+      "name": "Wait",
+      "webhookId": "d8ce0ef3-7709-420d-932c-2298401f72f5"
+    }
+  ],
+  "connections": {
+    "Run Every Hour": {
+      "main": [
+        [
+          {
+            "node": "Read Google Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Google Sheet": {
+      "main": [
+        [
+          {
+            "node": "Is Not Processed?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Not Processed?": {
+      "main": [
+        [
+          {
+            "node": "Take One Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Take One Row": {
+      "main": [
+        [
+          {
+            "node": "Mark Processed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Processed": {
+      "main": [
+        [
+          {
+            "node": "hello",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "hello": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "ca4a950f-cc11-49b6-9485-c0de676dfa76",
+  "activeVersionId": "ca4a950f-cc11-49b6-9485-c0de676dfa76",
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-02-12T12:34:42.040Z",
+      "createdAt": "2026-02-12T12:34:42.040Z",
+      "role": "workflow:owner",
+      "workflowId": "hyMlRfs29c6S10HyxPT5L",
+      "projectId": "Wp4nC2HsKCQjylkb"
+    }
+  ],
+  "activeVersion": {
+    "updatedAt": "2026-02-12T17:36:32.000Z",
+    "createdAt": "2026-02-12T17:36:29.050Z",
+    "versionId": "ca4a950f-cc11-49b6-9485-c0de676dfa76",
+    "workflowId": "hyMlRfs29c6S10HyxPT5L",
+    "nodes": [
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "hours"
+              }
+            ]
+          }
+        },
+        "id": "069113d0-88b9-4e07-8075-3d617c25695d",
+        "name": "Run Every Hour",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1,
+        "position": [
+          -640,
+          -48
+        ]
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1Ysb0ozO7S5ICRYJkOJSXaudKobEnkQsEQ-F3bQ7p_mM",
+            "mode": "list",
+            "cachedResultName": "Getleadsforasif",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Ysb0ozO7S5ICRYJkOJSXaudKobEnkQsEQ-F3bQ7p_mM/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 877151679,
+            "mode": "list",
+            "cachedResultName": "Bharat Rajpoot",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Ysb0ozO7S5ICRYJkOJSXaudKobEnkQsEQ-F3bQ7p_mM/edit#gid=877151679"
+          },
+          "options": {}
+        },
+        "id": "d598f8e2-4463-4961-9806-08c2b2fc5d36",
+        "name": "Read Google Sheet",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4,
+        "position": [
+          -416,
+          -48
+        ],
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "uJqb7ndcbLq8v9jO",
+            "name": "Dhanistadigital"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "string": [
+              {
+                "value1": "={{$json.processed}}",
+                "operation": "notEqual",
+                "value2": "TRUE"
+              }
+            ]
+          }
+        },
+        "id": "dd36c418-1af4-4eab-bb39-24bee2946f78",
+        "name": "Is Not Processed?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          -192,
+          -48
+        ]
+      },
+      {
+        "parameters": {
+          "batchSize": 1,
+          "options": {}
+        },
+        "id": "fe2385aa-c248-4ebe-9332-1c6cf1784df5",
+        "name": "Take One Row",
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 1,
+        "position": [
+          32,
+          -96
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1Ysb0ozO7S5ICRYJkOJSXaudKobEnkQsEQ-F3bQ7p_mM",
+            "mode": "list",
+            "cachedResultName": "Getleadsforasif",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Ysb0ozO7S5ICRYJkOJSXaudKobEnkQsEQ-F3bQ7p_mM/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 877151679,
+            "mode": "list",
+            "cachedResultName": "Bharat Rajpoot",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Ysb0ozO7S5ICRYJkOJSXaudKobEnkQsEQ-F3bQ7p_mM/edit#gid=877151679"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Timestamp": "={{ $json.Timestamp }}",
+              "Client Name": "={{ $json['Client Name'] }}",
+              "Contact": "={{ $json.Contact }}",
+              "About": "={{ $json.About }}",
+              "Note": "={{ $json.Note }}",
+              "processed": "=TRUE",
+              "row_number": "={{ $json.row_number }}"
+            },
+            "matchingColumns": [
+              "row_number"
+            ],
+            "schema": [
+              {
+                "id": "Timestamp",
+                "displayName": "Timestamp",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Client Name",
+                "displayName": "Client Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Contact",
+                "displayName": "Contact",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "About",
+                "displayName": "About",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Note",
+                "displayName": "Note",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "processed",
+                "displayName": "processed",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "id": "94142342-9e9a-4d47-b46a-859db2c2cfdc",
+        "name": "Mark Processed",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4,
+        "position": [
+          256,
+          -96
+        ],
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "uJqb7ndcbLq8v9jO",
+            "name": "Dhanistadigital"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://graph.facebook.com/v24.0/387521651107625/messages",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "Bearer EAAMPjrTPZB3MBQpH7EoTtleOUp6wf2eNkN60sB8y1upUDVktKpjkWES5wZBttG37UwrwBpSmUeFkLk7SUZBcGpOwTiYUa4sBck0HzgARYYWxEhZAIGXTRZCTCAWxVdzZBN8JkAEAWWoVkO9BcnIM8ZAi1KADCdVtutrYaaz3DE4wT0OiZCnez89S9bETYqBcVAZDZD"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"={{$('Read Google Sheet').item.json.Contact}}\",\n  \"type\": \"template\",\n  \"template\": {\n    \"name\": \"asif_bhai\",\n    \"language\": {\n      \"code\": \"en\"\n    },\n    \"components\": [\n      {\n        \"type\": \"header\",\n        \"parameters\": [\n          {\n            \"type\": \"image\",\n            \"image\": {\n              \"link\": \"https://github.com/pariflex1/WhatsApp-Images/blob/main/gwalior-shivpuri-plots.jpg?raw=true\"\n            }\n          }\n        ]\n      },\n      {\n        \"type\": \"body\",\n        \"parameters\": [\n          {\n            \"type\": \"text\",\n            \"text\": \"{{$('Read Google Sheet').item.json['Client Name'].trim().split(/\\s+/)[0]}}\"\n          }\n        ]\n      }\n    ]\n  }\n}\n",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          480,
+          -96
+        ],
+        "id": "c3c19969-0cb4-484a-a504-01ec73fdde22",
+        "name": "hello"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://www.privyr.com/api/v1/incoming-leads/0vZfjMQw/2IJvNWoS#generic-webhook",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"name\": \"{{$node['Read Google Sheet'].json['Client Name']}}\",\n  \"phone\": \"{{$node['Read Google Sheet'].json.Contact}}\",\n  \"other_fields\": {\n    \"lead_for\": \"Gwalior-Shivpuri Bypass\",\n\"lead source\": \"Ads\",\n        \"about\": \"{{ $('Read Google Sheet').item.json.About }}\",\n        \"city_job\": \"{{ $('Read Google Sheet').item.json.Note }}\"\n  }\n}\n",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          896,
+          -96
+        ],
+        "id": "b287b2f5-76f4-4ef1-be3b-45c54a33693d",
+        "name": "HTTP Request"
+      },
+      {
+        "parameters": {
+          "amount": 30,
+          "unit": "minutes"
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          688,
+          -96
+        ],
+        "id": "49674efc-3826-430c-9d33-d7ff7b8ab843",
+        "name": "Wait",
+        "webhookId": "d8ce0ef3-7709-420d-932c-2298401f72f5"
+      }
+    ],
+    "connections": {
+      "Run Every Hour": {
+        "main": [
+          [
+            {
+              "node": "Read Google Sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Read Google Sheet": {
+        "main": [
+          [
+            {
+              "node": "Is Not Processed?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Is Not Processed?": {
+        "main": [
+          [
+            {
+              "node": "Take One Row",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Take One Row": {
+        "main": [
+          [
+            {
+              "node": "Mark Processed",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mark Processed": {
+        "main": [
+          [
+            {
+              "node": "hello",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "hello": {
+        "main": [
+          [
+            {
+              "node": "Wait",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Brij Mohan",
+    "name": "Version ca4a950f",
+    "description": "",
+    "autosaved": false
+  },
+  "tags": []
+}
