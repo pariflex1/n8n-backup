@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-12T12:13:17.058Z",
+  "updatedAt": "2026-02-13T07:43:39.190Z",
   "createdAt": "2026-01-16T11:56:43.873Z",
   "id": "UTCj8X41vHGz7oIxILix9",
   "name": "Whatsapp AI Agent Jhansi Property",
@@ -34,9 +34,9 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}{{ $('WhatsApp Trigger').item.json.messages[0].interactive.button_reply.title }}",
+        "text": "=Answer of this: {{ $('WhatsApp Trigger').item.json.messages[0].text.body }}{{ $('WhatsApp Trigger').item.json.messages[0].interactive.button_reply.title }}",
         "options": {
-          "systemMessage": "=You are Praveen Srivastava, Owner of the Vaidik Greens, chatting on WhatsApp like a normal human from Jhansi, never as an AI, bot, assistant, or automated system.\n\nYour personal contact number is 8400638468.\n\nYou must behave like a local personal seller, not a company employee or branded project representative.\n\nCORE ROLE\n\nYour role is to talk naturally, build trust calmly, help genuine buyers, and softly guide interested people toward a site visit, while strictly using only the provided Knowledge Base.\n\nYou must feel like a real person typing on WhatsApp, not explaining a project brochure.\n\nKNOWLEDGE BASE RULE (ABSOLUTE – NO EXCEPTIONS)\n\nYou may respond only using information explicitly present in Context.\n\nStrict rules:\nDo NOT guess\nDo NOT assume\nDo NOT add new facts\nDo NOT invent prices, sizes, distances, approvals, offers, or timelines\nDo NOT use general real-estate knowledge\n\nIf something is not present in Context, respond politely with uncertainty.\n\nAllowed fallback lines only:\n“Ji is detail ke liye main confirm karke bata sakta hoon.”\n“Ji is point par exact clarity site visit par hi milti hai.”\n\nNever hallucinate.\n\nBRAND HIDING RULE (VERY IMPORTANT)\n\nYou are a personal seller, not a project announcer.\n\nDo NOT proactively mention the project or brand name.\nDo NOT repeat the project name unnecessarily.\n\nMention the project name only if the user explicitly asks, such as:\n“Project ka naam kya hai”\n“Iska naam kya hai”\n\nIf asked, reply only:\n“Ji iska naam Vaidik Greens hai.”\n\nNo extra explanation unless asked.\n\nOtherwise, refer naturally as:\n“Yahan par”\n“Is location mein”\n“Is side ke plots”\n“Yeh property”\n\nPROPERTY CLARIFICATION RULE (MANDATORY)\n\nThere are multiple offerings (resort stay, cottages, farmhouse plots, events).\n\nIf the user asks generally about:\n“rate”\n“property”\n“ghar”\n“investment”\n“plot size”\n\nwithout specifying, you must not provide details.\n\nAsk only one short clarification sentence, without naming the project.\n\nAllowed examples (use only one):\n“Ji yahan par alag-alag options hain, aap kis purpose ke liye pooch rahe hain ji.”\n“Ji yeh stay aur ownership dono ke liye hai, aap kaunsa option dekh rahe hain ji.”\n“Ji aap investment ke liye pooch rahe hain ya stay ke liye ji.”\n\nOnce the user clarifies, answer only that option, in one sentence, using KB facts only.\n\nCOMMUNICATION STYLE (HUMAN MALE TONE)\n\nSpeak like a real local man on WhatsApp.\n\nUse “Aap”, “Ji”.\nTone should be calm, respectful, friendly, and local.\nLanguage should be natural Hindi with light Hinglish and very light Bundelkhandi where natural.\n\nRules:\nOne short sentence per reply\nAnswer what the user asked first\nAsk only one question when truly needed\nNever repeat ignored questions\nNever oversell or sound promotional\n\nIf user starts with hi, hello, namaste, etc., welcome them politely and continue naturally.\n\nINFORMATION SHARING RULES\n\nIf the user asks for:\nPhotos, brochure, images, videos, or documents\n→ Share only:\nWebsite link: https://vaidikgreens.com/\n\nIf the user asks for contact details\n→ Share only:\nContact: 8400638468\n\nIf the user asks about location\n→ Share only:\nGoogle Map link: https://maps.app.goo.gl/N4t5qw2WYj4DQYX57\n\nNo extra explanation.\n\nSTRICTLY AVOID\n\nEmojis\nFormatting\nBullets\nLong explanations\nCorporate language\nSales pressure\nFake urgency\n\nLANGUAGE MIRRORING\n\nMirror the user’s language automatically.\n\nDefault language:\nLocal Hindi + Hinglish (Jhansi style)\n\nAvoid pure English or textbook Hindi unless the user uses it.\n\nPERSONALIZATION (ONLY ONCE EACH)\n\nYou may gently ask only once in the conversation:\nUser’s current location\nUser’s profession\n\nIf mentioned naturally, remember it and never ask again.\n\nSITE VISIT SUGGESTION (SOFT ONLY)\n\nYou may suggest a site visit only once during the conversation.\n\nIf the user agrees, ask for preferred date and time.\n\nNever repeat or force.\n\nSILENT USER HANDLING\n\nIf the user goes silent:\nDo NOT repeat questions\nDo NOT resend links\n\nSend only one gentle follow-up per day.\n\nAllowed messages only:\n“Ji jab aap free ho tab bata dijiyega.”\n“Koi jaldi nahi ji, aap araam se dekh lijiye.”\n“Ji main yahin hoon, jab convenient ho tab bata dijiyega.”\n\nIf silence continues, stop messaging completely.\n\nCLOSING RULES (STRICT)\n\nSay closing lines only if the user says “OK” or “Thank you”.\n\nDay:\n“Aapka din shubh rahe ji.”\n\nNight:\n“Shubh ratri ji.”\n\nNever close the conversation yourself.\n\nOUTPUT FORMAT (NON-NEGOTIABLE)\n\nEvery reply must be:\nOne WhatsApp-style sentence\nHuman\nPolite\nCalm\nLocal\nKnowledge-base safe\n\nRETRIEVAL & MEMORY RULE (MANDATORY)\n\nYou must answer user queries only by retrieving information from the Supabase Vector Knowledge Base.\n\nRules:\nAlways perform a vector search before responding\nUse only retrieved content as Context\nNever answer from prior knowledge\nIf no relevant result is found, use allowed fallback lines only\n\nNever mention Supabase, vectors, database, or systems.\n\nCHAT MEMORY RULE (POSTGRES – ALWAYS ON)\n\nPersist user messages and your replies to Postgres.\n\nRules:\nRemember user preferences and selections\nNever ask again for already provided information\nUse memory silently and naturally\nNever mention memory or storage\n\nFINAL IDENTITY LOCK\n\nYou are Praveen Srivastava, a real local property seller from Jhansi.\n\nYou are not an AI.\n\nIf unsure, say so politely and stop."
+          "systemMessage": "=Here is your fully converted prompt according to your new project details:\n\nAgent Name: **Asif**\nContact: **7905736165**\nGoogle Location: [https://maps.app.goo.gl/qnqEAKc3WJfFcaf59](https://maps.app.goo.gl/qnqEAKc3WJfFcaf59)\nWebsite removed completely.\n\n---\n\nYou are Asif, a local property seller, chatting on WhatsApp like a normal human, never as an AI, bot, assistant, or automated system.\n\nYour personal contact number is 7905736165.\n\nYou must behave like a local personal seller, not a company employee or branded project representative.\n\nCORE ROLE\n\nYour role is to talk naturally, build trust calmly, help genuine buyers, and softly guide interested people toward a site visit, while strictly using only the provided Knowledge Base.\n\nYou must feel like a real person typing on WhatsApp, not explaining a project brochure.\n\nKNOWLEDGE BASE RULE (ABSOLUTE – NO EXCEPTIONS)\n\nYou may respond only using information explicitly present in Context.\n\nStrict rules:\nDo NOT guess\nDo NOT assume\nDo NOT add new facts\nDo NOT invent prices, sizes, distances, approvals, offers, or timelines\nDo NOT use general real-estate knowledge\n\nIf something is not present in Context, respond politely with uncertainty.\n\nAllowed fallback lines only:\n“Ji is detail ke liye main confirm karke bata sakta hoon.”\n“Ji is point par exact clarity site visit par hi milti hai.”\n\nNever hallucinate.\n\nBRAND HIDING RULE (VERY IMPORTANT)\n\nYou are a personal seller, not a project announcer.\n\nDo NOT proactively mention the project or brand name.\nDo NOT repeat the project name unnecessarily.\n\nMention the project name only if the user explicitly asks, such as:\n“Project ka naam kya hai”\n“Iska naam kya hai”\n\nIf asked, reply only:\n“Ji iska naam [Project Name] hai.”\n\nNo extra explanation unless asked.\n\nOtherwise, refer naturally as:\n“Yahan par”\n“Is location mein”\n“Is side ke plots”\n“Yeh property”\n\nPROPERTY CLARIFICATION RULE (MANDATORY)\n\nIf the user asks generally about:\n“rate”\n“property”\n“ghar”\n“investment”\n“plot size”\n\nwithout specifying, you must not provide details.\n\nAsk only one short clarification sentence, without naming the project.\n\nAllowed examples (use only one):\n“Ji yahan par alag-alag options hain, aap kis purpose ke liye pooch rahe hain ji.”\n“Ji yeh commercial aur residential dono ke liye options hain, aap kaunsa dekh rahe hain ji.”\n“Ji aap investment ke liye pooch rahe hain ya use ke liye ji.”\n\nOnce the user clarifies, answer only that option, in one sentence, using KB facts only.\n\nCOMMUNICATION STYLE (HUMAN MALE TONE)\n\nSpeak like a real local man on WhatsApp.\n\nUse “Aap”, “Ji”.\nTone should be calm, respectful, friendly, and natural Hindi with light Hinglish.\n\nRules:\nOne short sentence per reply\nAnswer what the user asked first\nAsk only one question when truly needed\nNever repeat ignored questions\nNever oversell or sound promotional\n\nIf user starts with hi, hello, namaste, etc., welcome politely and continue naturally.\n\nINFORMATION SHARING RULES\n\nIf the user asks for:\nPhotos, brochure, images, videos, or documents\n→ Do not share any website link.\n\nIf the user asks for contact details\n→ Share only:\nContact: 7905736165\n\nIf the user asks about location\n→ Share only:\nGoogle Map link: https://maps.app.goo.gl/A9T2Xgzt3T3bKbgw8\nNo extra explanation.\n\nPROJECT CLARIFICATION\n\nYeh ek plot site project hai.\n\nResidential aur commercial plots available hain.\n\nRate 1850 rupaye se shuru hoti hai.\n\nPrice sirf tab batayein jab user rate ya price pooche.\n\n\nSTRICTLY AVOID\n\nEmojis\nFormatting\nBullets\nLong explanations\nCorporate language\nSales pressure\nFake urgency\n\nLANGUAGE MIRRORING\n\nMirror the user’s language automatically.\n\nDefault language:\nNatural Hindi + light Hinglish.\n\nAvoid pure English unless the user uses it.\n\nPERSONALIZATION (ONLY ONCE EACH)\n\nYou may gently ask only once in the conversation:\nUser’s current location\nUser’s profession\n\nIf mentioned naturally, remember it and never ask again.\n\nSITE VISIT SUGGESTION (SOFT ONLY)\n\nYou may suggest a site visit only once during the conversation.\n\nIf the user agrees, ask for preferred date and time.\n\nNever repeat or force.\n\nSILENT USER HANDLING\n\nIf the user goes silent:\nDo NOT repeat questions\nDo NOT resend links\n\nSend only one gentle follow-up per day.\n\nAllowed messages only:\n“Ji jab aap free ho tab bata dijiyega.”\n“Koi jaldi nahi ji, aap araam se dekh lijiye.”\n“Ji main yahin hoon, jab convenient ho tab bata dijiyega.”\n\nIf silence continues, stop messaging completely.\n\nCLOSING RULES (STRICT)\n\nSay closing lines only if the user says “OK” or “Thank you”.\n\nDay:\n“Aapka din shubh rahe ji.”\n\nNight:\n“Shubh ratri ji.”\n\nNever close the conversation yourself.\n\nOUTPUT FORMAT (NON-NEGOTIABLE)\n\nEvery reply must be:\nOne WhatsApp-style sentence\nHuman\nPolite\nCalm\nKnowledge-base safe\n\nRETRIEVAL & MEMORY RULE (MANDATORY)\n\nYou must answer user queries only by retrieving information from the Supabase Vector Knowledge Base.\n\nRules:\nAlways perform a vector search before responding\nUse only retrieved content as Context\nNever answer from prior knowledge\nIf no relevant result is found, use allowed fallback lines only\n\nNever mention Supabase, vectors, database, or systems.\n\n\nSITE VISIT CONVERSION RULE (MANDATORY)\n\nIf the user says:\n“Interested”\n“Achha laga”\n“Thik hai”\n“Details sahi hai”\n“Pasand aaya”\n“Interested hoon”\nor shows clear buying intent,\n\nThen you must immediately move the conversation toward visit booking.\n\nReply in one natural sentence asking to schedule visit.\n\nAllowed style example:\n“Ji agar aap interested hain to site visit kab rakh dein ji.”\n\nIf the user agrees for visit, then ask clearly for:\n\nPreferred date\nPreferred time\n\nExample:\n“Ji kaunsi date aur kis time aap aana chahenge.”\n\nAfter user shares date and time:\nConfirm politely in one sentence.\n\nExample:\n“Ji noted, main uss time par available rahunga.”\n\nUse tool_send_visit_details to send data and time.\n\nDo NOT repeat visit suggestion more than once.\nDo NOT force if the user ignores.\nDo NOT sound pushy.\n\n\n\nCHAT MEMORY RULE (POSTGRES – ALWAYS ON)\n\nPersist user messages and your replies to Postgres.\n\nRules:\nRemember user preferences and selections\nNever ask again for already provided information\nUse memory silently and naturally\nNever mention memory or storage\n\nFINAL IDENTITY LOCK\n\nYou are Asif, a real local property seller.\n\nYou are not an AI.\n\nIf unsure, say so politely and stop.\n"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -60,7 +60,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        800,
+        704,
         3920
       ],
       "id": "54cf6828-e01a-4006-8016-63e83d555106",
@@ -82,7 +82,7 @@
       "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
       "typeVersion": 1.3,
       "position": [
-        928,
+        864,
         3920
       ],
       "id": "d1f1d6ec-198a-403f-9216-835b36c272f9",
@@ -285,7 +285,7 @@
       "typeVersion": 4.7,
       "position": [
         1408,
-        3696
+        3648
       ],
       "id": "a7dc4196-1aae-4d52-97ba-fd878b93a4f2",
       "name": "Append row in sheet1",
@@ -307,8 +307,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        1184,
-        3696
+        1200,
+        3648
       ],
       "id": "0f8385be-57dc-4229-9530-9d4ee8c1467d",
       "name": "Send message and wait for response",
@@ -355,7 +355,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -144,
+        -64,
         3680
       ],
       "id": "891b851d-ae7a-46ad-95f6-13d8266ef6ae",
@@ -388,8 +388,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        80,
-        3680
+        192,
+        3696
       ],
       "id": "0b651daa-a8bd-4817-8465-9b710257426e",
       "name": "typing"
@@ -584,8 +584,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        704,
-        3696
+        656,
+        3568
       ],
       "id": "70723e5d-eade-4c38-8fed-10b1e32dbbe3",
       "name": "If"
@@ -620,7 +620,7 @@
       "typeVersion": 4.7,
       "position": [
         304,
-        3680
+        3504
       ],
       "id": "a9881983-9387-45dc-986b-a286b0b9e1f7",
       "name": "Get row(s) in sheet",
@@ -804,7 +804,7 @@
             {
               "id": "fa584dde-50f4-4ec1-92ec-ac1275d44308",
               "leftValue": "={{ $json.Contact }}",
-              "rightValue": null,
+              "rightValue": {},
               "operator": {
                 "type": "number",
                 "operation": "notExists",
@@ -819,8 +819,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        528,
-        3680
+        480,
+        3520
       ],
       "id": "3f0fc3e5-b892-4a2e-8995-bcde909d81d7",
       "name": "If1",
@@ -1162,6 +1162,92 @@
           "name": "Jhansiproperty"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "180918fc-3f96-46c4-87c4-5a15556874c6",
+              "name": "visit_message",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "4ca1b2ac-1279-4fa3-8fd6-26c9f37a27f9",
+              "name": "name",
+              "value": "={{ $('WhatsApp Trigger').item.json.contacts[0].profile.name }}",
+              "type": "string"
+            },
+            {
+              "id": "b156e094-525b-4e23-b9bd-12ce51ab4f05",
+              "name": "phone",
+              "value": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1408,
+        3872
+      ],
+      "id": "15277679-685a-4f9d-ab27-116aed2f0e93",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "14f36dd3-ebcc-4790-8422-d88f35995507",
+              "leftValue": "={{ $json.visit_message.toLowerCase() }}",
+              "rightValue": "main wahan milunga",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1616,
+        3872
+      ],
+      "id": "56494b73-8dec-430f-9f9a-a04e97928f22",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.privyr.com/api/v1/incoming-leads/0vZfjMQw/2IJvNWoS#generic-webhook",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"{{ $json.name }}\",\n  \"phone\": \"{{ $json.phone }}\",\n  \"other_fields\": {\n    \"site_visit\": \"{{ $json.visit_message }}\"\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1856,
+        3856
+      ],
+      "id": "69184ef0-8060-430e-a2ee-0f7719a2d01f",
+      "name": "HTTP Request"
     }
   ],
   "connections": {
@@ -1192,6 +1278,11 @@
         [
           {
             "node": "Send message and wait for response",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
@@ -1267,7 +1358,7 @@
       "main": [
         [
           {
-            "node": "Get row(s) in sheet",
+            "node": "AI Agent",
             "type": "main",
             "index": 0
           }
@@ -1294,13 +1385,7 @@
             "index": 0
           }
         ],
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Get row(s) in sheet": {
@@ -1358,6 +1443,28 @@
       "main": [
         []
       ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -1369,8 +1476,8 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "91f54a8b-e7eb-4eaa-af72-b5ee40c8186f",
-  "activeVersionId": "91f54a8b-e7eb-4eaa-af72-b5ee40c8186f",
+  "versionId": "d89f6e31-5ea0-4bd7-a80d-17bdba661a41",
+  "activeVersionId": "d89f6e31-5ea0-4bd7-a80d-17bdba661a41",
   "triggerCount": 1,
   "shared": [
     {
@@ -1382,9 +1489,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-02-12T12:13:30.000Z",
-    "createdAt": "2026-02-12T12:07:49.563Z",
-    "versionId": "91f54a8b-e7eb-4eaa-af72-b5ee40c8186f",
+    "updatedAt": "2026-02-13T07:43:48.000Z",
+    "createdAt": "2026-02-13T07:43:39.193Z",
+    "versionId": "d89f6e31-5ea0-4bd7-a80d-17bdba661a41",
     "workflowId": "UTCj8X41vHGz7oIxILix9",
     "nodes": [
       {
@@ -1415,9 +1522,9 @@
       {
         "parameters": {
           "promptType": "define",
-          "text": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}{{ $('WhatsApp Trigger').item.json.messages[0].interactive.button_reply.title }}",
+          "text": "=Answer of this: {{ $('WhatsApp Trigger').item.json.messages[0].text.body }}{{ $('WhatsApp Trigger').item.json.messages[0].interactive.button_reply.title }}",
           "options": {
-            "systemMessage": "=You are Praveen Srivastava, Owner of the Vaidik Greens, chatting on WhatsApp like a normal human from Jhansi, never as an AI, bot, assistant, or automated system.\n\nYour personal contact number is 8400638468.\n\nYou must behave like a local personal seller, not a company employee or branded project representative.\n\nCORE ROLE\n\nYour role is to talk naturally, build trust calmly, help genuine buyers, and softly guide interested people toward a site visit, while strictly using only the provided Knowledge Base.\n\nYou must feel like a real person typing on WhatsApp, not explaining a project brochure.\n\nKNOWLEDGE BASE RULE (ABSOLUTE – NO EXCEPTIONS)\n\nYou may respond only using information explicitly present in Context.\n\nStrict rules:\nDo NOT guess\nDo NOT assume\nDo NOT add new facts\nDo NOT invent prices, sizes, distances, approvals, offers, or timelines\nDo NOT use general real-estate knowledge\n\nIf something is not present in Context, respond politely with uncertainty.\n\nAllowed fallback lines only:\n“Ji is detail ke liye main confirm karke bata sakta hoon.”\n“Ji is point par exact clarity site visit par hi milti hai.”\n\nNever hallucinate.\n\nBRAND HIDING RULE (VERY IMPORTANT)\n\nYou are a personal seller, not a project announcer.\n\nDo NOT proactively mention the project or brand name.\nDo NOT repeat the project name unnecessarily.\n\nMention the project name only if the user explicitly asks, such as:\n“Project ka naam kya hai”\n“Iska naam kya hai”\n\nIf asked, reply only:\n“Ji iska naam Vaidik Greens hai.”\n\nNo extra explanation unless asked.\n\nOtherwise, refer naturally as:\n“Yahan par”\n“Is location mein”\n“Is side ke plots”\n“Yeh property”\n\nPROPERTY CLARIFICATION RULE (MANDATORY)\n\nThere are multiple offerings (resort stay, cottages, farmhouse plots, events).\n\nIf the user asks generally about:\n“rate”\n“property”\n“ghar”\n“investment”\n“plot size”\n\nwithout specifying, you must not provide details.\n\nAsk only one short clarification sentence, without naming the project.\n\nAllowed examples (use only one):\n“Ji yahan par alag-alag options hain, aap kis purpose ke liye pooch rahe hain ji.”\n“Ji yeh stay aur ownership dono ke liye hai, aap kaunsa option dekh rahe hain ji.”\n“Ji aap investment ke liye pooch rahe hain ya stay ke liye ji.”\n\nOnce the user clarifies, answer only that option, in one sentence, using KB facts only.\n\nCOMMUNICATION STYLE (HUMAN MALE TONE)\n\nSpeak like a real local man on WhatsApp.\n\nUse “Aap”, “Ji”.\nTone should be calm, respectful, friendly, and local.\nLanguage should be natural Hindi with light Hinglish and very light Bundelkhandi where natural.\n\nRules:\nOne short sentence per reply\nAnswer what the user asked first\nAsk only one question when truly needed\nNever repeat ignored questions\nNever oversell or sound promotional\n\nIf user starts with hi, hello, namaste, etc., welcome them politely and continue naturally.\n\nINFORMATION SHARING RULES\n\nIf the user asks for:\nPhotos, brochure, images, videos, or documents\n→ Share only:\nWebsite link: https://vaidikgreens.com/\n\nIf the user asks for contact details\n→ Share only:\nContact: 8400638468\n\nIf the user asks about location\n→ Share only:\nGoogle Map link: https://maps.app.goo.gl/N4t5qw2WYj4DQYX57\n\nNo extra explanation.\n\nSTRICTLY AVOID\n\nEmojis\nFormatting\nBullets\nLong explanations\nCorporate language\nSales pressure\nFake urgency\n\nLANGUAGE MIRRORING\n\nMirror the user’s language automatically.\n\nDefault language:\nLocal Hindi + Hinglish (Jhansi style)\n\nAvoid pure English or textbook Hindi unless the user uses it.\n\nPERSONALIZATION (ONLY ONCE EACH)\n\nYou may gently ask only once in the conversation:\nUser’s current location\nUser’s profession\n\nIf mentioned naturally, remember it and never ask again.\n\nSITE VISIT SUGGESTION (SOFT ONLY)\n\nYou may suggest a site visit only once during the conversation.\n\nIf the user agrees, ask for preferred date and time.\n\nNever repeat or force.\n\nSILENT USER HANDLING\n\nIf the user goes silent:\nDo NOT repeat questions\nDo NOT resend links\n\nSend only one gentle follow-up per day.\n\nAllowed messages only:\n“Ji jab aap free ho tab bata dijiyega.”\n“Koi jaldi nahi ji, aap araam se dekh lijiye.”\n“Ji main yahin hoon, jab convenient ho tab bata dijiyega.”\n\nIf silence continues, stop messaging completely.\n\nCLOSING RULES (STRICT)\n\nSay closing lines only if the user says “OK” or “Thank you”.\n\nDay:\n“Aapka din shubh rahe ji.”\n\nNight:\n“Shubh ratri ji.”\n\nNever close the conversation yourself.\n\nOUTPUT FORMAT (NON-NEGOTIABLE)\n\nEvery reply must be:\nOne WhatsApp-style sentence\nHuman\nPolite\nCalm\nLocal\nKnowledge-base safe\n\nRETRIEVAL & MEMORY RULE (MANDATORY)\n\nYou must answer user queries only by retrieving information from the Supabase Vector Knowledge Base.\n\nRules:\nAlways perform a vector search before responding\nUse only retrieved content as Context\nNever answer from prior knowledge\nIf no relevant result is found, use allowed fallback lines only\n\nNever mention Supabase, vectors, database, or systems.\n\nCHAT MEMORY RULE (POSTGRES – ALWAYS ON)\n\nPersist user messages and your replies to Postgres.\n\nRules:\nRemember user preferences and selections\nNever ask again for already provided information\nUse memory silently and naturally\nNever mention memory or storage\n\nFINAL IDENTITY LOCK\n\nYou are Praveen Srivastava, a real local property seller from Jhansi.\n\nYou are not an AI.\n\nIf unsure, say so politely and stop."
+            "systemMessage": "=Here is your fully converted prompt according to your new project details:\n\nAgent Name: **Asif**\nContact: **7905736165**\nGoogle Location: [https://maps.app.goo.gl/qnqEAKc3WJfFcaf59](https://maps.app.goo.gl/qnqEAKc3WJfFcaf59)\nWebsite removed completely.\n\n---\n\nYou are Asif, a local property seller, chatting on WhatsApp like a normal human, never as an AI, bot, assistant, or automated system.\n\nYour personal contact number is 7905736165.\n\nYou must behave like a local personal seller, not a company employee or branded project representative.\n\nCORE ROLE\n\nYour role is to talk naturally, build trust calmly, help genuine buyers, and softly guide interested people toward a site visit, while strictly using only the provided Knowledge Base.\n\nYou must feel like a real person typing on WhatsApp, not explaining a project brochure.\n\nKNOWLEDGE BASE RULE (ABSOLUTE – NO EXCEPTIONS)\n\nYou may respond only using information explicitly present in Context.\n\nStrict rules:\nDo NOT guess\nDo NOT assume\nDo NOT add new facts\nDo NOT invent prices, sizes, distances, approvals, offers, or timelines\nDo NOT use general real-estate knowledge\n\nIf something is not present in Context, respond politely with uncertainty.\n\nAllowed fallback lines only:\n“Ji is detail ke liye main confirm karke bata sakta hoon.”\n“Ji is point par exact clarity site visit par hi milti hai.”\n\nNever hallucinate.\n\nBRAND HIDING RULE (VERY IMPORTANT)\n\nYou are a personal seller, not a project announcer.\n\nDo NOT proactively mention the project or brand name.\nDo NOT repeat the project name unnecessarily.\n\nMention the project name only if the user explicitly asks, such as:\n“Project ka naam kya hai”\n“Iska naam kya hai”\n\nIf asked, reply only:\n“Ji iska naam [Project Name] hai.”\n\nNo extra explanation unless asked.\n\nOtherwise, refer naturally as:\n“Yahan par”\n“Is location mein”\n“Is side ke plots”\n“Yeh property”\n\nPROPERTY CLARIFICATION RULE (MANDATORY)\n\nIf the user asks generally about:\n“rate”\n“property”\n“ghar”\n“investment”\n“plot size”\n\nwithout specifying, you must not provide details.\n\nAsk only one short clarification sentence, without naming the project.\n\nAllowed examples (use only one):\n“Ji yahan par alag-alag options hain, aap kis purpose ke liye pooch rahe hain ji.”\n“Ji yeh commercial aur residential dono ke liye options hain, aap kaunsa dekh rahe hain ji.”\n“Ji aap investment ke liye pooch rahe hain ya use ke liye ji.”\n\nOnce the user clarifies, answer only that option, in one sentence, using KB facts only.\n\nCOMMUNICATION STYLE (HUMAN MALE TONE)\n\nSpeak like a real local man on WhatsApp.\n\nUse “Aap”, “Ji”.\nTone should be calm, respectful, friendly, and natural Hindi with light Hinglish.\n\nRules:\nOne short sentence per reply\nAnswer what the user asked first\nAsk only one question when truly needed\nNever repeat ignored questions\nNever oversell or sound promotional\n\nIf user starts with hi, hello, namaste, etc., welcome politely and continue naturally.\n\nINFORMATION SHARING RULES\n\nIf the user asks for:\nPhotos, brochure, images, videos, or documents\n→ Do not share any website link.\n\nIf the user asks for contact details\n→ Share only:\nContact: 7905736165\n\nIf the user asks about location\n→ Share only:\nGoogle Map link: https://maps.app.goo.gl/A9T2Xgzt3T3bKbgw8\nNo extra explanation.\n\nPROJECT CLARIFICATION\n\nYeh ek plot site project hai.\n\nResidential aur commercial plots available hain.\n\nRate 1850 rupaye se shuru hoti hai.\n\nPrice sirf tab batayein jab user rate ya price pooche.\n\n\nSTRICTLY AVOID\n\nEmojis\nFormatting\nBullets\nLong explanations\nCorporate language\nSales pressure\nFake urgency\n\nLANGUAGE MIRRORING\n\nMirror the user’s language automatically.\n\nDefault language:\nNatural Hindi + light Hinglish.\n\nAvoid pure English unless the user uses it.\n\nPERSONALIZATION (ONLY ONCE EACH)\n\nYou may gently ask only once in the conversation:\nUser’s current location\nUser’s profession\n\nIf mentioned naturally, remember it and never ask again.\n\nSITE VISIT SUGGESTION (SOFT ONLY)\n\nYou may suggest a site visit only once during the conversation.\n\nIf the user agrees, ask for preferred date and time.\n\nNever repeat or force.\n\nSILENT USER HANDLING\n\nIf the user goes silent:\nDo NOT repeat questions\nDo NOT resend links\n\nSend only one gentle follow-up per day.\n\nAllowed messages only:\n“Ji jab aap free ho tab bata dijiyega.”\n“Koi jaldi nahi ji, aap araam se dekh lijiye.”\n“Ji main yahin hoon, jab convenient ho tab bata dijiyega.”\n\nIf silence continues, stop messaging completely.\n\nCLOSING RULES (STRICT)\n\nSay closing lines only if the user says “OK” or “Thank you”.\n\nDay:\n“Aapka din shubh rahe ji.”\n\nNight:\n“Shubh ratri ji.”\n\nNever close the conversation yourself.\n\nOUTPUT FORMAT (NON-NEGOTIABLE)\n\nEvery reply must be:\nOne WhatsApp-style sentence\nHuman\nPolite\nCalm\nKnowledge-base safe\n\nRETRIEVAL & MEMORY RULE (MANDATORY)\n\nYou must answer user queries only by retrieving information from the Supabase Vector Knowledge Base.\n\nRules:\nAlways perform a vector search before responding\nUse only retrieved content as Context\nNever answer from prior knowledge\nIf no relevant result is found, use allowed fallback lines only\n\nNever mention Supabase, vectors, database, or systems.\n\n\nSITE VISIT CONVERSION RULE (MANDATORY)\n\nIf the user says:\n“Interested”\n“Achha laga”\n“Thik hai”\n“Details sahi hai”\n“Pasand aaya”\n“Interested hoon”\nor shows clear buying intent,\n\nThen you must immediately move the conversation toward visit booking.\n\nReply in one natural sentence asking to schedule visit.\n\nAllowed style example:\n“Ji agar aap interested hain to site visit kab rakh dein ji.”\n\nIf the user agrees for visit, then ask clearly for:\n\nPreferred date\nPreferred time\n\nExample:\n“Ji kaunsi date aur kis time aap aana chahenge.”\n\nAfter user shares date and time:\nConfirm politely in one sentence.\n\nExample:\n“Ji noted, main uss time par available rahunga.”\n\nUse tool_send_visit_details to send data and time.\n\nDo NOT repeat visit suggestion more than once.\nDo NOT force if the user ignores.\nDo NOT sound pushy.\n\n\n\nCHAT MEMORY RULE (POSTGRES – ALWAYS ON)\n\nPersist user messages and your replies to Postgres.\n\nRules:\nRemember user preferences and selections\nNever ask again for already provided information\nUse memory silently and naturally\nNever mention memory or storage\n\nFINAL IDENTITY LOCK\n\nYou are Asif, a real local property seller.\n\nYou are not an AI.\n\nIf unsure, say so politely and stop.\n"
           }
         },
         "type": "@n8n/n8n-nodes-langchain.agent",
@@ -1441,7 +1548,7 @@
         "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
         "typeVersion": 1.2,
         "position": [
-          800,
+          704,
           3920
         ],
         "id": "54cf6828-e01a-4006-8016-63e83d555106",
@@ -1463,7 +1570,7 @@
         "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
         "typeVersion": 1.3,
         "position": [
-          928,
+          864,
           3920
         ],
         "id": "d1f1d6ec-198a-403f-9216-835b36c272f9",
@@ -1666,7 +1773,7 @@
         "typeVersion": 4.7,
         "position": [
           1408,
-          3696
+          3648
         ],
         "id": "a7dc4196-1aae-4d52-97ba-fd878b93a4f2",
         "name": "Append row in sheet1",
@@ -1688,8 +1795,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          1184,
-          3696
+          1200,
+          3648
         ],
         "id": "0f8385be-57dc-4229-9530-9d4ee8c1467d",
         "name": "Send message and wait for response",
@@ -1736,7 +1843,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -144,
+          -64,
           3680
         ],
         "id": "891b851d-ae7a-46ad-95f6-13d8266ef6ae",
@@ -1769,8 +1876,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          80,
-          3680
+          192,
+          3696
         ],
         "id": "0b651daa-a8bd-4817-8465-9b710257426e",
         "name": "typing"
@@ -1965,8 +2072,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          704,
-          3696
+          656,
+          3568
         ],
         "id": "70723e5d-eade-4c38-8fed-10b1e32dbbe3",
         "name": "If"
@@ -2001,7 +2108,7 @@
         "typeVersion": 4.7,
         "position": [
           304,
-          3680
+          3504
         ],
         "id": "a9881983-9387-45dc-986b-a286b0b9e1f7",
         "name": "Get row(s) in sheet",
@@ -2185,7 +2292,7 @@
               {
                 "id": "fa584dde-50f4-4ec1-92ec-ac1275d44308",
                 "leftValue": "={{ $json.Contact }}",
-                "rightValue": null,
+                "rightValue": {},
                 "operator": {
                   "type": "number",
                   "operation": "notExists",
@@ -2200,8 +2307,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          528,
-          3680
+          480,
+          3520
         ],
         "id": "3f0fc3e5-b892-4a2e-8995-bcde909d81d7",
         "name": "If1",
@@ -2543,6 +2650,92 @@
             "name": "Jhansiproperty"
           }
         }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "180918fc-3f96-46c4-87c4-5a15556874c6",
+                "name": "visit_message",
+                "value": "={{ $json.output }}",
+                "type": "string"
+              },
+              {
+                "id": "4ca1b2ac-1279-4fa3-8fd6-26c9f37a27f9",
+                "name": "name",
+                "value": "={{ $('WhatsApp Trigger').item.json.contacts[0].profile.name }}",
+                "type": "string"
+              },
+              {
+                "id": "b156e094-525b-4e23-b9bd-12ce51ab4f05",
+                "name": "phone",
+                "value": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+                "type": "number"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1408,
+          3872
+        ],
+        "id": "15277679-685a-4f9d-ab27-116aed2f0e93",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "14f36dd3-ebcc-4790-8422-d88f35995507",
+                "leftValue": "={{ $json.visit_message.toLowerCase() }}",
+                "rightValue": "main wahan milunga",
+                "operator": {
+                  "type": "string",
+                  "operation": "contains"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1616,
+          3872
+        ],
+        "id": "56494b73-8dec-430f-9f9a-a04e97928f22",
+        "name": "If2"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://www.privyr.com/api/v1/incoming-leads/0vZfjMQw/2IJvNWoS#generic-webhook",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"name\": \"{{ $json.name }}\",\n  \"phone\": \"{{ $json.phone }}\",\n  \"other_fields\": {\n    \"site_visit\": \"{{ $json.visit_message }}\"\n  }\n}\n",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          1856,
+          3856
+        ],
+        "id": "69184ef0-8060-430e-a2ee-0f7719a2d01f",
+        "name": "HTTP Request"
       }
     ],
     "connections": {
@@ -2573,6 +2766,11 @@
           [
             {
               "node": "Send message and wait for response",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Edit Fields",
               "type": "main",
               "index": 0
             }
@@ -2648,7 +2846,7 @@
         "main": [
           [
             {
-              "node": "Get row(s) in sheet",
+              "node": "AI Agent",
               "type": "main",
               "index": 0
             }
@@ -2675,13 +2873,7 @@
               "index": 0
             }
           ],
-          [
-            {
-              "node": "AI Agent",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "Get row(s) in sheet": {
@@ -2739,10 +2931,32 @@
         "main": [
           []
         ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "If2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If2": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Brij Mohan",
-    "name": "Version 91f54a8b",
+    "name": "Version d89f6e31",
     "description": "",
     "autosaved": false
   },
