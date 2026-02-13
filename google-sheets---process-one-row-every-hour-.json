@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-12T17:36:29.048Z",
+  "updatedAt": "2026-02-13T06:39:00.587Z",
   "createdAt": "2026-02-12T12:34:42.033Z",
   "id": "hyMlRfs29c6S10HyxPT5L",
   "name": "Google Sheets - Process One Row Every Hour",
@@ -11,7 +11,9 @@
         "rule": {
           "interval": [
             {
-              "field": "hours"
+              "field": "hours",
+              "hoursInterval": 2,
+              "triggerAtMinute": 30
             }
           ]
         }
@@ -245,7 +247,7 @@
         "url": "https://www.privyr.com/api/v1/incoming-leads/0vZfjMQw/2IJvNWoS#generic-webhook",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"name\": \"{{$node['Read Google Sheet'].json['Client Name']}}\",\n  \"phone\": \"{{$node['Read Google Sheet'].json.Contact}}\",\n  \"other_fields\": {\n    \"lead_for\": \"Gwalior-Shivpuri Bypass\",\n\"lead source\": \"Ads\",\n        \"about\": \"{{ $('Read Google Sheet').item.json.About }}\",\n        \"city_job\": \"{{ $('Read Google Sheet').item.json.Note }}\"\n  }\n}\n",
+        "jsonBody": "={\n  \"name\": \"{{ $('Mark Processed').item.json['Client Name'] }}\",\n  \"phone\": \"{{ $('Mark Processed').item.json.Contact }}\",\n  \"other_fields\": {\n    \"lead_for\": \"Gwalior-Shivpuri Bypass\",\n\"lead source\": \"Ads\",\n        \"about\": \"{{ $('Mark Processed').item.json.About }}\",\n        \"note\": \"{{ $('Mark Processed').item.json.Note }}\"\n  }\n}\n",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -363,8 +365,8 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "ca4a950f-cc11-49b6-9485-c0de676dfa76",
-  "activeVersionId": "ca4a950f-cc11-49b6-9485-c0de676dfa76",
+  "versionId": "35303e9a-a81c-4187-a03d-88d94f327d1b",
+  "activeVersionId": "35303e9a-a81c-4187-a03d-88d94f327d1b",
   "triggerCount": 1,
   "shared": [
     {
@@ -376,9 +378,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-02-12T17:36:32.000Z",
-    "createdAt": "2026-02-12T17:36:29.050Z",
-    "versionId": "ca4a950f-cc11-49b6-9485-c0de676dfa76",
+    "updatedAt": "2026-02-13T06:34:35.000Z",
+    "createdAt": "2026-02-13T06:34:32.290Z",
+    "versionId": "35303e9a-a81c-4187-a03d-88d94f327d1b",
     "workflowId": "hyMlRfs29c6S10HyxPT5L",
     "nodes": [
       {
@@ -386,7 +388,9 @@
           "rule": {
             "interval": [
               {
-                "field": "hours"
+                "field": "hours",
+                "hoursInterval": 2,
+                "triggerAtMinute": 30
               }
             ]
           }
@@ -620,7 +624,7 @@
           "url": "https://www.privyr.com/api/v1/incoming-leads/0vZfjMQw/2IJvNWoS#generic-webhook",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"name\": \"{{$node['Read Google Sheet'].json['Client Name']}}\",\n  \"phone\": \"{{$node['Read Google Sheet'].json.Contact}}\",\n  \"other_fields\": {\n    \"lead_for\": \"Gwalior-Shivpuri Bypass\",\n\"lead source\": \"Ads\",\n        \"about\": \"{{ $('Read Google Sheet').item.json.About }}\",\n        \"city_job\": \"{{ $('Read Google Sheet').item.json.Note }}\"\n  }\n}\n",
+          "jsonBody": "={\n  \"name\": \"{{ $('Mark Processed').item.json['Client Name'] }}\",\n  \"phone\": \"{{ $('Mark Processed').item.json.Contact }}\",\n  \"other_fields\": {\n    \"lead_for\": \"Gwalior-Shivpuri Bypass\",\n\"lead source\": \"Ads\",\n        \"about\": \"{{ $('Mark Processed').item.json.About }}\",\n        \"note\": \"{{ $('Mark Processed').item.json.Note }}\"\n  }\n}\n",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -728,7 +732,7 @@
       }
     },
     "authors": "Brij Mohan",
-    "name": "Version ca4a950f",
+    "name": "Version 35303e9a",
     "description": "",
     "autosaved": false
   },
