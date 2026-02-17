@@ -1,0 +1,536 @@
+{
+  "updatedAt": "2026-02-17T13:52:53.453Z",
+  "createdAt": "2026-02-17T12:52:16.432Z",
+  "id": "nzLB9RREoqnbQUrimlnZ7",
+  "name": "Vaidik Greens - Social Media Image Publisher",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Vaidik Greens - Image Publisher",
+        "formDescription": "Upload an image to auto-generate AI title & description and publish to WordPress, Facebook, Instagram, and Google My Business.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Image",
+              "fieldType": "file",
+              "multipleFiles": false,
+              "acceptFileTypes": ".jpg,.jpeg,.png,.gif,.bmp,.webp",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Title",
+              "placeholder": "Leave blank for AI-generated title"
+            },
+            {
+              "fieldLabel": "Description",
+              "fieldType": "textarea",
+              "placeholder": "Leave blank for AI-generated description"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -3440,
+        2928
+      ],
+      "id": "02b82439-a6af-49ad-b6f8-89a9cff0524b",
+      "name": "Image Upload Form",
+      "webhookId": "a5fe9eef-e73a-4359-bebe-816d094af31e"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "config-wp-url",
+              "name": "wordpress_url",
+              "value": "https://vaidikgreens.com",
+              "type": "string"
+            },
+            {
+              "id": "config-fb-page-id",
+              "name": "facebook_page_id",
+              "value": "YOUR_FACEBOOK_PAGE_ID",
+              "type": "string"
+            },
+            {
+              "id": "config-ig-user-id",
+              "name": "instagram_user_id",
+              "value": "YOUR_INSTAGRAM_BUSINESS_USER_ID",
+              "type": "string"
+            },
+            {
+              "id": "config-gmb-account",
+              "name": "gmb_account_id",
+              "value": "accounts/YOUR_GMB_ACCOUNT_ID",
+              "type": "string"
+            },
+            {
+              "id": "config-gmb-location",
+              "name": "gmb_location_id",
+              "value": "locations/YOUR_GMB_LOCATION_ID",
+              "type": "string"
+            },
+            {
+              "id": "ref-fb-url",
+              "name": "ref_facebook_url",
+              "value": "https://www.facebook.com/vaidikgreensresort",
+              "type": "string"
+            },
+            {
+              "id": "ref-ig-url",
+              "name": "ref_instagram_url",
+              "value": "https://www.instagram.com/vaidikgreensresort2025/",
+              "type": "string"
+            },
+            {
+              "id": "ref-google-url",
+              "name": "ref_google_url",
+              "value": "https://www.google.com/travel/hotels/entity/CgoI1evv1KKZidh1EAE/reviews",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3152,
+        2928
+      ],
+      "id": "7c2e4bf8-c45d-4322-bf00-7b52c54fd7e6",
+      "name": "Set Config"
+    },
+    {
+      "parameters": {
+        "operation": "resize",
+        "dataPropertyName": "image",
+        "width": 1200,
+        "height": 1200,
+        "resizeOption": "maxLongestEdge",
+        "options": {
+          "format": "webp"
+        }
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        -2896,
+        2928
+      ],
+      "id": "312a8cc3-ad11-47fa-9835-b3d25536d8f3",
+      "name": "Resize & Convert to WebP"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
+        "text": "You are a social media marketing expert for \"Vaidik Greens\" — a premium luxury resort and cottage property located in India. The resort offers: luxury cottages & farmhouses, world-class dining, spa & wellness center, swimming pools & water features, pond with boating, disco & pub, VIP lounges, conference & meeting halls, wedding celebration venues, entertainment & nightlife, medical services, family-friendly amenities, nature-friendly sustainable living, and transport facilities.\n\nAnalyze this image and generate a social media post for Vaidik Greens.\n\nReturn your response in this EXACT JSON format (no markdown, no code blocks):\n{\n  \"title\": \"A short, catchy SEO-friendly title (max 60 chars)\",\n  \"description\": \"An engaging social media caption (150-250 chars) with relevant emojis. Include a call-to-action. Mention Vaidik Greens naturally.\",\n  \"hashtags\": \"#VaidikGreens #LuxuryResort and 5-8 more relevant hashtags\",\n  \"alt_text\": \"A brief, accessible description of the image for SEO (max 125 chars)\"\n}",
+        "inputType": "base64",
+        "binaryPropertyName": "image",
+        "options": {
+          "maxTokens": 500
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -2640,
+        2928
+      ],
+      "id": "984ef93b-efc6-4d4e-a0d4-eb3b88ec8c60",
+      "name": "OpenAI - Generate Content",
+      "credentials": {
+        "openAiApi": {
+          "id": "oeU3bDddqKmVY1Rx",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst returnItems = [];\n\nfor (const item of items) {\n  // Get user-provided values from the form\n  const userTitle = item.json['Title'] || item.json['title'] || '';\n  const userDesc = item.json['Description'] || item.json['description'] || '';\n\n  // Parse AI-generated content\n  let aiContent = {};\n  try {\n    const aiText = item.json.text || item.json.content || item.json.message?.content || '';\n    // Remove possible markdown code block wrappers\n    const cleanJson = aiText.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n    aiContent = JSON.parse(cleanJson);\n  } catch (e) {\n    aiContent = {\n      title: 'Experience Luxury at Vaidik Greens',\n      description: '🌿 Discover paradise at Vaidik Greens! Book your luxury escape today. 📞 +91-7518500146',\n      hashtags: '#VaidikGreens #LuxuryResort #NatureRetreat #Cottages #Luxury #Resort #India',\n      alt_text: 'Vaidik Greens luxury resort'\n    };\n  }\n\n  // Use user-provided values if available, otherwise use AI-generated\n  const finalTitle = userTitle.trim() || aiContent.title || 'Vaidik Greens';\n  const finalDesc = userDesc.trim() || aiContent.description || '';\n  const hashtags = aiContent.hashtags || '#VaidikGreens #LuxuryResort';\n  const altText = aiContent.alt_text || finalTitle;\n\n  // Build the full social media caption\n  const fullCaption = `${finalDesc}\\n\\n${hashtags}\\n\\n🌐 https://vaidikgreens.com\\n📞 +91-7518500146`;\n\n  // Clean title for filename\n  const cleanFileName = finalTitle.replace(/[^a-zA-Z0-9_-]/g, '_').substring(0, 50) + '.webp';\n\n  returnItems.push({\n    json: {\n      title: finalTitle,\n      description: finalDesc,\n      fullCaption: fullCaption,\n      hashtags: hashtags,\n      altText: altText,\n      fileName: cleanFileName,\n      wordpress_url: item.json.wordpress_url,\n      facebook_page_id: item.json.facebook_page_id,\n      instagram_user_id: item.json.instagram_user_id,\n      gmb_account_id: item.json.gmb_account_id,\n      gmb_location_id: item.json.gmb_location_id\n    },\n    binary: item.binary\n  });\n}\n\nreturn returnItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2384,
+        2928
+      ],
+      "id": "e216786e-9af3-4860-a79f-4d05d015c985",
+      "name": "Merge AI Content & Build Caption"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://vaidikgreens.com/wp-json/wp/v2/media",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Disposition",
+              "value": "attachment; filename=\"{{ $json.fileName }}\""
+            },
+            {
+              "name": "Content-Type",
+              "value": "image/webp"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "image",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2096,
+        2928
+      ],
+      "id": "02b050f2-6a5e-4e66-8824-a8a9de933998",
+      "name": "WordPress - Upload Media",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "sRZ7CngipZNhiFko",
+          "name": "Vaidik image"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Merge AI Content & Build Caption').item.json.wordpress_url || 'https://vaidikgreens.com' }}/wp-json/wp/v2/media/{{ $json.id }}\n",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"{{ $('Merge AI Content & Build Caption').item.json.title || $json.Title }}\",\n  \"alt_text\": \"{{ $('Merge AI Content & Build Caption').item.json.altText || $json.Title }}\",\n  \"caption\": \"{{ $('Merge AI Content & Build Caption').item.json.description || $json.Discription }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1824,
+        2928
+      ],
+      "id": "53ca811f-b4aa-4c03-8936-997bc29276be",
+      "name": "WordPress - Set Title & Caption",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "sRZ7CngipZNhiFko",
+          "name": "Vaidik image"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{ $('Merge AI Content & Build Caption').item.json.facebook_page_id }}/photos",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"url\": \"{{ $json.source_url }}\",\n  \"message\": \"{{ $('Merge AI Content & Build Caption').item.json.fullCaption }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1472,
+        2688
+      ],
+      "id": "66b55512-5d1e-448e-94d7-7431cd70df3b",
+      "name": "Facebook - Post Photo"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{ $('Merge AI Content & Build Caption').item.json.instagram_user_id }}/media",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"image_url\": \"{{ $json.source_url }}\",\n  \"caption\": \"{{ $('Merge AI Content & Build Caption').item.json.fullCaption }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1472,
+        2928
+      ],
+      "id": "9e756815-83e4-4102-8f4e-95455585ae09",
+      "name": "Instagram - Create Media Container"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{ $('Merge AI Content & Build Caption').item.json.instagram_user_id }}/media_publish",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"creation_id\": \"{{ $json.id }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1200,
+        2928
+      ],
+      "id": "27eb792b-ebfe-41f5-9744-22e768bb5a34",
+      "name": "Instagram - Publish"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://mybusiness.googleapis.com/v4/{{ $('Merge AI Content & Build Caption').item.json.gmb_account_id }}/{{ $('Merge AI Content & Build Caption').item.json.gmb_location_id }}/localPosts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"languageCode\": \"en\",\n  \"summary\": \"{{ $('Merge AI Content & Build Caption').item.json.fullCaption }}\",\n  \"media\": [\n    {\n      \"mediaFormat\": \"PHOTO\",\n      \"sourceUrl\": \"{{ $json.source_url }}\"\n    }\n  ],\n  \"topicType\": \"STANDARD\",\n  \"callToAction\": {\n    \"actionType\": \"LEARN_MORE\",\n    \"url\": \"https://vaidikgreens.com\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1472,
+        3168
+      ],
+      "id": "48279bda-b2de-4736-85b9-9be5ec2e5851",
+      "name": "Google My Business - Create Post"
+    },
+    {
+      "parameters": {
+        "content": "## 🌿 Vaidik Greens — Social Media Image Publisher\n\n**Workflow Flow:**\n1. Upload image via form (title & description are optional)\n2. Image is **resized & converted to WebP** (under 150 KB) using Edit Image node\n3. **OpenAI GPT-4o** analyzes the image and generates:\n   - SEO-friendly title\n   - Engaging caption with emojis\n   - Relevant hashtags\n   - Alt text for accessibility\n4. Image is uploaded to **WordPress** media library\n5. Post is published to **Facebook**, **Instagram**, and **Google My Business**\n\n---\n\n### ⚙️ Setup Required\n\n**1. Edit the \"Set Config\" node** with your actual:\n- WordPress URL (already set to vaidikgreens.com)\n- Facebook Page ID\n- Instagram Business User ID\n- Google My Business Account & Location IDs\n\n**2. Create Credentials in n8n:**\n- **OpenAI API** — Add your OpenAI API key\n- **WordPress Basic Auth** — Username + Application Password\n- **Facebook Page Token** (HTTP Header Auth) — `Authorization: Bearer TOKEN`\n- **Google OAuth2** — Client ID + Secret\n\n**3. Instagram** uses the same Facebook/Meta token.\n\n**4. No environment variables needed!** ✅\nThis version uses built-in n8n nodes (no sharp dependency).\n\n### 🔗 Reference URLs (for finding IDs)\n\n**Facebook Page:** https://www.facebook.com/vaidikgreensresort\n**Instagram:** https://www.instagram.com/vaidikgreensresort2025/\n**Google Reviews:** https://www.google.com/travel/hotels/entity/CgoI1evv1KKZidh1EAE/reviews",
+        "height": 640,
+        "width": 530,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -4000,
+        2640
+      ],
+      "id": "3161091e-76ee-440a-87d9-d3239e5cf940",
+      "name": "Sticky Note - Instructions"
+    },
+    {
+      "parameters": {
+        "content": "### 🖼️ Image Processing\nResizes to max 1200px & converts to WebP.\nUses built-in Edit Image node — no external modules needed!",
+        "height": 110,
+        "width": 300,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3024,
+        3136
+      ],
+      "id": "857b0dfd-35bf-424f-8dc9-16953650fd80",
+      "name": "Sticky Note - Image Processing"
+    },
+    {
+      "parameters": {
+        "content": "### 🤖 AI Content Generation\nGPT-4o Vision analyzes the image and creates:\n✅ Catchy title  ✅ Engaging caption\n✅ Hashtags  ✅ Alt text\nAll tailored for Vaidik Greens brand!",
+        "height": 130,
+        "width": 340,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2704,
+        3120
+      ],
+      "id": "45098083-00ce-4288-97b4-d7495aeca335",
+      "name": "Sticky Note - AI"
+    },
+    {
+      "parameters": {
+        "content": "### 🌐 WordPress + Social Media\nUploads to WP Media Library with proper title, alt text, caption.\nThen publishes to FB, IG, and GMB in parallel using the public image URL.",
+        "height": 120,
+        "width": 420,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2176,
+        3120
+      ],
+      "id": "3efb27c8-dc81-43be-97a7-d7a8e0704bcd",
+      "name": "Sticky Note - WordPress & Publishing"
+    },
+    {
+      "parameters": {
+        "content": "### 📱 Social Media Publishing\nPosts to **Facebook Page**, **Instagram Business**, and **Google My Business** in parallel.\nInsta uses 2-step process (container → publish).\nAll posts include AI caption + hashtags + CTA link.",
+        "height": 140,
+        "width": 420,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1536,
+        2496
+      ],
+      "id": "22bae64f-9881-45ee-897d-071156076dbf",
+      "name": "Sticky Note - Social Media"
+    }
+  ],
+  "connections": {
+    "Image Upload Form": {
+      "main": [
+        [
+          {
+            "node": "Set Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Config": {
+      "main": [
+        [
+          {
+            "node": "Resize & Convert to WebP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resize & Convert to WebP": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Generate Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Generate Content": {
+      "main": [
+        [
+          {
+            "node": "Merge AI Content & Build Caption",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge AI Content & Build Caption": {
+      "main": [
+        [
+          {
+            "node": "WordPress - Upload Media",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WordPress - Upload Media": {
+      "main": [
+        [
+          {
+            "node": "WordPress - Set Title & Caption",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WordPress - Set Title & Caption": {
+      "main": [
+        [
+          {
+            "node": "Facebook - Post Photo",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Instagram - Create Media Container",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google My Business - Create Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Instagram - Create Media Container": {
+      "main": [
+        [
+          {
+            "node": "Instagram - Publish",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "2ef9b899-6766-4bcf-a93f-eab9500a12ef",
+  "activeVersionId": null,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-02-17T12:52:16.435Z",
+      "createdAt": "2026-02-17T12:52:16.435Z",
+      "role": "workflow:owner",
+      "workflowId": "nzLB9RREoqnbQUrimlnZ7",
+      "projectId": "Wp4nC2HsKCQjylkb"
+    }
+  ],
+  "activeVersion": null,
+  "tags": []
+}
