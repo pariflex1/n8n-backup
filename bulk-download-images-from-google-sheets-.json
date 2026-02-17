@@ -1,0 +1,164 @@
+{
+  "updatedAt": "2026-02-17T07:49:49.000Z",
+  "createdAt": "2026-02-17T07:18:36.758Z",
+  "id": "L4YXg_hT3HpA28pqtxkO4",
+  "name": "Bulk Download Images from Google Sheets",
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "0b7b0e85-f72e-4745-85d5-6249ff67537e",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY",
+          "mode": "list",
+          "cachedResultName": "RVMC Chatbot",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 746271429,
+          "mode": "list",
+          "cachedResultName": "Imges",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit#gid=746271429"
+        },
+        "options": {}
+      },
+      "id": "38a7f676-cce2-4880-9e7b-a62d1843137b",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        -160,
+        -96
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uJqb7ndcbLq8v9jO",
+          "name": "Dhanistadigital"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "return items.map(item => {\n  let cell = item.json.Image || item.json.image || Object.values(item.json)[1];\n\n  let url = cell;\n\n  if (cell && cell.startsWith(\"=IMAGE\")) {\n    const match = cell.match(/\"(.*?)\"/);\n    if (match) url = match[1];\n  }\n\n  return {\n    json: {\n      name: item.json.Name || item.json.name || \"image\",\n      url: url\n    }\n  };\n});"
+      },
+      "id": "7672fe82-aaba-439d-bf6e-51e808db8cc6",
+      "name": "Extract Image URL",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        64,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$json[\"url\"]}}",
+        "options": {}
+      },
+      "id": "ba66ec0b-b7f6-4b97-8c20-86c50cc8a049",
+      "name": "Download Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        288,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "=/data/images/{{$json[\"name\"]}}.jpg",
+        "options": {}
+      },
+      "id": "0f147925-f292-4209-81d7-d6c0c87ffb4b",
+      "name": "Save Image",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        496,
+        -96
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Extract Image URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Image URL": {
+      "main": [
+        [
+          {
+            "node": "Download Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Image": {
+      "main": [
+        [
+          {
+            "node": "Save Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "af3a9568-6b91-4dc3-a94e-10dbb9cf89b7",
+  "activeVersionId": null,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-02-17T07:18:36.762Z",
+      "createdAt": "2026-02-17T07:18:36.762Z",
+      "role": "workflow:owner",
+      "workflowId": "L4YXg_hT3HpA28pqtxkO4",
+      "projectId": "Wp4nC2HsKCQjylkb"
+    }
+  ],
+  "activeVersion": null,
+  "tags": []
+}
