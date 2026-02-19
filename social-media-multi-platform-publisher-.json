@@ -1,0 +1,232 @@
+{
+  "updatedAt": "2026-02-19T12:43:26.897Z",
+  "createdAt": "2026-02-19T10:36:45.450Z",
+  "id": "KY4tgxw5qMfroRxuN3QSI",
+  "name": "Social Media Multi-Platform Publisher",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Vaidik",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Image",
+              "fieldType": "file",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Title"
+            },
+            {
+              "fieldLabel": "Details"
+            },
+            {
+              "fieldLabel": "Platform",
+              "fieldType": "checkbox",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Facebook"
+                  },
+                  {
+                    "option": "Instagram"
+                  },
+                  {
+                    "option": "Google"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {
+          "buttonLabel": "Submit"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -1536,
+        -192
+      ],
+      "id": "7a3c17ec-5f98-4013-aa94-8d2292a30a7c",
+      "name": "On form submission",
+      "webhookId": "2eb7c145-84a4-4688-b72b-3ee029b2892e"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "text": "=You are a social media marketing expert for \"Vaidik Greens\" — a premium luxury resort and cottage property located in India. The resort offers: luxury cottages & farmhouses, world-class dining, spa & wellness center, swimming pools & water features, pond with boating, disco & pub, VIP lounges, conference & meeting halls, wedding celebration venues, entertainment & nightlife, medical services, family-friendly amenities, nature-friendly sustainable living, and transport facilities.\n\nAnalyze this image and generate a social media post for Vaidik Greens.\n\nReturn your response in this EXACT JSON format (no markdown, no code blocks):\n{\n  \"title\": \"A short, catchy SEO-friendly title (max 60 chars)\",\n  \"description\": \"An engaging social media caption (150-250 chars) with relevant emojis. Include a call-to-action. Mention Vaidik Greens naturally.\",\n  \"hashtags\": \"#VaidikGreens #LuxuryResort and 5-8 more relevant hashtags\",\n  \"alt_text\": \"A brief, accessible description of the image for SEO (max 125 chars)\"\n}\nGenerate title on: {{ $json.Title }}\nGenerate description on: {{ $json.Details }}\n",
+        "inputType": "base64",
+        "binaryPropertyName": "Image",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        -1312,
+        -192
+      ],
+      "id": "caa6a322-36d1-4467-b805-e33a02ddb14a",
+      "name": "Analyze image",
+      "credentials": {
+        "openAiApi": {
+          "id": "oeU3bDddqKmVY1Rx",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Access the first item's JSON data\nconst item = $input.first().json;\n\n// 2. Get your field (replace 'your_webhook_field' with your actual field name)\n// Adding || \"\" ensures that if the field is missing, it stays an empty string instead of 'undefined'\nconst rawData = item.your_webhook_field || \"\"; \n\n// 3. Only run replace if rawData actually has content\nif (rawData) {\n    const cleanData = rawData.replace(/^data:image\\/\\w+;base64,/, \"\");\n    return {\n        json: {\n            base64Data: cleanData,\n            status: \"success\"\n        }\n    };\n} else {\n    // Return an error or skip if data is missing\n    return {\n        json: {\n            error: \"No image data found in input\",\n            received_fields: Object.keys(item)\n        }\n    };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1536,
+        -416
+      ],
+      "id": "7d8f08b0-0140-4a7b-aee9-ae3ab799a841",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://vaidikgreens.com/wp-json/wp/v2/media",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Disposition",
+              "value": "attachment; filename=\"gallery.jpg\""
+            },
+            {
+              "name": "Content-Type",
+              "value": "image/jpeg"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "=Image",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -1088,
+        -192
+      ],
+      "id": "414953b6-7980-4e8a-84d9-ed2fdb680fce",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "sRZ7CngipZNhiFko",
+          "name": "Vaidik image"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://vaidikgreens.com/wp-json/wp/v2/posts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"{{ JSON.parse($('Analyze image').item.json['0'].content[0].text).title }}\",\n  \"content\": \"Greens\",\n  \"status\": \"publish\",\n  \"categories\": [15],\n  \"author\": 2,\n  \"featured_media\": {{ $json.id }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -864,
+        -192
+      ],
+      "id": "a4f58014-4514-4ee1-b5ab-69d15b2a026e",
+      "name": "HTTP Request1",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "sRZ7CngipZNhiFko",
+          "name": "Vaidik image"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Analyze image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze image": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "8e11784c-a59e-408e-b01e-2c6c6280e0e9",
+  "activeVersionId": null,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-02-19T10:36:45.457Z",
+      "createdAt": "2026-02-19T10:36:45.457Z",
+      "role": "workflow:owner",
+      "workflowId": "KY4tgxw5qMfroRxuN3QSI",
+      "projectId": "Wp4nC2HsKCQjylkb"
+    }
+  ],
+  "activeVersion": null,
+  "tags": []
+}
