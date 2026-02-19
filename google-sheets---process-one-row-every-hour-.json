@@ -594,7 +594,13 @@
     "timeSavedMode": "fixed",
     "callerPolicy": "workflowsFromSameOwner"
   },
-  "staticData": null,
+  "staticData": {
+    "node:Run Every Hour": {
+      "recurrenceRules": [
+        22
+      ]
+    }
+  },
   "meta": {
     "templateCredsSetupCompleted": true
   },
