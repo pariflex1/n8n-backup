@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-20T14:45:17.266Z",
+  "updatedAt": "2026-02-21T12:53:37.777Z",
   "createdAt": "2026-02-19T10:36:45.450Z",
   "id": "KY4tgxw5qMfroRxuN3QSI",
   "name": "Social Media Multi-Platform Publisher",
@@ -8,57 +8,8 @@
   "nodes": [
     {
       "parameters": {
-        "formTitle": "Vaidik",
-        "formFields": {
-          "values": [
-            {
-              "fieldLabel": "Title"
-            },
-            {
-              "fieldLabel": "Details"
-            },
-            {
-              "fieldLabel": "Platform",
-              "fieldType": "checkbox",
-              "fieldOptions": {
-                "values": [
-                  {
-                    "option": "Facebook"
-                  },
-                  {
-                    "option": "Instagram"
-                  },
-                  {
-                    "option": "Google"
-                  }
-                ]
-              }
-            },
-            {
-              "fieldLabel": "data",
-              "fieldType": "file",
-              "requiredField": true
-            }
-          ]
-        },
-        "options": {
-          "buttonLabel": "Submit"
-        }
-      },
-      "type": "n8n-nodes-base.formTrigger",
-      "typeVersion": 2.5,
-      "position": [
-        -1664,
-        -208
-      ],
-      "id": "7a3c17ec-5f98-4013-aa94-8d2292a30a7c",
-      "name": "On form submission",
-      "webhookId": "2eb7c145-84a4-4688-b72b-3ee029b2892e"
-    },
-    {
-      "parameters": {
         "method": "POST",
-        "url": "https://vaidikgreens.com/wp-json/wp/v2/media",
+        "url": "https://thecurveconsultants.com/wp-json/wp/v2/media",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBasicAuth",
         "sendHeaders": true,
@@ -66,7 +17,7 @@
           "parameters": [
             {
               "name": "Content-Disposition",
-              "value": "=attachment; filename=\"{{ $json.data[0].filename }}.jpg\""
+              "value": "=attachment; filename=\"thecurve-{{ $now }}.jpg\""
             },
             {
               "name": "Content-Type",
@@ -76,7 +27,7 @@
         },
         "sendBody": true,
         "contentType": "binaryData",
-        "inputDataFieldName": "data",
+        "inputDataFieldName": "image",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -89,41 +40,15 @@
       "name": "HTTP Request",
       "credentials": {
         "httpBasicAuth": {
-          "id": "sRZ7CngipZNhiFko",
-          "name": "Vaidik image"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://vaidikgreens.com/wp-json/wp/v2/posts",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBasicAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"title\": \"{{ JSON.parse($json.output).title }}\",\n  \"content\": \"{{ JSON.parse($json.output).description }} <br> {{ JSON.parse($json.output).hashtags }}\",\n  \"status\": \"publish\",\n\"author\": 2, \n  \"categories\": [15],\n  \"featured_media\": \"{{ $('HTTP Request').item.json.id }}\",\n  \"meta\": {\n    \"alt_text\": \"{{ JSON.parse($json.output).alt_text }}\"\n  }\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        -864,
-        -112
-      ],
-      "id": "a4f58014-4514-4ee1-b5ab-69d15b2a026e",
-      "name": "HTTP Request1",
-      "credentials": {
-        "httpBasicAuth": {
-          "id": "sRZ7CngipZNhiFko",
-          "name": "Vaidik image"
+          "id": "iOfaLO027n6wIKcY",
+          "name": "The Curve"
         }
       }
     },
     {
       "parameters": {
         "promptType": "define",
-        "text": "=You are a social media marketing expert for \"Vaidik Greens\" — a premium luxury resort and cottage property located in India. The resort offers: luxury cottages & farmhouses, world-class dining, spa & wellness center, swimming pools & water features, pond with boating, disco & pub, VIP lounges, conference & meeting halls, wedding celebration venues, entertainment & nightlife, medical services, family-friendly amenities, nature-friendly sustainable living, and transport facilities.\n\nAnalyze this image and generate a social media post for Vaidik Greens.\n\nReturn your response in this EXACT JSON format (no markdown, no code blocks):\n{\n  \"title\": \"A short, catchy SEO-friendly title (max 60 chars)\",\n  \"description\": \"An engaging social media caption (150-250 chars) with relevant emojis. Include a call-to-action. Mention Vaidik Greens naturally.\",\n  \"hashtags\": \"#VaidikGreens #LuxuryResort and 5-8 more relevant hashtags\",\n  \"alt_text\": \"A brief, accessible description of the image for SEO (max 125 chars)\",\n\"caption\": \"A short, catchy SEO-friendly caption (max 60 chars)\"\n}\nGenerate title on: {{ $('On form submission').item.json.Title }}\nGenerate description on: {{ $('On form submission').item.json.Details }}\n",
+        "text": "=You are a social media marketing expert for \"Vaidik Greens\" — a premium luxury resort and cottage property located in India. The resort offers: luxury cottages & farmhouses, world-class dining, spa & wellness center, swimming pools & water features, pond with boating, disco & pub, VIP lounges, conference & meeting halls, wedding celebration venues, entertainment & nightlife, medical services, family-friendly amenities, nature-friendly sustainable living, and transport facilities.\n\nAnalyze this image and generate a social media post for Vaidik Greens.\n\nReturn your response in this EXACT JSON format (no markdown, no code blocks):\n{\n  \"title\": \"A short, catchy SEO-friendly title (max 60 chars)\",\n  \"description\": \"An engaging social media caption (150-250 chars) with relevant emojis. Include a call-to-action. Mention Vaidik Greens naturally.\",\n  \"hashtags\": \"#VaidikGreens #LuxuryResort and 5-8 more relevant hashtags\",\n  \"alt_text\": \"A brief, accessible description of the image for SEO (max 125 chars)\",\n\"caption\": \"A short, catchy SEO-friendly caption (max 60 chars)\"\n}\n\nthis is title refrence: {{ $('Webhook1').item.json.body.title }} \nthis is title description: {{ $('Webhook1').item.json.body.description }}",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -149,8 +74,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        -1144,
-        16
+        -1296,
+        0
       ],
       "id": "9bfeb5cb-14c7-4e02-933a-7bf7cb225504",
       "name": "OpenAI Chat Model",
@@ -163,8 +88,172 @@
     },
     {
       "parameters": {
+        "httpMethod": "POST",
+        "path": "vaidik",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1680,
+        -208
+      ],
+      "id": "c6bb2765-c2c4-4471-8108-f84d4976e196",
+      "name": "Webhook1",
+      "webhookId": "e020f35b-b702-4089-984f-cdf0765024b6"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Webhook1').item.json.body.platforms }}",
+                    "rightValue": "Facebook",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "6bc7e4d7-06b8-41b6-af11-d6a2d84eca8e"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Facebook"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "69355307-c95c-43de-9d9b-e54b915ac001",
+                    "leftValue": "={{ $('Webhook1').item.json.body.platforms }}",
+                    "rightValue": "Instagram",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Instagram"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "dd7885ea-4d5e-464c-8b08-2e0919004e58",
+                    "leftValue": "={{ $('Webhook1').item.json.body.platforms }}",
+                    "rightValue": "Google Business",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Google "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -592,
+        128
+      ],
+      "id": "620282ea-bb9b-4715-bd77-0504d1c11f6b",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v25.0/695388076981882/feed",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "link",
+              "value": "https://vaidikgreens.com/greener-views-taking-shape-at-vaidik-greens/"
+            },
+            {
+              "name": "message",
+              "value": "New post: Post title"
+            },
+            {
+              "name": "access_token",
+              "value": "EAAeb30iya3kBQ99jVeykXIH2F8nEKq77AJlVhpwk6uE6OgJaSCAdPAoBPD5zhWY5475UZBupE0IMFzxPXO7zxEetDWjzTZAvj3ZBrdCeK3c2JyEWi4ZCa4x7T8BtQyhhCQtxxp21L6eGY5iQGe9VMhYzVSUo6MZAbZCsZCbG7x88ECIRKZA4eZBLi2AWSlSMr9GZBgyKbVgLGJZC5PrV58G"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -688,
+        -64
+      ],
+      "id": "fc075544-50c5-4f9e-a777-27bd0e80fedf",
+      "name": "HTTP Request3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://thecurveconsultants.com/wp-json/wp/v2/posts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"{{ JSON.parse($json.output).title }}\",\n  \"content\": \"{{ JSON.parse($json.output).description }} <br> {{ JSON.parse($json.output).hashtags }}\",\n  \"status\": \"publish\",\n\"author\": 2, \n  \"categories\": [30],\n  \"featured_media\": \"{{ $('HTTP Request').item.json.id }}\",\n  \"meta\": {\n    \"alt_text\": \"{{ JSON.parse($json.output).alt_text }}\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -864,
+        -208
+      ],
+      "id": "a4f58014-4514-4ee1-b5ab-69d15b2a026e",
+      "name": "Post",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "iOfaLO027n6wIKcY",
+          "name": "The Curve"
+        }
+      }
+    },
+    {
+      "parameters": {
         "method": "PATCH",
-        "url": "=https://vaidikgreens.com/wp-json/wp/v2/media/{{ $('HTTP Request').item.json.id }}",
+        "url": "=https://thecurveconsultants.com/wp-json/wp/v2/media/{{ $('HTTP Request').item.json.id }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBasicAuth",
         "sendHeaders": true,
@@ -185,30 +274,19 @@
       "typeVersion": 4.4,
       "position": [
         -864,
-        -304
+        -352
       ],
       "id": "0a7ad3ee-d53f-4a12-8034-aa789adc5012",
-      "name": "HTTP Request2",
+      "name": "Image",
       "credentials": {
         "httpBasicAuth": {
-          "id": "sRZ7CngipZNhiFko",
-          "name": "Vaidik image"
+          "id": "iOfaLO027n6wIKcY",
+          "name": "The Curve"
         }
       }
     }
   ],
   "connections": {
-    "On form submission": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "HTTP Request": {
       "main": [
         [
@@ -235,16 +313,37 @@
       "main": [
         [
           {
-            "node": "HTTP Request1",
+            "node": "Post",
             "type": "main",
             "index": 0
           },
           {
-            "node": "HTTP Request2",
+            "node": "Image",
             "type": "main",
             "index": 0
           }
         ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        []
+      ]
+    },
+    "Post": {
+      "main": [
+        []
       ]
     }
   },
@@ -259,8 +358,8 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "70680e1b-2356-4e6f-a124-a75953613964",
-  "activeVersionId": "c3bf2ce5-0e5e-43fa-93e1-3fc7f2ec02e8",
+  "versionId": "c636b39e-f586-4a97-bd7a-e2d2eb15fbf1",
+  "activeVersionId": "2743c879-1fd6-49fc-a000-23d4b00d4be4",
   "triggerCount": 1,
   "shared": [
     {
@@ -272,60 +371,11 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-02-20T13:10:02.000Z",
-    "createdAt": "2026-02-20T13:08:13.346Z",
-    "versionId": "c3bf2ce5-0e5e-43fa-93e1-3fc7f2ec02e8",
+    "updatedAt": "2026-02-21T07:50:16.000Z",
+    "createdAt": "2026-02-21T07:50:09.900Z",
+    "versionId": "2743c879-1fd6-49fc-a000-23d4b00d4be4",
     "workflowId": "KY4tgxw5qMfroRxuN3QSI",
     "nodes": [
-      {
-        "parameters": {
-          "formTitle": "Vaidik",
-          "formFields": {
-            "values": [
-              {
-                "fieldLabel": "Title"
-              },
-              {
-                "fieldLabel": "Details"
-              },
-              {
-                "fieldLabel": "Platform",
-                "fieldType": "checkbox",
-                "fieldOptions": {
-                  "values": [
-                    {
-                      "option": "Facebook"
-                    },
-                    {
-                      "option": "Instagram"
-                    },
-                    {
-                      "option": "Google"
-                    }
-                  ]
-                }
-              },
-              {
-                "fieldLabel": "data",
-                "fieldType": "file",
-                "requiredField": true
-              }
-            ]
-          },
-          "options": {
-            "buttonLabel": "Submit"
-          }
-        },
-        "type": "n8n-nodes-base.formTrigger",
-        "typeVersion": 2.5,
-        "position": [
-          -1664,
-          -208
-        ],
-        "id": "7a3c17ec-5f98-4013-aa94-8d2292a30a7c",
-        "name": "On form submission",
-        "webhookId": "2eb7c145-84a4-4688-b72b-3ee029b2892e"
-      },
       {
         "parameters": {
           "method": "POST",
@@ -337,7 +387,7 @@
             "parameters": [
               {
                 "name": "Content-Disposition",
-                "value": "=attachment; filename=\"{{ $json.data[0].filename }}.jpg\""
+                "value": "=attachment; filename=\"vaidik-{{ $now }}.jpg\""
               },
               {
                 "name": "Content-Type",
@@ -347,7 +397,7 @@
           },
           "sendBody": true,
           "contentType": "binaryData",
-          "inputDataFieldName": "data",
+          "inputDataFieldName": "image",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -394,7 +444,7 @@
       {
         "parameters": {
           "promptType": "define",
-          "text": "=You are a social media marketing expert for \"Vaidik Greens\" — a premium luxury resort and cottage property located in India. The resort offers: luxury cottages & farmhouses, world-class dining, spa & wellness center, swimming pools & water features, pond with boating, disco & pub, VIP lounges, conference & meeting halls, wedding celebration venues, entertainment & nightlife, medical services, family-friendly amenities, nature-friendly sustainable living, and transport facilities.\n\nAnalyze this image and generate a social media post for Vaidik Greens.\n\nReturn your response in this EXACT JSON format (no markdown, no code blocks):\n{\n  \"title\": \"A short, catchy SEO-friendly title (max 60 chars)\",\n  \"description\": \"An engaging social media caption (150-250 chars) with relevant emojis. Include a call-to-action. Mention Vaidik Greens naturally.\",\n  \"hashtags\": \"#VaidikGreens #LuxuryResort and 5-8 more relevant hashtags\",\n  \"alt_text\": \"A brief, accessible description of the image for SEO (max 125 chars)\",\n\"caption\": \"A short, catchy SEO-friendly caption (max 60 chars)\"\n}\nGenerate title on: {{ $('On form submission').item.json.Title }}\nGenerate description on: {{ $('On form submission').item.json.Details }}\n",
+          "text": "=You are a social media marketing expert for \"Vaidik Greens\" — a premium luxury resort and cottage property located in India. The resort offers: luxury cottages & farmhouses, world-class dining, spa & wellness center, swimming pools & water features, pond with boating, disco & pub, VIP lounges, conference & meeting halls, wedding celebration venues, entertainment & nightlife, medical services, family-friendly amenities, nature-friendly sustainable living, and transport facilities.\n\nAnalyze this image and generate a social media post for Vaidik Greens.\n\nReturn your response in this EXACT JSON format (no markdown, no code blocks):\n{\n  \"title\": \"A short, catchy SEO-friendly title (max 60 chars)\",\n  \"description\": \"An engaging social media caption (150-250 chars) with relevant emojis. Include a call-to-action. Mention Vaidik Greens naturally.\",\n  \"hashtags\": \"#VaidikGreens #LuxuryResort and 5-8 more relevant hashtags\",\n  \"alt_text\": \"A brief, accessible description of the image for SEO (max 125 chars)\",\n\"caption\": \"A short, catchy SEO-friendly caption (max 60 chars)\"\n}\nGenerate title on: {{ $('Webhook1').item.json.body.title }}\nGenerate description on: {{ $('Webhook1').item.json.body.description }}",
           "options": {}
         },
         "type": "@n8n/n8n-nodes-langchain.agent",
@@ -466,20 +516,25 @@
             "name": "Vaidik image"
           }
         }
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "vaidik",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -1680,
+          -208
+        ],
+        "id": "c6bb2765-c2c4-4471-8108-f84d4976e196",
+        "name": "Webhook1",
+        "webhookId": "e020f35b-b702-4089-984f-cdf0765024b6"
       }
     ],
     "connections": {
-      "On form submission": {
-        "main": [
-          [
-            {
-              "node": "HTTP Request",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "HTTP Request": {
         "main": [
           [
@@ -517,10 +572,21 @@
             }
           ]
         ]
+      },
+      "Webhook1": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Brij Mohan",
-    "name": "Version c3bf2ce5",
+    "name": "Version 2743c879",
     "description": "",
     "autosaved": true
   },
