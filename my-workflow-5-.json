@@ -1,0 +1,94 @@
+{
+  "updatedAt": "2026-02-26T17:36:58.000Z",
+  "createdAt": "2026-02-26T17:34:26.987Z",
+  "id": "OtLNCLAkSUqVXx8D",
+  "name": "My workflow 5",
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "d592903f-1ff7-4966-b373-5748152bdc73",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "review",
+        "operation": "reply",
+        "account": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "location": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "review": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.googleBusinessProfile",
+      "typeVersion": 1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "ce10cf59-403d-467d-a776-ccdf68c73ced",
+      "name": "Reply to review",
+      "credentials": {
+        "googleBusinessProfileOAuth2Api": {
+          "id": "c0iLNauuaUYtxw62",
+          "name": "Google Business Profile account Vaidik"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Reply to review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "2b827b9b-071d-4381-bad5-62589c1ddead",
+  "activeVersionId": null,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-02-26T17:34:26.992Z",
+      "createdAt": "2026-02-26T17:34:26.992Z",
+      "role": "workflow:owner",
+      "workflowId": "OtLNCLAkSUqVXx8D",
+      "projectId": "Wp4nC2HsKCQjylkb"
+    }
+  ],
+  "activeVersion": null,
+  "tags": []
+}
