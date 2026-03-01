@@ -1,0 +1,408 @@
+{
+  "updatedAt": "2026-02-26T17:37:22.000Z",
+  "createdAt": "2026-02-26T11:23:46.810Z",
+  "id": "DYQ1lx0C41iGtUhF",
+  "name": "Vaidik Automation (Fixed)",
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "vaidik",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        1072,
+        2836
+      ],
+      "id": "477582fb-c7dd-430e-80c6-9db42fc7ef36",
+      "name": "Webhook",
+      "webhookId": "e020f35b-b702-4089-984f-cdf0765024b6"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://vaidikgreens.com/wp-json/wp/v2/media",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Disposition",
+              "value": "=attachment; filename=\"vaidik-{{ $now }}.jpg\""
+            },
+            {
+              "name": "Content-Type",
+              "value": "image/jpeg"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "image",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1296,
+        2836
+      ],
+      "id": "782dc91b-2f4b-4e5d-86e9-a2f2ff8bd2b4",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "sRZ7CngipZNhiFko",
+          "name": "Vaidik image"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a social media marketing expert for “Vaidik Greens” — a premium luxury resort, farmhouse and wellness lifestyle destination in India. The property offers luxury cottages and farmhouses, gated farmhouse plots, world-class dining, spa and wellness center, swimming pools and water features, pond with boating, clubhouse, entertainment and nightlife spaces, wedding and celebration venues, conference and meeting facilities, family-friendly amenities, nature-centric living and hospitality services.\n\nAnalyze the provided image and generate SEO-optimized social media and blog content for Vaidik Greens. The image represents resort amenities, farmhouse lifestyle, hospitality features, leisure experiences or luxury living environment.\n\nFollow these strict rules:\n\nTitle must be SEO-friendly and professional (no emojis)\n\nContent must match Vaidik Greens website positioning\n\nFocus on luxury resort lifestyle, farmhouse living, hospitality, wellness or leisure amenities\n\nTone: premium, aspirational, lifestyle, hospitality\n\nKeywords: luxury resort, farmhouse living, wellness retreat, gated farmhouse plots, premium lifestyle, nature living, hospitality, leisure destination\n\nDo not mention construction consultancy, healthcare or unrelated industries\n\nDescription may include minimal lifestyle emojis if suitable\n\nOptimize for LinkedIn, Facebook, Instagram and WordPress SEO\n\nExcerpt must be concise SEO summary of the post\n\nReturn your response in this EXACT JSON format (no markdown, no code blocks):\n\n{\n\"title\": \"SEO-optimized premium title (max 60 chars, no emojis)\",\n\"description\": \"150-250 char SEO caption about luxury resort, farmhouse or lifestyle amenities with CTA mentioning Vaidik Greens\",\n\"excerpt\": \"Short 120-160 char SEO summary of the post for WordPress excerpt\",\n\"hashtags\": \"#VaidikGreens #LuxuryResort #FarmhouseLiving #WellnessRetreat #PremiumLifestyle #NatureLiving #LuxuryHospitality\",\n\"alt_text\": \"SEO description of resort, farmhouse or lifestyle amenities shown in image (max 125 chars)\",\n\"caption\": \"Short SEO caption about luxury living or resort lifestyle (max 60 chars)\"\n}\n\nthis is title refrence: {{ $('Webhook').item.json.body.title }}\nthis is title description: {{ $('Webhook').item.json.body.description }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1520,
+        2532
+      ],
+      "id": "d060c6fd-d52d-45c9-8b58-d5e75570e1b0",
+      "name": "AI Agent",
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1592,
+        2756
+      ],
+      "id": "ea619889-c6f2-479d-86c4-f5d3526c9c84",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "1IcSG8lyD3TFykdY",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://vaidikgreens.com/wp-json/wp/v2/media/{{ $('HTTP Request').item.json.id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"{{ JSON.parse($json.output).title }}\",\n  \"description\": \"{{ JSON.parse($json.output).description }} <br> {{ JSON.parse($json.output).hashtags }}\",\n  \"caption\": \"{{ JSON.parse($json.output).caption }}\",\n  \"featured_media\": {{ $('HTTP Request').item.json.id }},\n  \"alt_text\": \"{{ JSON.parse($json.output).alt_text }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1872,
+        2496
+      ],
+      "id": "77dc8be3-69b7-4c24-aa37-89080ac5fcee",
+      "name": "Image",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "sRZ7CngipZNhiFko",
+          "name": "Vaidik image"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "b781f6b1-de1d-487b-8e00-7aa25742f49b",
+              "leftValue": "={{ $('Webhook').item.json.body.platforms }}",
+              "rightValue": "Facebook",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1872,
+        2688
+      ],
+      "id": "d86588b1-3f26-4ad2-942b-b3e94f0e3c4f",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "c891g7e2-ef2e-598c-9f11-8bb36853g5fb",
+              "leftValue": "={{ $('Webhook').item.json.body.platforms }}",
+              "rightValue": "Instagram",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1872,
+        2880
+      ],
+      "id": "ea78958a-cb91-4158-b3c7-23ab4f4d07fe",
+      "name": "If Instagram"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v25.0/695388076981882/photos",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "url",
+              "value": "={{ $('HTTP Request').item.json.guid.rendered.replace(/\\.webp(\\?.*)?$/, '.jpg') }}"
+            },
+            {
+              "name": "access_token",
+              "value": "EAAXXFyvdXZBsBQZCW7p6C6UuYBZByprvEgKtV5ZC1nEhOBYMPz8zXGdB61BVQX4J7MnXPWql3TGZAaDlOSgmcPmFW6Lhkib7UPebvsM2DAMBlZAauF1Ff7ZB2Yt2ZAqfPyRclKHoMak25ky8EhgJtgOXV6ImTZArUW6NcNhYGuVl0ryrxD6U0i0PvUCHesvPavYzRXZB09L6g9UJW3X5E7LW3AbI0o"
+            },
+            {
+              "name": "caption",
+              "value": "={{ JSON.parse($('AI Agent').item.json.output).title }}\n{{ JSON.parse($('AI Agent').item.json.output).description }}\n{{ JSON.parse($('AI Agent').item.json.output).hashtags }}\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c471921a-f999-4afd-8e00-181e0d5058ef",
+      "name": "Facebook Upload1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        2096,
+        2688
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://mybusiness.googleapis.com/v4/accounts/115640585369855367713/locations/11692384025787498738/media",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"mediaFormat\": \"PHOTO\",\n  \"locationAssociation\": {\n    \"category\": \"COVER\"\n  },\n  \"sourceUrl\": \"{{ $('HTTP Request').item.json.guid.rendered.replace(/\\.webp(\\?.*)?$/, '.jpg') }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1584,
+        2932
+      ],
+      "id": "cd8d8bdb-a5fd-4b59-ace4-9541fe98df0a",
+      "name": "Google",
+      "executeOnce": false,
+      "retryOnFail": false,
+      "credentials": {
+        "oAuth2Api": {
+          "id": "U5XXwG7sDvAKNmNn",
+          "name": "Vaidik"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "node": "17841474629310362",
+        "graphApiVersion": "v25.0",
+        "imageUrl": "={{ $('HTTP Request').item.json.guid.rendered.replace(/\\.webp(\\?.*)?$/, '.jpg') }}",
+        "caption": "={{ JSON.parse($('AI Agent').item.json.output).title }}\n{{ JSON.parse($('AI Agent').item.json.output).description }}\n{{ JSON.parse($('AI Agent').item.json.output).hashtags }}",
+        "additionalFields": {}
+      },
+      "type": "@mookielianhd/n8n-nodes-instagram.instagram",
+      "typeVersion": 1,
+      "position": [
+        2096,
+        2880
+      ],
+      "id": "a7e3a88f-ee4d-4458-b03c-41cdf6fe824f",
+      "name": "Publish",
+      "credentials": {
+        "instagramApi": {
+          "id": "q42uMFs7llTHdY1j",
+          "name": "Vaidik"
+        }
+      },
+      "continueOnFail": true
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Image",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If Instagram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Facebook Upload1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Instagram": {
+      "main": [
+        [
+          {
+            "node": "Publish",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "b2b47579-cb15-4528-aa7d-4387d529d401",
+  "activeVersionId": null,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-02-26T11:23:46.835Z",
+      "createdAt": "2026-02-26T11:23:46.835Z",
+      "role": "workflow:owner",
+      "workflowId": "DYQ1lx0C41iGtUhF",
+      "projectId": "Wp4nC2HsKCQjylkb"
+    }
+  ],
+  "activeVersion": null,
+  "tags": []
+}
