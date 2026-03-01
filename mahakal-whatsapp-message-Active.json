@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-01T07:32:58.492Z",
+  "updatedAt": "2026-03-01T08:32:37.430Z",
   "createdAt": "2026-02-28T16:14:27.029Z",
   "id": "FAFUG7T1BWy5Z1yH",
   "name": "Mahakal Whatsapp message",
@@ -476,6 +476,39 @@
       ],
       "id": "6c9cfcfd-55a6-47da-93da-d1270a4826ff",
       "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v24.0/387521651107625/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer EAAMPjrTPZB3MBQpH7EoTtleOUp6wf2eNkN60sB8y1upUDVktKpjkWES5wZBttG37UwrwBpSmUeFkLk7SUZBcGpOwTiYUa4sBck0HzgARYYWxEhZAIGXTRZCTCAWxVdzZBN8JkAEAWWoVkO9BcnIM8ZAi1KADCdVtutrYaaz3DE4wT0OiZCnez89S9bETYqBcVAZDZD"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"919198433007\",\n  \"type\": \"document\",\n  \"document\": {\n    \"link\": \"https://drive.google.com/uc?export=download&id=1ZcCBzdKu43d6Ftn_YkF936m92Qj1Lpwd\",\n\"filename\": \"mahakal.pdf\"\n  }\n}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -848,
+        464
+      ],
+      "id": "c6edffa8-cacc-4a66-8f7a-6c0f2105ff20",
+      "name": "Broucher"
     }
   ],
   "connections": {
@@ -604,7 +637,7 @@
   "staticData": null,
   "meta": null,
   "pinData": {},
-  "versionId": "b224b8fd-be03-41fb-99c7-051c90477e64",
+  "versionId": "eb7d29f2-3aeb-4aa7-9490-c693602606c3",
   "activeVersionId": "b224b8fd-be03-41fb-99c7-051c90477e64",
   "triggerCount": 1,
   "shared": [
