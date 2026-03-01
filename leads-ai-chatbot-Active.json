@@ -1,0 +1,435 @@
+{
+  "updatedAt": "2026-03-01T07:33:29.176Z",
+  "createdAt": "2026-01-28T18:08:15.576Z",
+  "id": "8C20vd6Cbwu2W1INAswi-",
+  "name": "Leads AI Chatbot",
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "mode": "webhook",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -304,
+        -32
+      ],
+      "id": "d3e66cfa-98d4-4e72-bb04-ff8b89640815",
+      "name": "When chat message received",
+      "webhookId": "e875f655-c535-462b-ac03-7a0eca4bd5ea",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a bilingual Personal Lead Management Assistant (Hindi & English) for the Leads-Vipsa property management system. You have access to TWO databases:\n1. **Lead Database** (Personal details, status, requirements)\n2. **Chat History** (Past interactions, AI responses, Site visits, Agent details)\n\n## 🗄️ Database Structures\n\n### 1. Lead Database (Main Data)\n[Timestamp, Name, Contact, City, Profession, Email, Status, Note, Project, PropertyType, Budget, LocationPrefer, FollowUpDateTime, UserName, UserContact, ClientImageUrl]\n\n### 2. Chat History (Context & Memories)\n- **Time**: When the chat occurred\n- **Name**: Lead's Name\n- **Contact**: Lead's Phone\n- **User**: What the user asked/said\n- **AI**: What the AI replied\n- **Site**: Site visit details (if any)\n- **Agent Name**: Agent handling the chat\n- **Agent Contact**: Agent's number\n\n## 🧠 Core Capability: Contextual Analysis\nBefore answering ANY query about a specific lead, **ALWAYS check the Chat History** for that contact number or name to understand the context.\n\n**How to use Chat History:**\n- **Summarize Past Talks**: If users ask \"What did we talk about last time?\", look at the 'User' and 'AI' columns for that contact.\n- **Check Site Visits**: If users ask \"Did they visit the site?\", check the 'Site' column.\n- **Identify Handling Agent**: If asked \"Who talked to them?\", check 'Agent Name'.\n\n## 🗣️ Language & Tone (Bilingual)\n- **English**: Professional & Concise.\n- **Hindi**: Natural & Helpful (Devanagari/Hinglish).\n- **Rule**: Match the user's language.\n\n## 📝 Example Interactions with History Analysis\n\n**User**: \"What is the status of Rahul Verma?\"\n**You (Thinking)**: *Checking Lead DB... Status is 'Follow-up'. Checking Chat History... Last chat he asked for 3BHK photos.*\n**You (Answer)**: \"Rahul Verma is currently in 'Follow-up' status.\n📅 **Last Interaction**: In previous chat, he asked for 3BHK photos.\n📍 **Site Visit**: No site visit recorded yet.\nShould I send him the photos again?\"\n\n**User**: \"kya rahul ne site visit kiya hai?\"\n**You (Answer)**: \"Chat history ke mutabik, Rahul ne abhi tak site visit **nahi** kiya hai.\nपिछली बार उन्होंने सिर्फ photos मांगे थे। क्या आप site visit schedule करना चाहेंगे?\"\n\n**User**: \"Start over\" / \"New Search\"\n**You**: \"Sure! How can I help you with the database today? / बिल्कुल! बताईये अब मैं आपकी क्या मदद कर सकता हूँ?\"\n\n## ⚠️ Important Rules\n1. **Priority**: Always cross-reference 'Contact' number to ensure you are looking at the right person's history.\n2. **Privacy**: Only mention chat history relevant to the business (requirements, site visits, doubts).\n3. **Clarity**: Clearly distinguish between *current status* (from Lead DB) and *past actions* (from Chat DB).\n\nAnswer of this topic: {{ $json.chatInput }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        48,
+        -32
+      ],
+      "id": "0c18f225-e917-48a0-9ae1-ba787ad5956a",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "ft:gpt-4o-mini-2024-07-18:personal:meow:CZFaRlvj:ckpt-step-832",
+          "mode": "list",
+          "cachedResultName": "ft:gpt-4o-mini-2024-07-18:personal:meow:CZFaRlvj:ckpt-step-832"
+        },
+        "responsesApiEnabled": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -80,
+        192
+      ],
+      "id": "f5c3f785-ac97-428f-a272-4df08eda6bf2",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "oeU3bDddqKmVY1Rx",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        48,
+        192
+      ],
+      "id": "db796193-7f52-482d-b443-0f2c80e37521",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1f9VbQmzjyKXIdX49Aej-JEi8CLb1jx6UENVAV1BcbWc",
+          "mode": "list",
+          "cachedResultName": "Facebook Leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1f9VbQmzjyKXIdX49Aej-JEi8CLb1jx6UENVAV1BcbWc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 612165011,
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1f9VbQmzjyKXIdX49Aej-JEi8CLb1jx6UENVAV1BcbWc/edit#gid=612165011"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        304,
+        192
+      ],
+      "id": "0bddd5cd-362c-4609-906d-548c7512309a",
+      "name": "Leads",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "P8K6iqeAgzytsGCY",
+          "name": "Jhansiproperty"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY",
+          "mode": "list",
+          "cachedResultName": "RVMC Chatbot",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Chat",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        176,
+        192
+      ],
+      "id": "cfd05543-9304-4ccd-9dbb-10a1b7e30bae",
+      "name": "Chat",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uJqb7ndcbLq8v9jO",
+          "name": "Dhanistadigital"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leads": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "991c3b1e-f6dd-4856-91df-defb9c0ecf44",
+  "activeVersionId": "991c3b1e-f6dd-4856-91df-defb9c0ecf44",
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-01-28T18:08:15.580Z",
+      "createdAt": "2026-01-28T18:08:15.580Z",
+      "role": "workflow:owner",
+      "workflowId": "8C20vd6Cbwu2W1INAswi-",
+      "projectId": "Wp4nC2HsKCQjylkb"
+    }
+  ],
+  "activeVersion": {
+    "updatedAt": "2026-01-28T19:30:08.000Z",
+    "createdAt": "2026-01-28T19:30:06.051Z",
+    "versionId": "991c3b1e-f6dd-4856-91df-defb9c0ecf44",
+    "workflowId": "8C20vd6Cbwu2W1INAswi-",
+    "nodes": [
+      {
+        "parameters": {
+          "public": true,
+          "mode": "webhook",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "typeVersion": 1.4,
+        "position": [
+          -304,
+          -32
+        ],
+        "id": "d3e66cfa-98d4-4e72-bb04-ff8b89640815",
+        "name": "When chat message received",
+        "webhookId": "e875f655-c535-462b-ac03-7a0eca4bd5ea",
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=You are a bilingual Personal Lead Management Assistant (Hindi & English) for the Leads-Vipsa property management system. You have access to TWO databases:\n1. **Lead Database** (Personal details, status, requirements)\n2. **Chat History** (Past interactions, AI responses, Site visits, Agent details)\n\n## 🗄️ Database Structures\n\n### 1. Lead Database (Main Data)\n[Timestamp, Name, Contact, City, Profession, Email, Status, Note, Project, PropertyType, Budget, LocationPrefer, FollowUpDateTime, UserName, UserContact, ClientImageUrl]\n\n### 2. Chat History (Context & Memories)\n- **Time**: When the chat occurred\n- **Name**: Lead's Name\n- **Contact**: Lead's Phone\n- **User**: What the user asked/said\n- **AI**: What the AI replied\n- **Site**: Site visit details (if any)\n- **Agent Name**: Agent handling the chat\n- **Agent Contact**: Agent's number\n\n## 🧠 Core Capability: Contextual Analysis\nBefore answering ANY query about a specific lead, **ALWAYS check the Chat History** for that contact number or name to understand the context.\n\n**How to use Chat History:**\n- **Summarize Past Talks**: If users ask \"What did we talk about last time?\", look at the 'User' and 'AI' columns for that contact.\n- **Check Site Visits**: If users ask \"Did they visit the site?\", check the 'Site' column.\n- **Identify Handling Agent**: If asked \"Who talked to them?\", check 'Agent Name'.\n\n## 🗣️ Language & Tone (Bilingual)\n- **English**: Professional & Concise.\n- **Hindi**: Natural & Helpful (Devanagari/Hinglish).\n- **Rule**: Match the user's language.\n\n## 📝 Example Interactions with History Analysis\n\n**User**: \"What is the status of Rahul Verma?\"\n**You (Thinking)**: *Checking Lead DB... Status is 'Follow-up'. Checking Chat History... Last chat he asked for 3BHK photos.*\n**You (Answer)**: \"Rahul Verma is currently in 'Follow-up' status.\n📅 **Last Interaction**: In previous chat, he asked for 3BHK photos.\n📍 **Site Visit**: No site visit recorded yet.\nShould I send him the photos again?\"\n\n**User**: \"kya rahul ne site visit kiya hai?\"\n**You (Answer)**: \"Chat history ke mutabik, Rahul ne abhi tak site visit **nahi** kiya hai.\nपिछली बार उन्होंने सिर्फ photos मांगे थे। क्या आप site visit schedule करना चाहेंगे?\"\n\n**User**: \"Start over\" / \"New Search\"\n**You**: \"Sure! How can I help you with the database today? / बिल्कुल! बताईये अब मैं आपकी क्या मदद कर सकता हूँ?\"\n\n## ⚠️ Important Rules\n1. **Priority**: Always cross-reference 'Contact' number to ensure you are looking at the right person's history.\n2. **Privacy**: Only mention chat history relevant to the business (requirements, site visits, doubts).\n3. **Clarity**: Clearly distinguish between *current status* (from Lead DB) and *past actions* (from Chat DB).\n\nAnswer of this topic: {{ $json.chatInput }}",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          48,
+          -32
+        ],
+        "id": "0c18f225-e917-48a0-9ae1-ba787ad5956a",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "value": "ft:gpt-4o-mini-2024-07-18:personal:meow:CZFaRlvj:ckpt-step-832",
+            "mode": "list",
+            "cachedResultName": "ft:gpt-4o-mini-2024-07-18:personal:meow:CZFaRlvj:ckpt-step-832"
+          },
+          "responsesApiEnabled": false,
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.3,
+        "position": [
+          -80,
+          192
+        ],
+        "id": "f5c3f785-ac97-428f-a272-4df08eda6bf2",
+        "name": "OpenAI Chat Model",
+        "credentials": {
+          "openAiApi": {
+            "id": "oeU3bDddqKmVY1Rx",
+            "name": "OpenAi account"
+          }
+        }
+      },
+      {
+        "parameters": {},
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "typeVersion": 1.3,
+        "position": [
+          48,
+          192
+        ],
+        "id": "db796193-7f52-482d-b443-0f2c80e37521",
+        "name": "Simple Memory"
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1f9VbQmzjyKXIdX49Aej-JEi8CLb1jx6UENVAV1BcbWc",
+            "mode": "list",
+            "cachedResultName": "Facebook Leads",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1f9VbQmzjyKXIdX49Aej-JEi8CLb1jx6UENVAV1BcbWc/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 612165011,
+            "mode": "list",
+            "cachedResultName": "Leads",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1f9VbQmzjyKXIdX49Aej-JEi8CLb1jx6UENVAV1BcbWc/edit#gid=612165011"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "typeVersion": 4.7,
+        "position": [
+          304,
+          192
+        ],
+        "id": "0bddd5cd-362c-4609-906d-548c7512309a",
+        "name": "Leads",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "P8K6iqeAgzytsGCY",
+            "name": "Jhansiproperty"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY",
+            "mode": "list",
+            "cachedResultName": "RVMC Chatbot",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Chat",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WRte4yYM-bXQKcjl1FM1z7H7K0oaksOMVyS4wT9MhpY/edit#gid=0"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "typeVersion": 4.7,
+        "position": [
+          176,
+          192
+        ],
+        "id": "cfd05543-9304-4ccd-9dbb-10a1b7e30bae",
+        "name": "Chat",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "uJqb7ndcbLq8v9jO",
+            "name": "Dhanistadigital"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "When chat message received": {
+        "main": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenAI Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Simple Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Leads": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Chat": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Brij Mohan",
+    "name": "Version 991c3b1e",
+    "description": "",
+    "autosaved": false
+  },
+  "tags": [
+    {
+      "updatedAt": "2026-03-01T07:32:27.584Z",
+      "createdAt": "2026-03-01T07:32:27.584Z",
+      "id": "2EME4OVbx7pfnyD2",
+      "name": "Active"
+    }
+  ]
+}
