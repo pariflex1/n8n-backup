@@ -1,0 +1,80 @@
+{
+  "updatedAt": "2026-02-26T17:22:25.000Z",
+  "createdAt": "2026-02-26T16:51:47.050Z",
+  "id": "O9TSanGDa4eoUffe",
+  "name": "My workflow 4",
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -272,
+        -64
+      ],
+      "id": "156cb632-32fd-46de-b350-410d22de44e5",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v23.0",
+        "node": "695388076981882",
+        "edge": "image",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        -64
+      ],
+      "id": "793cb754-d890-4c2c-8abf-9ce660960cb2",
+      "name": "Facebook Graph API",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "lQUC8YkdYBqNSTtm",
+          "name": "Vaidik"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "01f10a33-a92e-4ab1-9dc9-3aa28a3100a1",
+  "activeVersionId": null,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-02-26T16:51:47.054Z",
+      "createdAt": "2026-02-26T16:51:47.054Z",
+      "role": "workflow:owner",
+      "workflowId": "O9TSanGDa4eoUffe",
+      "projectId": "Wp4nC2HsKCQjylkb"
+    }
+  ],
+  "activeVersion": null,
+  "tags": []
+}
