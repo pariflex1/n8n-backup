@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-01T07:33:40.305Z",
+  "updatedAt": "2026-03-01T07:40:09.702Z",
   "createdAt": "2026-01-16T12:05:43.080Z",
   "id": "xqbIPaCJ0H3qQHc4BaBX0",
   "name": "Backup Github",
@@ -26,8 +26,7 @@
     {
       "parameters": {
         "filters": {
-          "activeWorkflows": true,
-          "tags": "Active"
+          "activeWorkflows": true
         },
         "requestOptions": {}
       },
@@ -415,8 +414,8 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "e81bb2b2-925b-4b76-9f11-d99ced50576f",
-  "activeVersionId": "e81bb2b2-925b-4b76-9f11-d99ced50576f",
+  "versionId": "529f2ab3-c866-4ee3-8204-3a469817659f",
+  "activeVersionId": "529f2ab3-c866-4ee3-8204-3a469817659f",
   "triggerCount": 1,
   "shared": [
     {
@@ -428,9 +427,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-03-01T07:33:42.000Z",
-    "createdAt": "2026-03-01T07:33:40.306Z",
-    "versionId": "e81bb2b2-925b-4b76-9f11-d99ced50576f",
+    "updatedAt": "2026-03-01T07:40:14.000Z",
+    "createdAt": "2026-03-01T07:40:09.704Z",
+    "versionId": "529f2ab3-c866-4ee3-8204-3a469817659f",
     "workflowId": "xqbIPaCJ0H3qQHc4BaBX0",
     "nodes": [
       {
@@ -453,8 +452,7 @@
       {
         "parameters": {
           "filters": {
-            "activeWorkflows": true,
-            "tags": "Active"
+            "activeWorkflows": true
           },
           "requestOptions": {}
         },
@@ -828,7 +826,7 @@
       }
     },
     "authors": "Brij Mohan",
-    "name": "Version e81bb2b2",
+    "name": "Version 529f2ab3",
     "description": "",
     "autosaved": true
   },
