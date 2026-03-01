@@ -1,0 +1,107 @@
+{
+  "updatedAt": "2026-02-26T16:06:27.000Z",
+  "createdAt": "2026-02-26T16:05:19.174Z",
+  "id": "E1F8ezKVp7F3vLQK",
+  "name": "My workflow 3",
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v19.0/17841474629310362/media",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "image_url",
+              "value": "={{$json.source_url}}"
+            },
+            {
+              "name": "caption",
+              "value": "={{$json.caption}}"
+            },
+            {
+              "name": "access_token",
+              "value": "PASTE_IG_ACCESS_TOKEN"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "IG Create Media",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e3114aac-2726-48e2-8361-565b5b930af2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v19.0/17841474629310362/media_publish",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "creation_id",
+              "value": "={{$json.id}}"
+            },
+            {
+              "name": "access_token",
+              "value": "PASTE_IG_ACCESS_TOKEN"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "IG Publish",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        256,
+        0
+      ],
+      "id": "4a726272-a1be-42b8-9e0b-57cdc82038b7"
+    }
+  ],
+  "connections": {
+    "IG Create Media": {
+      "main": [
+        [
+          {
+            "node": "IG Publish",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "ef25e555-74a8-42c8-9813-c5ba5aebb03d",
+  "activeVersionId": null,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-02-26T16:05:19.178Z",
+      "createdAt": "2026-02-26T16:05:19.178Z",
+      "role": "workflow:owner",
+      "workflowId": "E1F8ezKVp7F3vLQK",
+      "projectId": "Wp4nC2HsKCQjylkb"
+    }
+  ],
+  "activeVersion": null,
+  "tags": []
+}
