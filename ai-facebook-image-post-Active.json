@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-01T07:33:22.491Z",
+  "updatedAt": "2026-03-05T06:42:45.315Z",
   "createdAt": "2026-02-19T10:36:45.450Z",
   "id": "KY4tgxw5qMfroRxuN3QSI",
   "name": "AI Facebook Image Post",
@@ -709,6 +709,20 @@
         752
       ],
       "id": "bd2a1a08-c37e-484e-bc36-ca15aebabf7b"
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.awsS3",
+      "typeVersion": 2,
+      "position": [
+        -2464,
+        208
+      ],
+      "id": "63f614e5-96e8-4dfe-a7ff-cd629b1ab72d",
+      "name": "Upload a file"
     }
   ],
   "connections": {
@@ -917,7 +931,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "61f9a0e7-c4d3-4b61-a8e8-1f58de871e90",
+  "versionId": "df7b008a-29a2-4377-9c7e-468061b13e4e",
   "activeVersionId": "61f9a0e7-c4d3-4b61-a8e8-1f58de871e90",
   "triggerCount": 1,
   "shared": [
