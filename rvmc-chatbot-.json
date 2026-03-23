@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-21T15:21:42.432Z",
+  "updatedAt": "2026-03-23T12:37:12.597Z",
   "createdAt": "2026-03-18T09:55:28.265Z",
   "id": "WZ4fkbD3rXl8rHRq",
   "name": "RVMC Chatbot",
@@ -114,7 +114,7 @@
       "typeVersion": 1.1,
       "position": [
         -768,
-        712
+        720
       ],
       "id": "7194f877-5a4c-4d39-955a-89ca15285fd2",
       "name": "Send message and wait for response",
@@ -242,8 +242,8 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        -984,
-        936
+        -992,
+        944
       ],
       "id": "017bffea-44d9-41f6-a373-82b3fbf6de2c",
       "name": "Simple Memory"
@@ -262,8 +262,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        -1112,
-        936
+        -1120,
+        944
       ],
       "id": "e70d0290-d072-4015-a397-9eef4bfdec4e",
       "name": "OpenAI Chat Model",
@@ -333,7 +333,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -1344,
+        -1328,
         512
       ],
       "id": "a04f1304-842e-428c-9372-567b94bf601b",
@@ -351,7 +351,7 @@
       "typeVersion": 1.1,
       "position": [
         -768,
-        312
+        320
       ],
       "id": "b90cd073-08d6-499e-9495-874845a02dba",
       "name": "Send message and wait for response1",
@@ -372,8 +372,8 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        -984,
-        432
+        -1024,
+        400
       ],
       "id": "3863cff1-0002-4bb0-aae1-73cb4f7c0b48",
       "name": "Simple Memory1"
@@ -392,8 +392,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        -1112,
-        432
+        -1136,
+        400
       ],
       "id": "2dab49b1-953b-4abd-91a1-c8617097e5e6",
       "name": "OpenAI Chat Model1",
@@ -433,7 +433,7 @@
       "typeVersion": 3.1,
       "position": [
         -1120,
-        712
+        720
       ],
       "id": "331e040c-09dc-44e5-836e-8fab5a2c76c8",
       "name": "YLS Agent"
@@ -624,8 +624,8 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "mobile": "={{ $('Webhook').item.json.body.Contact }}",
-            "project": "={{ $('Webhook').item.json.body.Site }}"
+            "project": "={{ $('Webhook').item.json.body.Site }}",
+            "number": "={{ $('Webhook').item.json.body.Contact }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -640,12 +640,12 @@
               "removed": false
             },
             {
-              "id": "mobile",
-              "displayName": "mobile",
+              "id": "number",
+              "displayName": "number",
               "required": false,
               "defaultMatch": false,
               "display": true,
-              "type": "number",
+              "type": "string",
               "readOnly": false,
               "removed": false
             }
@@ -658,7 +658,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        -2016,
+        -2048,
         -16
       ],
       "id": "c56a995c-3be5-4c98-89c0-def30f1023cd",
@@ -667,8 +667,8 @@
     {
       "parameters": {
         "phoneNumberId": "639759029221223",
-        "recipientPhoneNumber": "919198433007",
-        "template": "rvmc_|en_US",
+        "recipientPhoneNumber": "={{ $('Insert row').item.json.mobile }}",
+        "template": "rvmc|en_US",
         "components": {
           "component": [
             {
@@ -694,7 +694,7 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        -1568,
+        -1600,
         -16
       ],
       "webhookId": "335f76eb-f177-45c7-b7c7-62460e4563ef",
@@ -851,12 +851,12 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -1792,
+        -1808,
         -16
       ],
-      "id": "a846727c-71fc-4b5c-ac98-aac9007b315a",
+      "id": "c32a4f01-ee59-4e5e-a353-05e95bbd0e03",
       "name": "Wait",
-      "webhookId": "1463b62b-b78a-4724-9a0b-ae097f7788cb"
+      "webhookId": "8044ef65-80ce-4f48-a7b8-3fa8651771db"
     }
   ],
   "connections": {
@@ -1064,44 +1064,9 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "pinData": {
-    "WhatsApp Trigger": [
-      {
-        "json": {
-          "messaging_product": "whatsapp",
-          "metadata": {
-            "display_phone_number": "919198242854",
-            "phone_number_id": "639759029221223"
-          },
-          "contacts": [
-            {
-              "profile": {
-                "name": "Pari Flex"
-              },
-              "wa_id": "919198433007"
-            }
-          ],
-          "messages": [
-            {
-              "from": "919198433007",
-              "id": "wamid.HBgMOTE5MTk4NDMzMDA3FQIAEhggQTVGREYzMjUzNjA1QjRCRjJFRDIyQTE5NDVFQkMwNTcA",
-              "timestamp": "1774105375",
-              "text": {
-                "body": "Yy"
-              },
-              "type": "text"
-            }
-          ],
-          "field": "messages"
-        },
-        "pairedItem": {
-          "item": 0
-        }
-      }
-    ]
-  },
-  "versionId": "584bfbe6-e590-42fe-a983-9a4f503d939f",
-  "activeVersionId": "584bfbe6-e590-42fe-a983-9a4f503d939f",
+  "pinData": {},
+  "versionId": "c38d4779-e01a-40d4-8cf7-532fc7aa9aa3",
+  "activeVersionId": "c38d4779-e01a-40d4-8cf7-532fc7aa9aa3",
   "triggerCount": 2,
   "shared": [
     {
@@ -1113,9 +1078,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-03-21T15:21:54.000Z",
-    "createdAt": "2026-03-21T15:21:42.434Z",
-    "versionId": "584bfbe6-e590-42fe-a983-9a4f503d939f",
+    "updatedAt": "2026-03-23T12:38:04.000Z",
+    "createdAt": "2026-03-23T12:37:12.600Z",
+    "versionId": "c38d4779-e01a-40d4-8cf7-532fc7aa9aa3",
     "workflowId": "WZ4fkbD3rXl8rHRq",
     "nodes": [
       {
@@ -1226,7 +1191,7 @@
         "typeVersion": 1.1,
         "position": [
           -768,
-          712
+          720
         ],
         "id": "7194f877-5a4c-4d39-955a-89ca15285fd2",
         "name": "Send message and wait for response",
@@ -1354,8 +1319,8 @@
         "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
         "typeVersion": 1.3,
         "position": [
-          -984,
-          936
+          -992,
+          944
         ],
         "id": "017bffea-44d9-41f6-a373-82b3fbf6de2c",
         "name": "Simple Memory"
@@ -1374,8 +1339,8 @@
         "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
         "typeVersion": 1.3,
         "position": [
-          -1112,
-          936
+          -1120,
+          944
         ],
         "id": "e70d0290-d072-4015-a397-9eef4bfdec4e",
         "name": "OpenAI Chat Model",
@@ -1445,7 +1410,7 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.4,
         "position": [
-          -1344,
+          -1328,
           512
         ],
         "id": "a04f1304-842e-428c-9372-567b94bf601b",
@@ -1463,7 +1428,7 @@
         "typeVersion": 1.1,
         "position": [
           -768,
-          312
+          320
         ],
         "id": "b90cd073-08d6-499e-9495-874845a02dba",
         "name": "Send message and wait for response1",
@@ -1484,8 +1449,8 @@
         "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
         "typeVersion": 1.3,
         "position": [
-          -984,
-          432
+          -1024,
+          400
         ],
         "id": "3863cff1-0002-4bb0-aae1-73cb4f7c0b48",
         "name": "Simple Memory1"
@@ -1504,8 +1469,8 @@
         "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
         "typeVersion": 1.3,
         "position": [
-          -1112,
-          432
+          -1136,
+          400
         ],
         "id": "2dab49b1-953b-4abd-91a1-c8617097e5e6",
         "name": "OpenAI Chat Model1",
@@ -1545,7 +1510,7 @@
         "typeVersion": 3.1,
         "position": [
           -1120,
-          712
+          720
         ],
         "id": "331e040c-09dc-44e5-836e-8fab5a2c76c8",
         "name": "YLS Agent"
@@ -1736,8 +1701,8 @@
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
-              "mobile": "={{ $('Webhook').item.json.body.Contact }}",
-              "project": "={{ $('Webhook').item.json.body.Site }}"
+              "project": "={{ $('Webhook').item.json.body.Site }}",
+              "number": "={{ $('Webhook').item.json.body.Contact }}"
             },
             "matchingColumns": [],
             "schema": [
@@ -1752,12 +1717,12 @@
                 "removed": false
               },
               {
-                "id": "mobile",
-                "displayName": "mobile",
+                "id": "number",
+                "displayName": "number",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
-                "type": "number",
+                "type": "string",
                 "readOnly": false,
                 "removed": false
               }
@@ -1770,7 +1735,7 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          -2016,
+          -2048,
           -16
         ],
         "id": "c56a995c-3be5-4c98-89c0-def30f1023cd",
@@ -1779,8 +1744,8 @@
       {
         "parameters": {
           "phoneNumberId": "639759029221223",
-          "recipientPhoneNumber": "919198433007",
-          "template": "rvmc_|en_US",
+          "recipientPhoneNumber": "={{ $('Insert row').item.json.mobile }}",
+          "template": "rvmc|en_US",
           "components": {
             "component": [
               {
@@ -1806,7 +1771,7 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          -1568,
+          -1600,
           -16
         ],
         "webhookId": "335f76eb-f177-45c7-b7c7-62460e4563ef",
@@ -1963,12 +1928,12 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          -1792,
+          -1808,
           -16
         ],
-        "id": "a846727c-71fc-4b5c-ac98-aac9007b315a",
+        "id": "c32a4f01-ee59-4e5e-a353-05e95bbd0e03",
         "name": "Wait",
-        "webhookId": "1463b62b-b78a-4724-9a0b-ae097f7788cb"
+        "webhookId": "8044ef65-80ce-4f48-a7b8-3fa8651771db"
       }
     ],
     "connections": {
@@ -2168,7 +2133,7 @@
       }
     },
     "authors": "Brij Mohan",
-    "name": "Version 584bfbe6",
+    "name": "Version c38d4779",
     "description": "",
     "autosaved": true
   },
