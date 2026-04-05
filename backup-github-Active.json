@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-01T07:40:09.702Z",
+  "updatedAt": "2026-04-05T00:25:26.922Z",
   "createdAt": "2026-01-16T12:05:43.080Z",
   "id": "xqbIPaCJ0H3qQHc4BaBX0",
   "name": "Backup Github",
@@ -111,10 +111,10 @@
         },
         "repository": {
           "__rl": true,
-          "value": "n8n-backup",
+          "value": "n8n-backup-new",
           "mode": "list",
-          "cachedResultName": "n8n-backup",
-          "cachedResultUrl": "https://github.com/pariflex1/n8n-backup"
+          "cachedResultName": "n8n-backup-new",
+          "cachedResultUrl": "https://github.com/pariflex1/n8n-backup-new"
         },
         "filePath": "={{ $('Retrieve workflows').item.json.name.replace(/\\s+/g, '-').toLowerCase() }}-{{ $('Retrieve workflows').item.json.tags[0].name }}.json",
         "fileContent": "={{ $('To base64').item.json.data }}",
@@ -147,10 +147,10 @@
         },
         "repository": {
           "__rl": true,
-          "value": "n8n-backup",
+          "value": "n8n-backup-new",
           "mode": "list",
-          "cachedResultName": "n8n-backup",
-          "cachedResultUrl": "https://github.com/pariflex1/n8n-backup"
+          "cachedResultName": "n8n-backup-new",
+          "cachedResultUrl": "https://github.com/pariflex1/n8n-backup-new"
         },
         "filePath": "={{ $('Retrieve workflows').item.json.name.replace(/\\s+/g, '-').toLowerCase() }}-{{ $('Retrieve workflows').item.json.tags[0].name }}.json",
         "fileContent": "={{ $('To base64').item.json.data }}",
@@ -414,7 +414,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "529f2ab3-c866-4ee3-8204-3a469817659f",
+  "versionId": "cf14d438-226f-4998-b28d-4184ab082546",
   "activeVersionId": "529f2ab3-c866-4ee3-8204-3a469817659f",
   "triggerCount": 1,
   "shared": [
